@@ -4,16 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using TMPro;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField] private ObjectId _objectId = null;
     [SerializeField] private Image _slotImage = null;
+    [SerializeField] private LetterSlot _letterSlot = null;
     private RectTransform rectTransform;
 
     private void Awake() 
     {
         rectTransform = GetComponent<RectTransform>();    
+    }
+
+    public void Init(string letter)
+    {
+        _letterSlot.Init(letter);
     }
 
     public void OnDrop(PointerEventData eventData)
