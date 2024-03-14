@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private Transform _spriteTransform = null;
     [SerializeField] private Animator _spriteAnimator = null;
     private float _horizontalScale;
+    private bool _canMove;
 
     private void Awake() 
     {
         _horizontalScale = _spriteTransform.localScale.x;
     }
 
+    public void Toggle(bool toggle) 
+    { 
+        _canMove = toggle;
+        _spriteAnimator.SetFloat("speed", 0f);
+    }
+
     void Update()
     {
+        if(!_canMove) return;
+
         Vector2 movementVector = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
 
         float magnitude = movementVector.magnitude;
