@@ -6,7 +6,7 @@ public class DamageableHealthController : MonoBehaviour, IDamageable
     [SerializeField] private int _maxHealth = 10;
     private float _health;
     public delegate void OnDamageFeedback();
-    public OnDestroyDamageable onDamageFeedback;
+    public OnDamageFeedback onDamageFeedback;
     public delegate void OnDestroyDamageable();
     public OnDestroyDamageable onDestroyDamageable;
 
