@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Animator _spriteAnimator = null;
     private float _horizontalScale;
     private bool _canMove;
+    private bool _isFacingRight = true;
 
     private void Awake() 
     {
@@ -33,15 +34,17 @@ public class MovementController : MonoBehaviour
         if(magnitude <= 0f)
         {
             _spriteTransform.localScale = new Vector3(
-                _horizontalScale,
+                _isFacingRight ? _horizontalScale : -_horizontalScale,
                 _spriteTransform.localScale.y,
                 _spriteTransform.localScale.z
             );
             return;
         } 
         
+        _isFacingRight = movementVector.x > 0;
+
         _spriteTransform.localScale = new Vector3(
-            movementVector.x > 0 ? _horizontalScale : -_horizontalScale,
+            _isFacingRight ? _horizontalScale : -_horizontalScale,
             _spriteTransform.localScale.y,
             _spriteTransform.localScale.z
         );
