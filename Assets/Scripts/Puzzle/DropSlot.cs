@@ -12,6 +12,8 @@ public class DropSlot : MonoBehaviour, IDropHandler
     [SerializeField] private LetterSlot _letterSlot = null;
     private RectTransform rectTransform;
     private string keyId;
+    public delegate void OnUnlocked();
+    public OnUnlocked onUnlocked;
 
     private void Awake() 
     {
@@ -33,7 +35,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             {
                 _slotImage.DOFade(0f, 0.5f);
                 _slotImage.rectTransform.DOAnchorPosY(-45f, 0.8f);
-                Debug.Log("Lock Removed");
+                if(onUnlocked != null) onUnlocked();
             }
             else
             {

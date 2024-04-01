@@ -1,10 +1,11 @@
+
 using DG.Tweening;
 using Treasure.EventBus;
 using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
+public class LockPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
 {
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button _exitButton;
@@ -19,6 +20,9 @@ public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
     [SerializeField] private float _slotsSpacing = 160;
     [SerializeField] private Vector2 _minLockPanelSize = new Vector2(550, 50);
     private WordData _puzzleWord;
+    private Chest _currentChest;
+    private int _totalNumberOfLocks;
+    private int _numberOfLocksUnlocked;
 
     private void Start()
     {
@@ -48,7 +52,13 @@ public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
     public void OnEvent(OnShowPuzzle e)
     {
         ToggleVisibility(true);
+
         _puzzleWord = e.puzzleWord;
+        _currentChest = e.chest.GetComponent<Chest>();
+
+        _numberOfLocksUnlocked = 0;
+        _totalNumberOfLocks = 0;
+
         GenerateLetterSlots();
     }
 
@@ -77,15 +87,28 @@ public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
                 DropSlot dropSlot = Object.Instantiate(_dropSlotTemplate, _slotsParent);
                 dropSlot.Init(letter.ToString());
                 dropSlot.gameObject.name = $"{letter} Slot";
+
+                _totalNumberOfLocks++;
+                dropSlot.onUnlocked += OnUnlockingSlot;
+
                 continue;
             }
 
-            LetterSlot letterSlot = Object.Instantiate(_letterSlotTemplate, _slotsParent.);
+            LetterSlot letterSlot = Object.Instantiate(_letterSlotTemplate, _slotsParent);
             letterSlot.Init(letter.ToString());
             letterSlot.gameObject.name = $"{letter} Slot";
         }
 
         _lockPanel.sizeDelta = new Vector2(adjustedPanelSizeX, adjustedPanelSizeY);
+    }
+
+    private void OnUnlockingSlot()
+    {
+        _numberOfLocksUnlocked++;
+
+        if(_numberOfLocksUnlocked < _totalNumberOfLocks) return;
+        _currentChest.ToggleLock(true);
+        ToggleVisibility(false);
     }
 
     private bool ShouldGenerateDropSlot(char letter, int letterPosition)
