@@ -1,5 +1,7 @@
 using UnityEngine;
-namespace Treasure.EventBus
+using Treasure.EventBus;
+
+public struct OnShowPuzzle : IEvent 
 {
-    public struct OnShowPuzzle : IEvent {}
+    public WordData puzzleWord;
 }

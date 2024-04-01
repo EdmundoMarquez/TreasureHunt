@@ -8,10 +8,10 @@ using TMPro;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private ObjectId _objectId = null;
     [SerializeField] private Image _slotImage = null;
     [SerializeField] private LetterSlot _letterSlot = null;
     private RectTransform rectTransform;
+    private string keyId;
 
     private void Awake() 
     {
@@ -21,6 +21,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     public void Init(string letter)
     {
         _letterSlot.Init(letter);
+        keyId = letter;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -28,7 +29,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         if(eventData.pointerDrag != null)
         {
             DragItem item = eventData.pointerDrag.GetComponent<DragItem>();
-            if(item.Id.Value == _objectId.Value)
+            if(item.Id.Value == keyId)
             {
                 _slotImage.DOFade(0f, 0.5f);
                 _slotImage.rectTransform.DOAnchorPosY(-45f, 0.8f);

@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using Treasure.EventBus;
 using UnityEditor.Build;
 using UnityEngine;
@@ -18,7 +18,7 @@ public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
     [SerializeField] private float _slotsSize = 60;
     [SerializeField] private float _slotsSpacing = 160;
     [SerializeField] private Vector2 _minLockPanelSize = new Vector2(550, 50);
-    public string _puzzleWord;
+    private WordData _puzzleWord;
 
     private void Start()
     {
@@ -48,6 +48,7 @@ public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
     public void OnEvent(OnShowPuzzle e)
     {
         ToggleVisibility(true);
+        _puzzleWord = e.puzzleWord;
         GenerateLetterSlots();
     }
 
@@ -58,30 +59,43 @@ public class ShowPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
             Destroy(_slotsParent.GetChild(i).gameObject);
         }
 
-        float adjustedPanelSizeX = _slotsSize * _puzzleWord.Length + _slotsSpacing;
+
+        float adjustedPanelSizeX = _slotsSize * _puzzleWord.Word.Length + _slotsSpacing;
         float adjustedPanelSizeY = _lockPanel.sizeDelta.y;
 
-        foreach(var character in _puzzleWord)
+        int letterPosition = 0;
+        foreach(var letter in _puzzleWord.Word)
         {
-            if(_puzzleWord.Length >= 9)
+            letterPosition++;
+            if(_puzzleWord.Word.Length >= 9)
             {
                 AdjustPanelSize(ref adjustedPanelSizeX, ref adjustedPanelSizeY);
             }
 
-            if (character == '_')
+            if (ShouldGenerateDropSlot(letter, letterPosition))
             {
                 DropSlot dropSlot = Object.Instantiate(_dropSlotTemplate, _slotsParent);
-                dropSlot.Init("X");
-                dropSlot.gameObject.name = "X Slot";
+                dropSlot.Init(letter.ToString());
+                dropSlot.gameObject.name = $"{letter} Slot";
                 continue;
             }
 
-            LetterSlot letterSlot = Object.Instantiate(_letterSlotTemplate, _slotsParent);
-            letterSlot.Init(character.ToString());
-            letterSlot.gameObject.name = $"{character} Slot";
+            LetterSlot letterSlot = Object.Instantiate(_letterSlotTemplate, _slotsParent.);
+            letterSlot.Init(letter.ToString());
+            letterSlot.gameObject.name = $"{letter} Slot";
         }
 
         _lockPanel.sizeDelta = new Vector2(adjustedPanelSizeX, adjustedPanelSizeY);
+    }
+
+    private bool ShouldGenerateDropSlot(char letter, int letterPosition)
+    {
+        foreach (var missingLetter in _puzzleWord.MissingLetters)
+        {
+            if(letter != missingLetter.letter) continue;
+            if(letterPosition == missingLetter.position) return true;
+        } 
+        return false;
     }
 
     private void AdjustPanelSize(ref float adjustedPanelSizeX, ref float adjustedPanelSizeY)
