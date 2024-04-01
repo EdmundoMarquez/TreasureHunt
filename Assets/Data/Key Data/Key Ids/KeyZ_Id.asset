@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61008b5efb4be0442b8af26df9724c67, type: 3}
   m_Name: KeyZ_Id
   m_EditorClassIdentifier: 
-  _objectId: key_Z
+  _objectId: Z

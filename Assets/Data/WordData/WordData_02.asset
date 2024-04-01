@@ -9,7 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61008b5efb4be0442b8af26df9724c67, type: 3}
-  m_Name: KeyV_Id
+  m_Script: {fileID: 11500000, guid: e6ca94c8f52a58d48b25a1ee6040e1a8, type: 3}
+  m_Name: WordData_02
   m_EditorClassIdentifier: 
-  _objectId: V
+  _completeWord: ZARCILLOS
+  _missingLetters:
+  - letter: 90
+    position: 1
+  - letter: 67
+    position: 4
