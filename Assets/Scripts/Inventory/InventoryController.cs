@@ -4,10 +4,13 @@ using System.Linq;
 using Treasure.EventBus;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>
+public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>
 {
     [SerializeField] private KeyData[] _keys;
     private Dictionary<string, bool> _idToKey;
+    [SerializeField] private ObjectId _startingSword = null;
+    private string _equippedSword;
+    public string EquippedSword => _equippedSword;
 
     private void Awake()
     {
@@ -17,11 +20,18 @@ public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>
         {
             _idToKey.Add(key.Id, key.IsUnlocked);
         }
+
+        _equippedSword = _startingSword.Value;
     }
 
     public void OnEvent(AddKeyItem e)
     {
         _idToKey[e.itemId] = true;
+    }
+
+    public void OnEvent(AddSwordItem e)
+    {
+        _equippedSword = e.newItemId;
     }
 
     public bool GetKeyById(string id)
@@ -38,10 +48,12 @@ public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>
     private void OnEnable()
     {
         EventBus<AddKeyItem>.Register(this);
+        EventBus<AddSwordItem>.Register(this);
     }
 
     private void OnDisable()
     {
         EventBus<AddKeyItem>.UnRegister(this);
+        EventBus<AddSwordItem>.UnRegister(this);
     }
 }

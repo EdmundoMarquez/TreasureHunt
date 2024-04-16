@@ -13,10 +13,11 @@ public class Bat : MonoBehaviour
     [SerializeField] private SpriteRenderer _batSprite = null;
     [SerializeField] private Transform _target = null;
     [SerializeField] private AIPath _pathAgent = null;
+    [SerializeField] private DataProperty[] _damageProperties;
 
     private void Start()
     {
-        _damageInstigator.Init(1);
+        _damageInstigator.Init(_damageProperties);
     }
 
     private void OnEnable()

@@ -5,4 +5,16 @@ namespace Treasure.EventBus
     {
         public string itemId;
     }
+
+    public struct AddSwordItem : IEvent
+    {
+        public string previousItemId;
+        public string newItemId;
+    }
+
+    public struct ConfirmAddSwordItem : IEvent
+    {
+        public string itemId;
+        public GameObject swordObject;
+    }
 }

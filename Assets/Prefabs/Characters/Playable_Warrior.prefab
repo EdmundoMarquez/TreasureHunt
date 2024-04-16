@@ -81,7 +81,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _swordPivot: {fileID: 1582419349669237827}
+  _swordSprite: {fileID: 1582419349623770066}
   _damageInstigator: {fileID: 1582419350478012634}
+  _inventoryController: {fileID: 0}
+  _swordFactory: {fileID: 0}
   _attackTime: 0.5
 --- !u!114 &1582419349503239402
 MonoBehaviour:

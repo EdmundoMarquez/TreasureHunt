@@ -4,11 +4,11 @@ public class DamageInstigator : MonoBehaviour
 {
     [SerializeField] private Collider2D _collider;
     [SerializeField] private InstigatorTags _instigatorTag;
-    private int _damageAmount;
+    private DataProperty[] _damageProperties;
 
-    public void Init(int damageAmount)
+    public void Init(DataProperty[] damageProperties)
     {
-        _damageAmount = damageAmount;
+        _damageProperties = damageProperties;
     }
 
     public void ToggleInstigator(bool toggle)
@@ -20,9 +20,14 @@ public class DamageInstigator : MonoBehaviour
     {
         if(col.tag == _instigatorTag.ToString()) return;
 
-        if(col.TryGetComponent<IDamageable>(out var damageable))
+        if(col.TryGetComponent<IDamageable>(out var damageable)) { OnDamage(damageable); }
+    }
+
+    private void OnDamage(IDamageable damageable)
+    {
+        foreach (var damage in _damageProperties)
         {
-            damageable.Damage(_damageAmount);
+            damageable.Damage(damage.amount);
         }
     }
 }

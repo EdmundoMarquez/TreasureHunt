@@ -1,19 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
+using Treasure.EventBus;
 
-public class SwordAttackController : MonoBehaviour
+public class SwordAttackController : MonoBehaviour, IEventReceiver<AddSwordItem>
 {
     [SerializeField] private Transform _swordPivot = null;
+    [SerializeField] private SpriteRenderer _swordSprite = null;
     [SerializeField] private DamageInstigator _damageInstigator = null;
+    [SerializeField] private InventoryController _inventoryController = null;
     [SerializeField] private float _attackTime = 0.8f;
     private float _attackTimer;
     private bool _canAttack;
 
     private void Start()
     {
-        _damageInstigator.Init(1);
+        UpdateSword(_inventoryController.EquippedSword);
+    }
+
+    private void UpdateSword(string swordId)
+    {
+        SwordData equippedSword = SwordFactory.Instance.GetSwordById(swordId);
+        _swordSprite.sprite = equippedSword.SwordImage;
+        _damageInstigator.Init(equippedSword.Damage);
+    }
+
+    public void OnEvent(AddSwordItem e)
+    {
+        UpdateSword(e.newItemId);
+    }
+
+    private void OnEnable()
+    {
+        EventBus<AddSwordItem>.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        EventBus<AddSwordItem>.UnRegister(this);
     }
 
     public void Toggle(bool toggle) 
