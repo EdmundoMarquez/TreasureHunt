@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4840b82c3f8230f419535df3040033da, type: 3}
+  m_Name: Wooden_SwordData
+  m_EditorClassIdentifier: 
+  SwordId: {fileID: 11400000, guid: bff1eef83687f224194ec557442e7fd1, type: 2}
+  SwordImage: {fileID: 21300000, guid: e67ca7430e24c3f45bbf9ab2d00a4e7e, type: 3}
+  Damage:
+  - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
+    amount: 1
