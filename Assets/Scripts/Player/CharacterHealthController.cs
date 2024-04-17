@@ -1,32 +1,36 @@
-﻿using UnityEngine;
-
-public class CharacterHealthController : MonoBehaviour, IDamageable
+﻿namespace Treasure.Player
 {
-    [SerializeField] private int _maxHealth = 100;
-    private float _health;
-    public delegate void OnDamageFeedback();
-    public OnDamageFeedback onDamageFeedback;
-    public delegate void OnDead();
-    public OnDead onDead;
-    public float Health => _health;
-    public float MaxHealth => _maxHealth;
+    using UnityEngine;
+    using Treasure.Common;
 
-    public void Init()
+    public class CharacterHealthController : MonoBehaviour, IDamageable
     {
-        _health = _maxHealth;
-    }
+        [SerializeField] private int _maxHealth = 100;
+        private float _health;
+        public delegate void OnDamageFeedback();
+        public OnDamageFeedback onDamageFeedback;
+        public delegate void OnDead();
+        public OnDead onDead;
+        public float Health => _health;
+        public float MaxHealth => _maxHealth;
 
-    public void Damage(int amount)
-    {
-        _health -= amount;
-
-        if(_health <= 0)
+        public void Init()
         {
-            _health = 0;
-            if(onDead != null) onDead();
-            return;
+            _health = _maxHealth;
         }
 
-        if(onDamageFeedback != null) onDamageFeedback();
+        public void Damage(int amount)
+        {
+            _health -= amount;
+
+            if (_health <= 0)
+            {
+                _health = 0;
+                if (onDead != null) onDead();
+                return;
+            }
+
+            if (onDamageFeedback != null) onDamageFeedback();
+        }
     }
 }

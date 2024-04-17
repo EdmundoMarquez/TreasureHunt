@@ -1,5 +1,9 @@
-public interface IPlayableCharacter
+namespace Treasure.Player
 {
-    ObjectId CharacterId {get;}
-    void ToggleControl(bool toggle);
+    using Treasure.Common;
+    public interface IPlayableCharacter
+    {
+        ObjectId CharacterId { get; }
+        void ToggleControl(bool toggle);
+    }
 }

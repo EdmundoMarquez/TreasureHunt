@@ -1,143 +1,149 @@
-
-using DG.Tweening;
-using Treasure.EventBus;
-using UnityEditor.Build;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class LockPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
+namespace Treasure.Puzzle
 {
-    [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private Button _exitButton;
-    [SerializeField] private InventoryController _inventoryController;
-    [SerializeField] private RectTransform[] _draggableKeyItems;
-    [SerializeField] private RectTransform _slotsParent;
-    [SerializeField] private RectTransform _lockPanel;
-    [SerializeField] private LetterSlot _letterSlotTemplate;
-    [SerializeField] private DropSlot _dropSlotTemplate;
-    [Header("Configurations")]
-    [SerializeField] private float _slotsSize = 60;
-    [SerializeField] private float _slotsSpacing = 160;
-    [SerializeField] private Vector2 _minLockPanelSize = new Vector2(550, 50);
-    private WordData _puzzleWord;
-    private Chest _currentChest;
-    private int _totalNumberOfLocks;
-    private int _numberOfLocksUnlocked;
 
-    private void Start()
+    using DG.Tweening;
+    using Treasure.EventBus;
+    using Treasure.Inventory;
+    using Treasure.Common;
+    using Treasure.Interactables;
+    using UnityEngine;
+    using UnityEngine.UI;
+
+    public class LockPuzzleView : MonoBehaviour, IEventReceiver<OnShowPuzzle>
     {
-        _exitButton.onClick.AddListener(()=> ToggleVisibility(false));
-    }
+        [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private Button _exitButton;
+        [SerializeField] private InventoryController _inventoryController;
+        [SerializeField] private RectTransform[] _draggableKeyItems;
+        [SerializeField] private RectTransform _slotsParent;
+        [SerializeField] private RectTransform _lockPanel;
+        [SerializeField] private LetterSlot _letterSlotTemplate;
+        [SerializeField] private DropSlot _dropSlotTemplate;
+        [Header("Configurations")]
+        [SerializeField] private float _slotsSize = 60;
+        [SerializeField] private float _slotsSpacing = 160;
+        [SerializeField] private Vector2 _minLockPanelSize = new Vector2(550, 50);
+        private WordData _puzzleWord;
+        private Chest _currentChest;
+        private int _totalNumberOfLocks;
+        private int _numberOfLocksUnlocked;
 
-    private void ToggleVisibility(bool toggle)
-    {
-        if(toggle) RefreshDraggableKeys();
-
-        _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f);
-        _canvasGroup.interactable = toggle;
-        _canvasGroup.blocksRaycasts = toggle;
-
-    }
-
-    private void RefreshDraggableKeys()
-    {
-        string[] ids = _inventoryController.GetAllKeys();
-
-        for (int i = 0; i < ids.Length; i++)
+        private void Start()
         {
-            _draggableKeyItems[i].gameObject.SetActive(_inventoryController.GetKeyById(ids[i]));
-        }
-    }
-
-    public void OnEvent(OnShowPuzzle e)
-    {
-        ToggleVisibility(true);
-
-        _puzzleWord = e.puzzleWord;
-        _currentChest = e.chest.GetComponent<Chest>();
-
-        _numberOfLocksUnlocked = 0;
-        _totalNumberOfLocks = 0;
-
-        GenerateLetterSlots();
-    }
-
-    private void GenerateLetterSlots()
-    {
-        for (int i = 0; i < _slotsParent.childCount; i++)
-        {
-            Destroy(_slotsParent.GetChild(i).gameObject);
+            _exitButton.onClick.AddListener(() => ToggleVisibility(false));
         }
 
-
-        float adjustedPanelSizeX = _slotsSize * _puzzleWord.Word.Length + _slotsSpacing;
-        float adjustedPanelSizeY = _lockPanel.sizeDelta.y;
-
-        int letterPosition = 0;
-        foreach(var letter in _puzzleWord.Word)
+        private void ToggleVisibility(bool toggle)
         {
-            letterPosition++;
-            if(_puzzleWord.Word.Length >= 9)
+            if (toggle) RefreshDraggableKeys();
+
+            _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f);
+            _canvasGroup.interactable = toggle;
+            _canvasGroup.blocksRaycasts = toggle;
+
+        }
+
+        private void RefreshDraggableKeys()
+        {
+            string[] ids = _inventoryController.GetAllKeys();
+
+            for (int i = 0; i < ids.Length; i++)
             {
-                AdjustPanelSize(ref adjustedPanelSizeX, ref adjustedPanelSizeY);
+                _draggableKeyItems[i].gameObject.SetActive(_inventoryController.GetKeyById(ids[i]));
+            }
+        }
+
+        public void OnEvent(OnShowPuzzle e)
+        {
+            ToggleVisibility(true);
+
+            _puzzleWord = e.puzzleWord;
+            _currentChest = e.chest.GetComponent<Chest>();
+
+            _numberOfLocksUnlocked = 0;
+            _totalNumberOfLocks = 0;
+
+            GenerateLetterSlots();
+        }
+
+        private void GenerateLetterSlots()
+        {
+            for (int i = 0; i < _slotsParent.childCount; i++)
+            {
+                Destroy(_slotsParent.GetChild(i).gameObject);
             }
 
-            if (ShouldGenerateDropSlot(letter, letterPosition))
+
+            float adjustedPanelSizeX = _slotsSize * _puzzleWord.Word.Length + _slotsSpacing;
+            float adjustedPanelSizeY = _lockPanel.sizeDelta.y;
+
+            int letterPosition = 0;
+            foreach (var letter in _puzzleWord.Word)
             {
-                DropSlot dropSlot = Object.Instantiate(_dropSlotTemplate, _slotsParent);
-                dropSlot.Init(letter.ToString());
-                dropSlot.gameObject.name = $"{letter} Slot";
+                letterPosition++;
+                if (_puzzleWord.Word.Length >= 9)
+                {
+                    AdjustPanelSize(ref adjustedPanelSizeX, ref adjustedPanelSizeY);
+                }
 
-                _totalNumberOfLocks++;
-                dropSlot.onUnlocked += OnUnlockingSlot;
+                if (ShouldGenerateDropSlot(letter, letterPosition))
+                {
+                    DropSlot dropSlot = Object.Instantiate(_dropSlotTemplate, _slotsParent);
+                    dropSlot.Init(letter.ToString());
+                    dropSlot.gameObject.name = $"{letter} Slot";
 
-                continue;
+                    _totalNumberOfLocks++;
+                    dropSlot.onUnlocked += OnUnlockingSlot;
+
+                    continue;
+                }
+
+                LetterSlot letterSlot = Object.Instantiate(_letterSlotTemplate, _slotsParent);
+                letterSlot.Init(letter.ToString());
+                letterSlot.gameObject.name = $"{letter} Slot";
             }
 
-            LetterSlot letterSlot = Object.Instantiate(_letterSlotTemplate, _slotsParent);
-            letterSlot.Init(letter.ToString());
-            letterSlot.gameObject.name = $"{letter} Slot";
+            _lockPanel.sizeDelta = new Vector2(adjustedPanelSizeX, adjustedPanelSizeY);
         }
 
-        _lockPanel.sizeDelta = new Vector2(adjustedPanelSizeX, adjustedPanelSizeY);
-    }
-
-    private void OnUnlockingSlot()
-    {
-        _numberOfLocksUnlocked++;
-
-        if(_numberOfLocksUnlocked < _totalNumberOfLocks) return;
-        _currentChest.ToggleLock(true);
-        ToggleVisibility(false);
-    }
-
-    private bool ShouldGenerateDropSlot(char letter, int letterPosition)
-    {
-        foreach (var missingLetter in _puzzleWord.MissingLetters)
+        private void OnUnlockingSlot()
         {
-            if(letter != missingLetter.letter) continue;
-            if(letterPosition == missingLetter.position) return true;
-        } 
-        return false;
+            _numberOfLocksUnlocked++;
+
+            if (_numberOfLocksUnlocked < _totalNumberOfLocks) return;
+            _currentChest.ToggleLock(true);
+            ToggleVisibility(false);
+        }
+
+        private bool ShouldGenerateDropSlot(char letter, int letterPosition)
+        {
+            foreach (var missingLetter in _puzzleWord.MissingLetters)
+            {
+                if (letter != missingLetter.letter) continue;
+                if (letterPosition == missingLetter.position) return true;
+            }
+            return false;
+        }
+
+        private void AdjustPanelSize(ref float adjustedPanelSizeX, ref float adjustedPanelSizeY)
+        {
+            float reductionMargin = 2;
+            adjustedPanelSizeX -= reductionMargin;
+            adjustedPanelSizeY -= reductionMargin / 2;
+
+            adjustedPanelSizeX = Mathf.Clamp(adjustedPanelSizeX, _minLockPanelSize.x, 700);
+            adjustedPanelSizeY = Mathf.Clamp(adjustedPanelSizeY, _minLockPanelSize.y, 100);
+        }
+
+        private void OnEnable()
+        {
+            EventBus<OnShowPuzzle>.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            EventBus<OnShowPuzzle>.UnRegister(this);
+        }
     }
 
-    private void AdjustPanelSize(ref float adjustedPanelSizeX, ref float adjustedPanelSizeY)
-    {
-        float reductionMargin = 2;
-        adjustedPanelSizeX -= reductionMargin;
-        adjustedPanelSizeY -= reductionMargin / 2;
-
-        adjustedPanelSizeX = Mathf.Clamp(adjustedPanelSizeX, _minLockPanelSize.x, 700);
-        adjustedPanelSizeY = Mathf.Clamp(adjustedPanelSizeY, _minLockPanelSize.y, 100);
-    }
-
-    private void OnEnable()
-    {
-        EventBus<OnShowPuzzle>.Register(this);
-    }
-
-    private void OnDisable()
-    {
-        EventBus<OnShowPuzzle>.UnRegister(this);
-    }
 }

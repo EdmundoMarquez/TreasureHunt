@@ -1,31 +1,35 @@
-using System;
-using UnityEngine;
-
-public class DamageableHealthController : MonoBehaviour, IDamageable
+namespace Treasure.Damageables
 {
-    [SerializeField] private int _maxHealth = 10;
-    private float _health;
-    public delegate void OnDamageFeedback();
-    public OnDamageFeedback onDamageFeedback;
-    public delegate void OnDestroyDamageable();
-    public OnDestroyDamageable onDestroyDamageable;
-
-    private void Start()
+    
+    using UnityEngine;
+    using Treasure.Common;
+    
+    public class DamageableHealthController : MonoBehaviour, IDamageable
     {
-        _health = _maxHealth;
-    }
-
-    public void Damage(int amount)
-    {
-        _health -= amount;
-
-        if(_health <= 0)
+        [SerializeField] private int _maxHealth = 10;
+        private float _health;
+        public delegate void OnDamageFeedback();
+        public OnDamageFeedback onDamageFeedback;
+        public delegate void OnDestroyDamageable();
+        public OnDestroyDamageable onDestroyDamageable;
+    
+        private void Start()
         {
-            _health = 0;
-            if(onDestroyDamageable != null) onDestroyDamageable();
-            return;
+            _health = _maxHealth;
         }
-
-        if(onDamageFeedback != null) onDamageFeedback();
+    
+        public void Damage(int amount)
+        {
+            _health -= amount;
+    
+            if(_health <= 0)
+            {
+                _health = 0;
+                if(onDestroyDamageable != null) onDestroyDamageable();
+                return;
+            }
+    
+            if(onDamageFeedback != null) onDamageFeedback();
+        }
     }
 }

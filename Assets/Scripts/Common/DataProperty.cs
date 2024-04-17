@@ -1,6 +1,9 @@
-[System.Serializable]
-public class DataProperty
+namespace Treasure.Common
 {
-    public ObjectId propertyId;
-    public int amount;
+    [System.Serializable]
+    public class DataProperty
+    {
+        public ObjectId propertyId;
+        public int amount;
+    }
 }

@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using Treasure.EventBus;
-using UnityEngine;
-
-public class Key : MonoBehaviour
+namespace Treasure.Interactables
 {
-    [SerializeField] private ObjectId _requiredCharacter;
-    [SerializeField] private ObjectId _itemId;
+    using Treasure.EventBus;
+    using Treasure.Common;
+    using Treasure.Player;
+    using UnityEngine;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public class Key : MonoBehaviour
     {
-        if(col.tag == "Player")
+        [SerializeField] private ObjectId _requiredCharacter;
+        [SerializeField] private ObjectId _itemId;
+
+        private void OnTriggerEnter2D(Collider2D col)
         {
-           if(col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
+            if (col.tag == "Player")
+            {
+                if (col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
 
-           EventBus<AddKeyItem>.Raise(new AddKeyItem
-           {
-                itemId = _itemId.Value
-           });
+                EventBus<AddKeyItem>.Raise(new AddKeyItem
+                {
+                    itemId = _itemId.Value
+                });
 
-           gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

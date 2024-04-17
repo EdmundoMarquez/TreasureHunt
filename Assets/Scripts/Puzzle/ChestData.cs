@@ -1,12 +1,16 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "ChestData", menuName = "Puzzle/ChestData", order = 0)]
-public class ChestData : ScriptableObject 
+namespace Treasure.Puzzle
 {
-    [SerializeField] private WordData[] _wordBank;
+    using UnityEngine;
+    using Treasure.Common;
 
-    public WordData RandomizeWord()
+    [CreateAssetMenu(fileName = "ChestData", menuName = "Puzzle/ChestData", order = 0)]
+    public class ChestData : ScriptableObject
     {
-        return _wordBank[Random.Range(0, _wordBank.Length)];
+        [SerializeField] private WordData[] _wordBank;
+
+        public WordData RandomizeWord()
+        {
+            return _wordBank[Random.Range(0, _wordBank.Length)];
+        }
     }
 }

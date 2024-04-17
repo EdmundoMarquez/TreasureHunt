@@ -1,12 +1,15 @@
-using UnityEngine;
-using TMPro;
-
-public class LetterSlot : MonoBehaviour
+namespace Treasure.Puzzle
 {
-    [SerializeField] private TMP_Text _letterText;
+    using UnityEngine;
+    using TMPro;
 
-    public void Init(string letter)
+    public class LetterSlot : MonoBehaviour
     {
-        _letterText.SetText(letter);
+        [SerializeField] private TMP_Text _letterText;
+
+        public void Init(string letter)
+        {
+            _letterText.SetText(letter);
+        }
     }
 }

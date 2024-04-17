@@ -1,25 +1,29 @@
-﻿using UnityEngine;
-using DG.Tweening;
-
-public class InventoryView : MonoBehaviour
+﻿namespace Treasure.Inventory
 {
-    [SerializeField] private CanvasGroup _canvasGroup = null;
-    [SerializeField] private SwordInfoBox _currentSwordInfoBox = null;
-    [SerializeField] private InventoryController _inventoryController = null;
+    using UnityEngine;
+    using DG.Tweening;
+    using Treasure.Swords;
 
-    public void ToggleVisibility(bool toggle)
+    public class InventoryView : MonoBehaviour
     {
-        Time.timeScale = toggle ? 0f : 1f;
-        _canvasGroup.DOFade(toggle ? 1:0, 0.3f).SetUpdate(true);
-        _canvasGroup.interactable = toggle;
-        _canvasGroup.blocksRaycasts = toggle;
+        [SerializeField] private CanvasGroup _canvasGroup = null;
+        [SerializeField] private SwordInfoBox _currentSwordInfoBox = null;
+        [SerializeField] private InventoryController _inventoryController = null;
 
-        if(toggle) UpdateInventory();
-    }
+        public void ToggleVisibility(bool toggle)
+        {
+            Time.timeScale = toggle ? 0f : 1f;
+            _canvasGroup.DOFade(toggle ? 1 : 0, 0.3f).SetUpdate(true);
+            _canvasGroup.interactable = toggle;
+            _canvasGroup.blocksRaycasts = toggle;
 
-    private void UpdateInventory()
-    {
-        SwordData equippedSword = SwordFactory.Instance.GetSwordById(_inventoryController.EquippedSword);
-        _currentSwordInfoBox.Fill(equippedSword.SwordId.Value, equippedSword.SwordImage, equippedSword.Damage);
+            if (toggle) UpdateInventory();
+        }
+
+        private void UpdateInventory()
+        {
+            SwordData equippedSword = SwordFactory.Instance.GetSwordById(_inventoryController.EquippedSword);
+            _currentSwordInfoBox.Fill(equippedSword.SwordId.Value, equippedSword.SwordImage, equippedSword.Damage);
+        }
     }
 }

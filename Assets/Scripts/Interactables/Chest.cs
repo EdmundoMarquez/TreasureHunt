@@ -1,40 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Treasure.EventBus;
-using UnityEngine;
-
-public class Chest : MonoBehaviour
+﻿namespace Treasure.Interactables
 {
-    [SerializeField] private ObjectId _requiredCharacter;
-    [SerializeField] private ChestData _chestData;
-    [SerializeField] private GameObject _lockedSprite;
-    [SerializeField] private GameObject _unlockedSprite;
-    private WordData _wordToSolve;
-    private bool _isUnlocked;
+    using Treasure.EventBus;
+    using Treasure.Common;
+    using Treasure.Puzzle;
+    using Treasure.Player;
+    using UnityEngine;
 
-    private void Start()
+    public class Chest : MonoBehaviour
     {
-        _wordToSolve = _chestData.RandomizeWord();
-    }
+        [SerializeField] private ObjectId _requiredCharacter;
+        [SerializeField] private ChestData _chestData;
+        [SerializeField] private GameObject _lockedSprite;
+        [SerializeField] private GameObject _unlockedSprite;
+        private WordData _wordToSolve;
+        private bool _isUnlocked;
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if(_isUnlocked) return;
-        if(col.tag == "Player")
+        private void Start()
         {
-           if(col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
-           EventBus<OnShowPuzzle>.Raise(new OnShowPuzzle
-           {
-                chest = gameObject,
-                puzzleWord = _wordToSolve
-           });
+            _wordToSolve = _chestData.RandomizeWord();
         }
-    }
 
-    public void ToggleLock(bool unlock)
-    {
-        _isUnlocked = unlock;
-        _lockedSprite.SetActive(!unlock);
-        _unlockedSprite.SetActive(unlock);
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (_isUnlocked) return;
+            if (col.tag == "Player")
+            {
+                if (col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
+                EventBus<OnShowPuzzle>.Raise(new OnShowPuzzle
+                {
+                    chest = gameObject,
+                    puzzleWord = _wordToSolve
+                });
+            }
+        }
+
+        public void ToggleLock(bool unlock)
+        {
+            _isUnlocked = unlock;
+            _lockedSprite.SetActive(!unlock);
+            _unlockedSprite.SetActive(unlock);
+        }
     }
 }

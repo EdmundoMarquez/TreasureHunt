@@ -1,31 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using Treasure.EventBus;
-using UnityEngine;
-
-public class Sword : MonoBehaviour
+namespace Treasure.Interactables
 {
-    [SerializeField] private ObjectId _requiredCharacter;
-    [SerializeField] private ObjectId _itemId;
-    [SerializeField] private SpriteRenderer _swordSprite = null;
 
-    private void Start()
-    {
-        _swordSprite.sprite = SwordFactory.Instance.GetSwordById(_itemId.Value).SwordImage;
-    }
+    using Treasure.EventBus;
+    using Treasure.Common;
+    using Treasure.Swords;
+    using Treasure.Player;
+    using UnityEngine;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public class Sword : MonoBehaviour
     {
-        if(col.tag == "Player")
+        [SerializeField] private ObjectId _requiredCharacter;
+        [SerializeField] private ObjectId _itemId;
+        [SerializeField] private SpriteRenderer _swordSprite = null;
+
+        private void Start()
         {
-           if(col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
+            _swordSprite.sprite = SwordFactory.Instance.GetSwordById(_itemId.Value).SwordImage;
+        }
 
-           EventBus<ConfirmAddSwordItem>.Raise(new ConfirmAddSwordItem
-           {
-                itemId = _itemId.Value,
-                swordObject = gameObject
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.tag == "Player")
+            {
+                if (col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
 
-           });
+                EventBus<ConfirmAddSwordItem>.Raise(new ConfirmAddSwordItem
+                {
+                    itemId = _itemId.Value,
+                    swordObject = gameObject
+
+                });
+            }
         }
     }
 }
