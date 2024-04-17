@@ -45,7 +45,7 @@ namespace Treasure.Puzzle
 
         private void RefreshDraggableKeys()
         {
-            string[] ids = _inventoryController.GetAllKeys();
+            string[] ids = _inventoryController.GetAllKeyIds();
 
             for (int i = 0; i < ids.Length; i++)
             {

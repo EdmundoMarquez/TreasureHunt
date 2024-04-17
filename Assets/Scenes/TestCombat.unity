@@ -695,6 +695,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 352397509}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &376713432 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4779294083781401570, guid: 09abd2853a2e930409cdf587945408b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 69759432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &379727791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -925,6 +931,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466947769}
   m_CullTransparentMesh: 0
+--- !u!225 &525483720 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4779294083781401570, guid: 09abd2853a2e930409cdf587945408b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1575328860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &529230142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1592,12 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!225 &589989373 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4779294083781401570, guid: 09abd2853a2e930409cdf587945408b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 559918654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &598375389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2702,6 +2720,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831243098}
   m_CullTransparentMesh: 0
+--- !u!225 &883047901 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4779294083781401570, guid: 09abd2853a2e930409cdf587945408b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 379727791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943521929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,6 +3076,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 733478454}
   _currentSwordInfoBox: {fileID: 1150458827}
+  _availableKeyItems:
+  - {fileID: 883047901}
+  - {fileID: 525483720}
+  - {fileID: 1504986303}
+  - {fileID: 589989373}
+  - {fileID: 376713432}
   _inventoryController: {fileID: 1101177245}
 --- !u!224 &1150458826 stripped
 RectTransform:
@@ -4697,6 +4727,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503471700}
   m_CullTransparentMesh: 0
+--- !u!225 &1504986303 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4779294083781401570, guid: 09abd2853a2e930409cdf587945408b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 352397509}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1511347515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6214,7 +6250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACQn+tx1YB1XQIAAAEFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMziVj89n01hpCeiBkQju5+CLkNdYgSx59hI8M/70r2cYOPSH2vd19b7XyJ+HSVMCs0ivNs7XKgPwYEH8m3wYd+Awnuldyyy/Qct55ZgtPooHzRi1XGI99mlElWM3ZT7kXnhxh0EmeK10usz0kyliD4ZwKAwhpZX22xNDngJzwZ/joU854Gs396YKnx2hwxSMDaUF31PhhPJ3MptH32XIYzZusNqdOcZIJWlaQef29zFHDjmuaRGcNw7tgSghuGlnEnqtgO6GVcWgKCRmnaDNo8fwC+L6wXnI/eZPnBmwjSdPzgmucVl2V/FL1CEtqDrWuDyqc7zOazoKmuuj6P3wYBzjXqnxu+8aR72ELzg5v9Myosb0Z98OLr8KdPFJxoDsB7wXIF7XSyskMQaudT3UGRoteqZu3pAB26Hi11jbYsl3VTTy6ux7v4hr8nxLBy52HHiZ1YCtUmHjYBNB4N79RctgT05TAqJfx18Afuu8vVAM8cW0sQo1P6fXtlNOeSpZhat6Os4nSEkK4sVKBpMKeX7GMvb/EO6zX9g55ov7pNM0brH0Rdykh3PGj6A56VcfbdZlCHddgio2zgkvoRHvgBeeUKCnrHevPpE3bOp1T1kvbO559XS4yZo/zySzP57t8NN2x0XAWR/h/PmZsOotpPiVh+7hEn1S81kKb8eCtya64xE1rvyiDlaZV2PdM0+OKX0rVGzmXudoyDSA3dYWbcNDYBN9ltsw4DmgL1nIZ7pt8pkQodoAsvRVKg9PlyWqadlVSUvEPZX0kJUn4hKTkSq7/AFBLAwQUAAAICAAAkJ/rZxcjUWwAAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0knGypbmJWVqaeVKakWlSspGumaEBkG9unJxsamaYmGaqFAtUX1JZkOqXmJsK0ROQWJKRlpmXkpmXrudelJniDjJaKbYWAFBLAQItABQAAAgIAACQn+tx1YB1XQIAAAEFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACQn+tnFyNRbAAAAHgAAAAJACQAAAAAAAAAAAAAAKoCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAYQMAAAAA
+    dataString: UEsDBBQAAAgIAACQn+v3FS4IYAIAAAYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty4jAQ/BVK54UyJEDY265DyB4IqZCtXHwR8thWIUsuPcIjxb/vSLaxw/qCmO4Zdc+M/UW4NBUwq/RK83StUiA/B8SfyY9BBz7DkeZKbvkZWs4HT23hSTRw3qjlCuNjn2ZUCVZz9kvmwpMjDDrJM6XLZZpDrIw1GM6oMICQVtZnSwx9DcgRf4YLn3LC02TuT2c8LaLBBY8MpAXdUSej8SLC565JGE5GD/MFPg8PTWKd5yQTtKwg9SZ66dP2opom0V7D8FaYEoKbRhuxpyp4j2llHDpDQsopeg2CPL8AnhfWl+snb7LMgG0aoenpkWtsWV2V/FZ1H0tq9rWuTyocBG2zoKkuuv4PH44DnGlVPrf3jiN/hy0427/RE6PG9hrdDz9+F+7kgYo93Qn4KEC+qJVWTqYIWu18qjMweeyVunqLC2D7jldrbYMt21Vdx9vJtnP1Li7B/zEWvNx5aHRfB7ZChY6HdQCNs/mDksOymKYERr2Mvwbead7fqgZ44tpYhBqf0uvbKac9lSxD17wdZ2OlJYRwY6UCSYU9vWIZezvEG6x37Q3yRP3701zeYO1rcZMSwh0/im6gV3W4jssU6rAGU2ycFVxCJ9oDL9inWElZ71i/J23a1umMsl5a7nj6fbnIHVvM72dZNt9lk+mOTYazcYT/53eMTWdjmk1J2D4u0ScVr7XQpj04NdkVl7hp7WdlsNK0CvueanpY8XOpei3nMlNbpgHkpq5wFQ4aL8H3Ml2mHBu0BWu5DPMmXwkRiu0hTa6FkuB0ebSaJl2VhFT8U1kfSUgcviMJuZDLP1BLAwQUAAAICAAAkJ/rZxcjUWwAAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0knGypbmJWVqaeVKakWlSspGumaEBkG9unJxsamaYmGaqFAtUX1JZkOqXmJsK0ROQWJKRlpmXkpmXrudelJniDjJaKbYWAFBLAQItABQAAAgIAACQn+v3FS4IYAIAAAYFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACQn+tnFyNRbAAAAHgAAAAJACQAAAAAAAAAAAAAAK0CAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAZAMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -7198,7 +7234,7 @@ GameObject:
   - component: {fileID: 2097804725}
   - component: {fileID: 2097804724}
   - component: {fileID: 2097804723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}

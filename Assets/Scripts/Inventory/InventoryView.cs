@@ -8,6 +8,7 @@
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private SwordInfoBox _currentSwordInfoBox = null;
+        [SerializeField] private CanvasGroup[] _availableKeyItems;
         [SerializeField] private InventoryController _inventoryController = null;
 
         public void ToggleVisibility(bool toggle)
@@ -24,6 +25,13 @@
         {
             SwordData equippedSword = SwordFactory.Instance.GetSwordById(_inventoryController.EquippedSword);
             _currentSwordInfoBox.Fill(equippedSword.SwordId.Value, equippedSword.SwordImage, equippedSword.Damage);
+
+            bool[] keys = _inventoryController.GetAllKeyValues();
+            for (int i = 0; i < _availableKeyItems.Length; i++)
+            {
+                _availableKeyItems[i].alpha = keys[i] ? 1f : 0.3f;
+                _availableKeyItems[i].blocksRaycasts = keys[i];
+            }           
         }
     }
 }

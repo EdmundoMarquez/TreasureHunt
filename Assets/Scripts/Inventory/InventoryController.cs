@@ -43,7 +43,12 @@
             return keyUnlocked;
         }
 
-        public string[] GetAllKeys()
+        public bool[] GetAllKeyValues()
+        {
+            return _idToKey.Values.ToArray();
+        }
+
+        public string[] GetAllKeyIds()
         {
             return _idToKey.Keys.ToArray();
         }
