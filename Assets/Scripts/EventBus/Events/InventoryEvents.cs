@@ -1,3 +1,4 @@
+using Treasure.Common;
 using UnityEngine;
 namespace Treasure.EventBus
 {
@@ -16,5 +17,11 @@ namespace Treasure.EventBus
     {
         public string itemId;
         public GameObject swordObject;
+    }
+
+    public struct AddPotionItem : IEvent
+    {
+        public DataProperty potionProperties;
+        public GameObject potionObject;
     }
 }

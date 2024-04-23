@@ -7,13 +7,15 @@
     using Treasure.Common;
     using UnityEngine;
 
-    public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>
+    public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>, IEventReceiver<AddPotionItem>
     {
         [SerializeField] private KeyData[] _keys;
-        private Dictionary<string, bool> _idToKey;
         [SerializeField] private ObjectId _startingSword = null;
+        private Dictionary<string, bool> _idToKey;
+        private List<DataProperty> _potionsInStorage;
         private string _equippedSword;
         public string EquippedSword => _equippedSword;
+        private const int POTIONS_LIMIT_IN_INVENTORY = 3;
 
         private void Awake()
         {
@@ -23,6 +25,8 @@
             {
                 _idToKey.Add(key.Id, key.IsUnlocked);
             }
+
+            _potionsInStorage = new List<DataProperty>();
 
             _equippedSword = _startingSword.Value;
         }
@@ -35,6 +39,18 @@
         public void OnEvent(AddSwordItem e)
         {
             _equippedSword = e.newItemId;
+        }
+
+        public void OnEvent(AddPotionItem e)
+        {
+            if (_potionsInStorage.Count >= POTIONS_LIMIT_IN_INVENTORY)
+            {
+                Debug.Log("Exceeded max numbers of potions to store.");
+                return;
+            }
+
+            _potionsInStorage.Add(e.potionProperties);
+            e.potionObject.SetActive(false);
         }
 
         public bool GetKeyById(string id)
@@ -53,16 +69,23 @@
             return _idToKey.Keys.ToArray();
         }
 
+        public DataProperty[] GetAllPotionValues()
+        {
+            return _potionsInStorage.ToArray();
+        }
+
         private void OnEnable()
         {
             EventBus<AddKeyItem>.Register(this);
             EventBus<AddSwordItem>.Register(this);
+            EventBus<AddPotionItem>.Register(this);
         }
 
         private void OnDisable()
         {
             EventBus<AddKeyItem>.UnRegister(this);
             EventBus<AddSwordItem>.UnRegister(this);
+            EventBus<AddPotionItem>.UnRegister(this);
         }
     }
 }
