@@ -4,7 +4,6 @@ namespace Treasure.Interactables
     using Treasure.EventBus;
     using Treasure.Common;
     using Treasure.Swords;
-    using Treasure.Player;
     using UnityEngine;
 
     public class Sword : MonoBehaviour

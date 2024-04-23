@@ -1,6 +1,5 @@
-namespace Treasure.Player
+namespace Treasure.Common
 {
-    using Treasure.Common;
     public interface IPlayableCharacter
     {
         ObjectId CharacterId { get; }

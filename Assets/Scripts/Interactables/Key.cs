@@ -2,7 +2,6 @@ namespace Treasure.Interactables
 {
     using Treasure.EventBus;
     using Treasure.Common;
-    using Treasure.Player;
     using UnityEngine;
 
     public class Key : MonoBehaviour
