@@ -7,7 +7,7 @@
     using Treasure.Common;
     using UnityEngine;
 
-    public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>, IEventReceiver<AddPotionItem>
+    public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>, IEventReceiver<AddPotionItem>, IEventReceiver<RemovePotionItem>
     {
         [SerializeField] private KeyData[] _keys;
         [SerializeField] private ObjectId _startingSword = null;
@@ -16,6 +16,8 @@
         private string _equippedSword;
         public string EquippedSword => _equippedSword;
         private const int POTIONS_LIMIT_IN_INVENTORY = 3;
+        public delegate void OnUpdateInventory();
+        public OnUpdateInventory onUpdateInventory;
 
         private void Awake()
         {
@@ -53,6 +55,15 @@
             e.potionObject.SetActive(false);
         }
 
+        public void OnEvent(RemovePotionItem e)
+        {
+            var potionToRemove = _potionsInStorage.SingleOrDefault(p => p.propertyId.Value == e.potionId);
+            if(potionToRemove == null) return;
+            _potionsInStorage.Remove(potionToRemove);
+
+            if(onUpdateInventory != null) onUpdateInventory();
+        }
+
         public bool GetKeyById(string id)
         {
             if (!_idToKey.TryGetValue(id, out bool keyUnlocked)) return false;
@@ -79,13 +90,14 @@
             EventBus<AddKeyItem>.Register(this);
             EventBus<AddSwordItem>.Register(this);
             EventBus<AddPotionItem>.Register(this);
+            EventBus<RemovePotionItem>.Register(this);
         }
 
         private void OnDisable()
         {
             EventBus<AddKeyItem>.UnRegister(this);
             EventBus<AddSwordItem>.UnRegister(this);
-            EventBus<AddPotionItem>.UnRegister(this);
+            EventBus<RemovePotionItem>.UnRegister(this);
         }
     }
 }

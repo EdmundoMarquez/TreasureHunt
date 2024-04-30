@@ -24,4 +24,9 @@ namespace Treasure.EventBus
         public DataProperty potionProperties;
         public GameObject potionObject;
     }
+
+    public struct RemovePotionItem : IEvent
+    {
+        public string potionId;
+    }
 }

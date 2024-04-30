@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1582419349503239406}
   - component: {fileID: 1582419349503239407}
   - component: {fileID: 1582419349503239402}
+  - component: {fileID: 7747285734487814042}
   - component: {fileID: 1582419349503239380}
   - component: {fileID: 1582419349503239401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Playable_Warrior
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -51,10 +52,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterId: {fileID: 11400000, guid: 00c41f1ca94aa9d4197980e6481b0c42, type: 2}
+  _characterAttributes: {fileID: 11400000, guid: 3d423e877165f944894c4addbcf85e38,
+    type: 2}
   _healthBar: {fileID: 1582419350709921138}
   _healthController: {fileID: 1582419349503239406}
   _movementController: {fileID: 1582419349503239402}
   _swordAttackController: {fileID: 1582419349503239407}
+  _potionController: {fileID: 7747285734487814042}
 --- !u!114 &1582419349503239406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b04afe57213e3441b45ad2dc1daa65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
 --- !u!114 &1582419349503239407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +87,6 @@ MonoBehaviour:
   _swordSprite: {fileID: 1582419349623770066}
   _damageInstigator: {fileID: 1582419350478012634}
   _inventoryController: {fileID: 0}
-  _swordFactory: {fileID: 0}
   _attackTime: 0.5
 --- !u!114 &1582419349503239402
 MonoBehaviour:
@@ -98,9 +100,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103e226cf189150499813f7fef0b9a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
   _spriteTransform: {fileID: 1582419350319044504}
   _spriteAnimator: {fileID: 1582419350319044511}
+--- !u!114 &7747285734487814042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582419349503239381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76715cfb045b894e99c49565356fede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthController: {fileID: 1582419349503239406}
+  _potionFactory: {fileID: 0}
+  _potionDataConfiguration: {fileID: 11400000, guid: 0e9cee8e960fd4e488b5616e65c8f559,
+    type: 2}
 --- !u!70 &1582419349503239380
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582419349623770067}
   - component: {fileID: 1582419349623770066}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582419349669237827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sword Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582419350254850882}
   - component: {fileID: 1582419350254850881}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582419350319044504}
   - component: {fileID: 1582419350319044511}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +410,7 @@ GameObject:
   - component: {fileID: 1582419350478012612}
   - component: {fileID: 1582419350478012635}
   - component: {fileID: 1582419350478012634}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hit Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,6 +472,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961327651050213641, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1961327651050213640, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
@@ -561,11 +583,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1961327649765531727, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1961327651050213636, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
       propertyPath: _healthController
       value: 
       objectReference: {fileID: 1582419349503239406}
+    - target: {fileID: 1961327651050213637, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961327651257212320, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ec14b05ff984db4d8f0a32e6de45fbc, type: 3}
 --- !u!224 &1582419350709921150 stripped

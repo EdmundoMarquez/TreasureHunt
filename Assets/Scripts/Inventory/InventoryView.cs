@@ -14,6 +14,11 @@
         [SerializeField] private PotionContainer[] _potionContainers = null;
         [SerializeField] private InventoryController _inventoryController = null;
 
+        private void Start() 
+        {
+            _inventoryController.onUpdateInventory += UpdateInventory;    
+        }
+
         public void ToggleVisibility(bool toggle)
         {
             Time.timeScale = toggle ? 0f : 1f;
@@ -45,7 +50,7 @@
                 PotionData potionData = PotionFactory.Instance.GetPotionById(potions[i].propertyId.Value);
                 if(potionData != null)
                 {
-                    _potionContainers[i].Init(true, potionData.PotionImage);
+                    _potionContainers[i].Init(true, potionData.PotionImage, potionData.Properties.propertyId.Value);
                     continue;
                 }
             }

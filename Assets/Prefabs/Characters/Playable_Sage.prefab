@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6831353685814468642}
   - component: {fileID: 6831353685814468644}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,9 +63,10 @@ GameObject:
   - component: {fileID: 6831353685916346381}
   - component: {fileID: 1186273600148539086}
   - component: {fileID: 6831353685916346378}
+  - component: {fileID: 4345955333888909448}
   - component: {fileID: 6831353685916346377}
   - component: {fileID: 6831353685916346379}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Playable_Sage
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -101,9 +102,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterId: {fileID: 11400000, guid: 75aea07be920ad94fb4118c1c792798b, type: 2}
+  _characterAttributes: {fileID: 11400000, guid: 0a2587a6e5c4ff04096d6a4e99e454b7,
+    type: 2}
   _movementController: {fileID: 6831353685916346378}
   _healthController: {fileID: 1186273600148539086}
   _healthBar: {fileID: 7546531905951604200}
+  _potionController: {fileID: 4345955333888909448}
 --- !u!114 &1186273600148539086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b04afe57213e3441b45ad2dc1daa65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
 --- !u!114 &6831353685916346378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,9 +132,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103e226cf189150499813f7fef0b9a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1.5
   _spriteTransform: {fileID: 6831353685814468642}
   _spriteAnimator: {fileID: 6831353685814468644}
+--- !u!114 &4345955333888909448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831353685916346614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76715cfb045b894e99c49565356fede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthController: {fileID: 1186273600148539086}
+  _potionFactory: {fileID: 0}
+  _potionDataConfiguration: {fileID: 11400000, guid: 0e9cee8e960fd4e488b5616e65c8f559,
+    type: 2}
 --- !u!70 &6831353685916346377
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -179,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6831353686977776733}
   - component: {fileID: 6831353686977776732}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,6 +278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961327651050213641, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1961327651050213640, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
@@ -366,11 +389,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1961327649765531727, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1961327651050213636, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
       propertyPath: _healthController
       value: 
       objectReference: {fileID: 1186273600148539086}
+    - target: {fileID: 1961327651050213637, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961327651257212320, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ec14b05ff984db4d8f0a32e6de45fbc, type: 3}
 --- !u!224 &7546531905951604196 stripped
