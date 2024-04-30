@@ -1,7 +1,6 @@
 namespace Treasure.Inventory.Potions
 {
     using System.Collections.Generic;
-    using Treasure.Inventory;
     using UnityEngine;
 
     public class PotionFactory : MonoBehaviour

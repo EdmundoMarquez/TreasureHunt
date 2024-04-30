@@ -4,9 +4,9 @@
 
     public class MovementController : MonoBehaviour
     {
-        [SerializeField] private float _moveSpeed = 2f;
         [SerializeField] private Transform _spriteTransform = null;
         [SerializeField] private Animator _spriteAnimator = null;
+        private float _moveSpeed;
         private float _horizontalScale;
         private bool _canMove;
         private bool _isFacingRight = true;
@@ -14,6 +14,11 @@
         private void Awake()
         {
             _horizontalScale = _spriteTransform.localScale.x;
+        }
+
+        public void Init(float moveSpeed)
+        {
+            _moveSpeed = moveSpeed;
         }
 
         public void Toggle(bool toggle)

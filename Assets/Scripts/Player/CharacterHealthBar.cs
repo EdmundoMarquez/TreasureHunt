@@ -18,12 +18,14 @@
         {
             _healthController.onDead += UpdateHealthBar;
             _healthController.onDamageFeedback += UpdateHealthBar;
+            _healthController.onHealFeedback += UpdateHealthBar;
         }
 
         private void OnDisable()
         {
             _healthController.onDead -= UpdateHealthBar;
             _healthController.onDamageFeedback -= UpdateHealthBar;
+            _healthController.onHealFeedback -= UpdateHealthBar;
         }
 
         private void UpdateHealthBar()

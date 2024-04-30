@@ -5,18 +5,29 @@
 
     public class CharacterHealthController : MonoBehaviour, IDamageable
     {
-        [SerializeField] private int _maxHealth = 100;
+        private int _maxHealth;
         private float _health;
         public delegate void OnDamageFeedback();
         public OnDamageFeedback onDamageFeedback;
         public delegate void OnDead();
         public OnDead onDead;
+        public delegate void OnHealFeedback();
+        public OnHealFeedback onHealFeedback;
         public float Health => _health;
         public float MaxHealth => _maxHealth;
 
-        public void Init()
+        public void Init(int maxHealth)
         {
+            _maxHealth = maxHealth;
             _health = _maxHealth;
+        }
+
+        public void Heal(int amount)
+        {
+            _health += amount;
+            _health = Mathf.Clamp(_health, 0, MaxHealth);
+            
+            if (onHealFeedback != null) onHealFeedback();
         }
 
         public void Damage(int amount)
