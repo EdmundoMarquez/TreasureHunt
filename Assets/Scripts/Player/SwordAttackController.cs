@@ -50,6 +50,13 @@
             _damageInstigator.ToggleInstigator(false);
         }
 
+        public void Attack()
+        {
+            if (!_canAttack || _attackTimer > 0f) return;
+            _attackTimer = _attackTime;
+            _swordPivot.DOLocalRotate(new Vector3(0, 0, -360), _attackTime, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear);
+        }
+
         private void Update()
         {
             if (!_canAttack) return;
@@ -60,12 +67,6 @@
             {
                 _attackTimer -= Time.deltaTime;
                 return;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                _attackTimer = _attackTime;
-                _swordPivot.DOLocalRotate(new Vector3(0, 0, -360), _attackTime, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear);
             }
         }
     }

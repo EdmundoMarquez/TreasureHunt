@@ -27,11 +27,9 @@
             _spriteAnimator.SetFloat("speed", 0f);
         }
 
-        void Update()
+        public void Move(Vector2 movementVector)
         {
             if (!_canMove) return;
-
-            Vector2 movementVector = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
 
             float magnitude = movementVector.magnitude;
             _spriteAnimator.SetFloat("speed", magnitude);
