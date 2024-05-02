@@ -5,14 +5,17 @@
     using System.Linq;
     using Treasure.EventBus;
     using Treasure.Common;
+    using Treasure.Inventory.Potions;
     using UnityEngine;
+    using System;
 
     public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>, IEventReceiver<AddPotionItem>, IEventReceiver<RemovePotionItem>
     {
         [SerializeField] private KeyData[] _keys;
+        [SerializeField] private PotionDataConfiguration _potions;
         [SerializeField] private ObjectId _startingSword = null;
         private Dictionary<string, bool> _idToKey;
-        private List<DataProperty> _potionsInStorage;
+        private Dictionary<string, PotionInventoryData> _potionsInStorage;
         private string _equippedSword;
         public string EquippedSword => _equippedSword;
         private const int POTIONS_LIMIT_IN_INVENTORY = 3;
@@ -28,9 +31,24 @@
                 _idToKey.Add(key.Id, key.IsUnlocked);
             }
 
-            _potionsInStorage = new List<DataProperty>();
-
             _equippedSword = _startingSword.Value;
+            _potionsInStorage = new Dictionary<string, PotionInventoryData>();
+
+            foreach (var potion in _potions.healingPotions)
+            {
+                AddPotionToStorage(potion);
+            }
+            //...Remaining Potions
+        }
+
+        private void AddPotionToStorage(PotionData potion)
+        {
+            PotionInventoryData inventoryData = new PotionInventoryData();
+            inventoryData.PotionImage = potion.PotionImage;
+            inventoryData.Properties = potion.Properties;
+            inventoryData.Quantity = 0;
+
+            _potionsInStorage.Add(potion.Properties.propertyId.Value, inventoryData);
         }
 
         public void OnEvent(AddKeyItem e)
@@ -45,22 +63,31 @@
 
         public void OnEvent(AddPotionItem e)
         {
-            if (_potionsInStorage.Count >= POTIONS_LIMIT_IN_INVENTORY)
+            int numberOfPotions = 0;
+            foreach (var potion in GetAllPotions())
             {
-                Debug.Log("Exceeded max numbers of potions to store.");
-                return;
+                numberOfPotions += potion.Quantity;
+                if(numberOfPotions >= POTIONS_LIMIT_IN_INVENTORY)
+                {
+                    Debug.Log("Exceeded max numbers of potions to store.");
+                    return;
+                }
             }
 
-            _potionsInStorage.Add(e.potionProperties);
+            if(_potionsInStorage.TryGetValue(e.potionProperties.propertyId.Value, out var inventoryData))
+            {
+                inventoryData.Quantity += 1;
+            }
             e.potionObject.SetActive(false);
         }
 
         public void OnEvent(RemovePotionItem e)
         {
-            var potionToRemove = _potionsInStorage.SingleOrDefault(p => p.propertyId.Value == e.potionId);
-            if(potionToRemove == null) return;
-            _potionsInStorage.Remove(potionToRemove);
-
+            if(!_potionsInStorage.TryGetValue(e.potionId, out var inventoryData))
+            {
+                return;
+            }
+            inventoryData.Quantity = Math.Abs(--inventoryData.Quantity);
             if(onUpdateInventory != null) onUpdateInventory();
         }
 
@@ -80,9 +107,27 @@
             return _idToKey.Keys.ToArray();
         }
 
-        public DataProperty[] GetAllPotionValues()
+        public PotionInventoryData[] GetAllPotions()
         {
-            return _potionsInStorage.ToArray();
+            return _potionsInStorage.Values.ToArray();
+        }
+
+        public List<DataProperty> GetAllAvailablePotions()
+        {
+            List<DataProperty> availablePotions = new List<DataProperty>();
+
+            foreach (var potion in GetAllPotions())
+            {
+                if(potion.Quantity > 0)
+                {
+                    for (int i = 0; i < potion.Quantity; i++)
+                    {
+                        availablePotions.Add(potion.Properties);
+                    }
+                }
+            }
+
+            return availablePotions;
         }
 
         private void OnEnable()

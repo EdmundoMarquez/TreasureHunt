@@ -691,7 +691,7 @@ MonoBehaviour:
   _batSprite: {fileID: 2101583814}
   _target: {fileID: 838428142}
   _radius: 1
-  _rotationSpeed: 2
+  _rotationSpeed: 4
 --- !u!1 &324266856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,7 +2053,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3796,6 +3796,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3cf01da0971c56488e8c606e761e16c, type: 2}
   - {fileID: 11400000, guid: c64223182d2e1604baeffd0e1338f607, type: 2}
   - {fileID: 11400000, guid: 092af7405560d5b40a208633691f0426, type: 2}
+  _potions: {fileID: 11400000, guid: 0e9cee8e960fd4e488b5616e65c8f559, type: 2}
   _startingSword: {fileID: 11400000, guid: bff1eef83687f224194ec557442e7fd1, type: 2}
 --- !u!114 &1101177246
 MonoBehaviour:
@@ -6518,7 +6519,7 @@ MonoBehaviour:
   _batSprite: {fileID: 1357957952}
   _target: {fileID: 342984205}
   _radius: 1
-  _rotationSpeed: 2
+  _rotationSpeed: 4
 --- !u!4 &1589794558
 Transform:
   m_ObjectHideFlags: 0
@@ -7270,7 +7271,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1860713824}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3
+    OrthographicSize: 4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

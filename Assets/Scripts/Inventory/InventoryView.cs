@@ -5,6 +5,7 @@
     using Treasure.Swords;
     using Treasure.Common;
     using Treasure.Inventory.Potions;
+    using System.Collections.Generic;
 
     public class InventoryView : MonoBehaviour
     {
@@ -44,8 +45,8 @@
             foreach (var container in _potionContainers)
                 container.Init(false, null);
 
-            DataProperty[] potions = _inventoryController.GetAllPotionValues();
-            for (int i = 0; i < potions.Length; i++)
+            List<DataProperty> potions = _inventoryController.GetAllAvailablePotions();
+            for (int i = 0; i < potions.Count; i++)
             {
                 PotionData potionData = PotionFactory.Instance.GetPotionById(potions[i].propertyId.Value);
                 if(potionData != null)

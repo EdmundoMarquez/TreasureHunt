@@ -9,4 +9,12 @@
         public Sprite PotionImage;
         public DataProperty Properties;
     }
+
+    [SerializeField]
+    public class PotionInventoryData
+    {
+        public Sprite PotionImage;
+        public DataProperty Properties;
+        public int Quantity;
+    }
 }
