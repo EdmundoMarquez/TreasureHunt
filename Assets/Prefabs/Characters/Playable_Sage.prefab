@@ -108,6 +108,7 @@ MonoBehaviour:
   _healthController: {fileID: 1186273600148539086}
   _healthBar: {fileID: 7546531905951604200}
   _potionController: {fileID: 4345955333888909448}
+  _collider2D: {fileID: 6831353685916346377}
 --- !u!114 &1186273600148539086
 MonoBehaviour:
   m_ObjectHideFlags: 0

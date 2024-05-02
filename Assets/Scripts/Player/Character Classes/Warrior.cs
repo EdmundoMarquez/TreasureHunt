@@ -12,6 +12,7 @@ namespace Treasure.Player
         [SerializeField] private MovementController _movementController = null;
         [SerializeField] private SwordAttackController _swordAttackController = null;
         [SerializeField] private CharacterPotionController _potionController = null;
+        [SerializeField] private Collider2D _collider2D = null;
         public ObjectId CharacterId => _characterId;
 
         private void Start()
@@ -26,6 +27,7 @@ namespace Treasure.Player
         {
             _swordAttackController.Toggle(toggle);
             _movementController.Toggle(toggle);
+            _collider2D.enabled = toggle;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Treasure.Player
         [SerializeField] private CharacterHealthController _healthController = null;
         [SerializeField] private CharacterHealthBar _healthBar = null;
         [SerializeField] private CharacterPotionController _potionController = null;
+        [SerializeField] private Collider2D _collider2D = null;
         public ObjectId CharacterId => _characterId;
 
         private void Start()
@@ -24,6 +25,7 @@ namespace Treasure.Player
         public void ToggleControl(bool toggle)
         {
             _movementController.Toggle(toggle);
+            _collider2D.enabled = toggle;
         }
     }
 }

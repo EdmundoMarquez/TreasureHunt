@@ -59,6 +59,7 @@ MonoBehaviour:
   _movementController: {fileID: 1582419349503239402}
   _swordAttackController: {fileID: 1582419349503239407}
   _potionController: {fileID: 7747285734487814042}
+  _collider2D: {fileID: 1582419349503239380}
 --- !u!114 &1582419349503239406
 MonoBehaviour:
   m_ObjectHideFlags: 0
