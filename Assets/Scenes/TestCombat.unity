@@ -10233,6 +10233,10 @@ PrefabInstance:
       propertyPath: _potionFactory
       value: 
       objectReference: {fileID: 943521932}
+    - target: {fileID: 5357468, guid: d36bea40e680e0a4bbc3b5ef8a772d17, type: 3}
+      propertyPath: _characterToFollow
+      value: 
+      objectReference: {fileID: 1860713824}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36bea40e680e0a4bbc3b5ef8a772d17, type: 3}
 --- !u!1001 &8212405298480493407
