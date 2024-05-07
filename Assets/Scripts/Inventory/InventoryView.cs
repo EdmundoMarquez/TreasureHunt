@@ -6,6 +6,9 @@
     using Treasure.Common;
     using Treasure.Inventory.Potions;
     using System.Collections.Generic;
+    using Treasure.PlayerInput;
+    using UnityEngine.Experimental.PlayerLoop;
+    using System.Linq.Expressions;
 
     public class InventoryView : MonoBehaviour
     {
@@ -14,10 +17,31 @@
         [SerializeField] private CanvasGroup[] _availableKeyItems;
         [SerializeField] private PotionContainer[] _potionContainers = null;
         [SerializeField] private InventoryController _inventoryController = null;
+        private IPlayerInput _inputAdapter;
+        private bool _isOpen = false;
 
-        private void Start() 
+        public void Init(IPlayerInput inputAdapter)
         {
-            _inventoryController.onUpdateInventory += UpdateInventory;    
+            _inputAdapter = inputAdapter;
+        }
+
+        private void OnEnable() 
+        {
+            _inventoryController.onUpdateInventory += UpdateInventory;
+        }
+
+        private void OnDisable()
+        {
+            _inventoryController.onUpdateInventory -= UpdateInventory;   
+        }
+
+        public void Tick()
+        {
+            if(_inputAdapter.InventoryButtonPressed())
+            {
+                if(_isOpen) return;
+                ToggleVisibility(true);
+            }
         }
 
         public void ToggleVisibility(bool toggle)
@@ -26,6 +50,7 @@
             _canvasGroup.DOFade(toggle ? 1 : 0, 0.3f).SetUpdate(true);
             _canvasGroup.interactable = toggle;
             _canvasGroup.blocksRaycasts = toggle;
+            _isOpen = toggle;
 
             if (toggle) UpdateInventory();
         }

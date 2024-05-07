@@ -3,7 +3,7 @@ namespace Treasure.Player
     using UnityEngine;
     using Treasure.Common;
     using Treasure.PlayerInput;
-    using Pathfinding;
+    using DG.Tweening;
 
     public class Sage : MonoBehaviour, IPlayableCharacter
     {
@@ -13,21 +13,19 @@ namespace Treasure.Player
         [SerializeField] private CharacterHealthController _healthController = null;
         [SerializeField] private CharacterHealthBar _healthBar = null;
         [SerializeField] private CharacterPotionController _potionController = null;
-        [SerializeField] private Transform _followCharacter = null;
-        private AIPath _aiPath;
+        [SerializeField] private CompanionFollowController _followController = null;
+        [SerializeField] private SpriteRenderer _arrow = null;
+
         public ObjectId CharacterId => _characterId;
         private IPlayerInput _inputAdapter;
         private bool _canTick = false;
 
-        private void Start()
-        {
-            _aiPath = GetComponent<AIPath>();
-        }
 
         public void Init(IPlayerInput inputAdapter)
         {
             _healthController.Init(_characterAttributes.Health);
             _movementController.Init(_characterAttributes.Stamina);
+            _followController.Init(_characterAttributes.Stamina);
             _potionController.Init(_characterId.Value);
             _healthBar.Init();
 
@@ -37,15 +35,23 @@ namespace Treasure.Player
         public void ToggleControl(bool toggle)
         {
             _movementController.Toggle(toggle);
-            _aiPath.enabled = !toggle; //Enable only when no active
+            _followController.Toggle(!toggle);
+            _healthController.Toggle(toggle);
             _canTick = toggle;
+
+            ShowControlArrow(toggle);
+        }
+
+        public void ShowControlArrow(bool show)
+        {
+            _arrow.DOFade(show ? 1f : 0f, 0.3f);
         }
 
         public void Tick()
         {
             if(!_canTick)
             {
-                _aiPath.destination = _followCharacter.position;
+                _followController.Follow();
                 return;
             } 
 

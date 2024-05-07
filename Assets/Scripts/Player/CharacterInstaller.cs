@@ -3,6 +3,7 @@
     using Cinemachine;
     using UnityEngine;
     using Treasure.PlayerInput;
+    using Treasure.Inventory;
 
     public class CharacterInstaller : MonoBehaviour
     {
@@ -10,6 +11,7 @@
         [SerializeField] private CinemachineVirtualCamera _followCamera = null;
         [SerializeField] private Warrior _warriorCharacter = null;
         [SerializeField] private Sage _sageCharacter = null;
+        [SerializeField] private InventoryView _inventoryView = null;
         private IPlayerInput _inputAdapter;
         private bool isWarriorActive = true;
 
@@ -24,6 +26,7 @@
         {
             _warriorCharacter.Init(_inputAdapter);
             _sageCharacter.Init(_inputAdapter);
+            _inventoryView.Init(_inputAdapter);
 
             //Set warrior as the default
             _warriorCharacter.ToggleControl(true);
@@ -34,6 +37,7 @@
         {
             _warriorCharacter.Tick();
             _sageCharacter.Tick();
+            _inventoryView.Tick();
 
             if (_inputAdapter.ChangeCharacterButtonPressed())
             {

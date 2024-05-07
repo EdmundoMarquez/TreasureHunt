@@ -64,7 +64,7 @@
                 selectedCharacterId = characterId
             });
             
-            yield return new WaitForSecondsRealtime(1.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
             ToggleCrosshair(false);
         }
 

@@ -15,11 +15,17 @@
         public OnHealFeedback onHealFeedback;
         public float Health => _health;
         public float MaxHealth => _maxHealth;
+        private bool _canTakeDamage;
 
         public void Init(int maxHealth)
         {
             _maxHealth = maxHealth;
             _health = _maxHealth;
+        }
+
+        public void Toggle(bool toggle)
+        {
+            _canTakeDamage = toggle;
         }
 
         public void Heal(int amount)
@@ -32,6 +38,8 @@
 
         public void Damage(int amount)
         {
+            if(!_canTakeDamage) return;
+
             _health -= amount;
 
             if (_health <= 0)
