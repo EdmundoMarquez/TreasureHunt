@@ -6,33 +6,29 @@
     using Treasure.Player;
     using UnityEngine;
 
-    public class Chest : MonoBehaviour
+    public class Chest : MonoBehaviour, IInteractable
     {
-        [SerializeField] private ObjectId _requiredCharacter;
+        // [SerializeField] private ObjectId _requiredCharacter;
         [SerializeField] private ChestData _chestData;
         [SerializeField] private GameObject _lockedSprite;
         [SerializeField] private GameObject _unlockedSprite;
         private WordData _wordToSolve;
         private bool _isUnlocked;
+        public bool CanInteract => _isUnlocked;
 
         private void Start()
         {
             _wordToSolve = _chestData.RandomizeWord();
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        public void Interact()
         {
-            if (_isUnlocked) return;
-            if (col.tag == "Player")
-            {
-                if (col.GetComponent<IPlayableCharacter>().CharacterId.Value != _requiredCharacter.Value) return;
-                EventBus<OnShowPuzzle>.Raise(new OnShowPuzzle
-                {
-                    chest = gameObject,
-                    puzzleWord = _wordToSolve
-                });
-            }
+            EventBus<OnShowPuzzle>.Raise(new OnShowPuzzle{
+                chest = gameObject,
+                puzzleWord = _wordToSolve
+            });
         }
+
 
         public void ToggleLock(bool unlock)
         {

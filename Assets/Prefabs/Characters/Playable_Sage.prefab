@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 871862320}
   - component: {fileID: 871862321}
   - component: {fileID: 5357468}
+  - component: {fileID: 3618653458915930880}
   m_Layer: 9
   m_Name: Playable_Sage
   m_TagString: Player
@@ -192,6 +193,7 @@ MonoBehaviour:
   _healthController: {fileID: 1186273600148539086}
   _healthBar: {fileID: 7546531905951604200}
   _potionController: {fileID: 4345955333888909448}
+  _interactionController: {fileID: 3618653458915930880}
   _followController: {fileID: 5357468}
   _arrow: {fileID: 4402188042563074232}
 --- !u!114 &1186273600148539086
@@ -352,6 +354,33 @@ MonoBehaviour:
   _characterToFollow: {fileID: 0}
   _spriteTransform: {fileID: 6831353685814468642}
   _spriteAnimator: {fileID: 6831353685814468644}
+--- !u!114 &3618653458915930880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831353685916346614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58196592fd1ec40479f28ae689c9ad7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectionRadius: 5
+  _contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 1
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1024
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!1 &6831353686977776730
 GameObject:
   m_ObjectHideFlags: 0

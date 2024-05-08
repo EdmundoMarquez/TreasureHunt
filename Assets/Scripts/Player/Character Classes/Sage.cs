@@ -13,6 +13,7 @@ namespace Treasure.Player
         [SerializeField] private CharacterHealthController _healthController = null;
         [SerializeField] private CharacterHealthBar _healthBar = null;
         [SerializeField] private CharacterPotionController _potionController = null;
+        [SerializeField] private CharacterInteractionController _interactionController = null;
         [SerializeField] private CompanionFollowController _followController = null;
         [SerializeField] private SpriteRenderer _arrow = null;
 
@@ -30,13 +31,15 @@ namespace Treasure.Player
             _healthBar.Init();
 
             _inputAdapter = inputAdapter;
+            _interactionController.Init(_inputAdapter);
         }
 
         public void ToggleControl(bool toggle)
         {
             _movementController.Toggle(toggle);
-            _followController.Toggle(!toggle);
             _healthController.Toggle(toggle);
+            _interactionController.Toggle(toggle);
+            _followController.Toggle(!toggle);
             _canTick = toggle;
 
             ShowControlArrow(toggle);
@@ -56,11 +59,7 @@ namespace Treasure.Player
             } 
 
             _movementController.Move(_inputAdapter.GetDirection());
-
-            if(_inputAdapter.InteractButtonPressed())
-            {
-                //...Interact
-            }
+            _interactionController.Tick();
         }
     }
 }
