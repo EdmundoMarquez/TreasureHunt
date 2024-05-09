@@ -2,19 +2,22 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Treasure.Player;
+using Treasure.EventBus;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
+using Pathfinding;
 
-public class RoomContentGenerator : MonoBehaviour
+public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloorReady>
 {
     [SerializeField]
-    private RoomGenerator playerRoom, defaultRoom;
+    private RoomGenerator playerRoom, defaultRoom, treasureRoom;
 
     List<GameObject> spawnedObjects = new List<GameObject>();
 
     [SerializeField]
     private GraphTest graphTest;
-
 
     public Transform itemParent;
 
@@ -43,18 +46,18 @@ public class RoomContentGenerator : MonoBehaviour
         spawnedObjects.Clear();
 
         SelectPlayerSpawnPoint(dungeonData);
-        SelectEnemySpawnPoints(dungeonData);
+        SelectDungeonSpawnPoints(dungeonData);
 
         foreach (GameObject item in spawnedObjects)
         {
-            if(item != null)
+            if (item != null)
                 item.transform.SetParent(itemParent, false);
         }
     }
 
     private void SelectPlayerSpawnPoint(DungeonData dungeonData)
     {
-        int randomRoomIndex = UnityEngine.Random.Range(0, dungeonData.roomsDictionary.Count);
+        int randomRoomIndex = Random.Range(0, dungeonData.roomsDictionary.Count);
         Vector2Int playerSpawnPoint = dungeonData.roomsDictionary.Keys.ElementAt(randomRoomIndex);
 
         graphTest.RunDijkstraAlgorithm(playerSpawnPoint, dungeonData.floorPositions);
@@ -67,32 +70,58 @@ public class RoomContentGenerator : MonoBehaviour
             dungeonData.GetRoomFloorWithoutCorridors(roomIndex)
             );
 
-        FocusCameraOnThePlayer(placedPrefabs[placedPrefabs.Count - 1].transform);
+        InitializePlayer(placedPrefabs[placedPrefabs.Count - 1].transform);
 
         spawnedObjects.AddRange(placedPrefabs);
 
         dungeonData.roomsDictionary.Remove(playerSpawnPoint);
     }
 
-    private void FocusCameraOnThePlayer(Transform playerTransform)
+
+    private void InitializePlayer(Transform playerTransform)
     {
-        cinemachineCamera.LookAt = playerTransform;
-        cinemachineCamera.Follow = playerTransform;
+        CharacterInstaller playerInstaller = playerTransform.GetComponent<CharacterInstaller>();
+        playerInstaller.Init(cinemachineCamera);
     }
 
-    private void SelectEnemySpawnPoints(DungeonData dungeonData)
+    private void SelectDungeonSpawnPoints(DungeonData dungeonData)
     {
-        foreach (KeyValuePair<Vector2Int,HashSet<Vector2Int>> roomData in dungeonData.roomsDictionary)
-        { 
-            spawnedObjects.AddRange(
-                defaultRoom.ProcessRoom(
-                    roomData.Key,
-                    roomData.Value, 
-                    dungeonData.GetRoomFloorWithoutCorridors(roomData.Key)
-                    )
-            );
+        foreach (KeyValuePair<Vector2Int, HashSet<Vector2Int>> roomData in dungeonData.roomsDictionary)
+        {
+            if (Random.value > 0.5f) //50% chance of getting default room
+            {
+                spawnedObjects.AddRange(
+                    defaultRoom.ProcessRoom(
+                        roomData.Key,
+                        roomData.Value,
+                        dungeonData.GetRoomFloorWithoutCorridors(roomData.Key)
+                        )
+                );
+                continue;
+            }
 
+            spawnedObjects.AddRange(
+                    treasureRoom.ProcessRoom(
+                        roomData.Key,
+                        roomData.Value,
+                        dungeonData.GetRoomFloorWithoutCorridors(roomData.Key)
+                        )
+                );
         }
     }
 
+    public void OnEvent(OnDungeonFloorReady e)
+    {
+        GenerateRoomContent(e.dungeonData);
+    }
+
+    private void OnEnable()
+    {
+        EventBus<OnDungeonFloorReady>.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        EventBus<OnDungeonFloorReady>.UnRegister(this);
+    }
 }

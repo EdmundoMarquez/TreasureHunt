@@ -10,7 +10,6 @@
     {
         [SerializeField] private Camera _mainCamera = null;
         [SerializeField] private CanvasGroup _inventoryCanvas = null;
-        [SerializeField] private PotionFactory _potionFactory = null;
         [SerializeField] private SpriteRenderer _potionCrosshair = null;
         [SerializeField] private ContactFilter2D _contactFilter;
         private bool _isThrowingPotion;
@@ -21,7 +20,7 @@
         {
             ToggleCrosshair(true);
 
-            PotionData potionData = _potionFactory.GetPotionById(e.potionId);
+            PotionData potionData = PotionFactory.Instance.GetPotionById(e.potionId);
             _potionCrosshair.sprite = potionData.PotionImage;
             _throwPotionId = potionData.Properties.propertyId.Value;
         }

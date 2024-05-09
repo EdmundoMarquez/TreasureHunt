@@ -9,7 +9,6 @@
     public class CharacterPotionController : MonoBehaviour, IEventReceiver<OnPotionSelectCharacter> 
     {
         [SerializeField] private CharacterHealthController _healthController = null;
-        [SerializeField] private PotionFactory _potionFactory = null;
         [SerializeField] private PotionDataConfiguration _potionDataConfiguration = null;
         private string _characterId;
 

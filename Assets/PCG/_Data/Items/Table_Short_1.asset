@@ -15,4 +15,9 @@ MonoBehaviour:
   sprite: {fileID: -8675773652462920300, guid: fc5028170ab84ed4bbf43948f12a52d6, type: 3}
   size: {x: 1, y: 1}
   placementType: 1
+  assignedLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   addOffset: 1
+  health: 1
+  nonDestructible: 0

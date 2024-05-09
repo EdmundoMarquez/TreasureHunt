@@ -144,12 +144,12 @@ GameObject:
   - component: {fileID: 1186273600148539086}
   - component: {fileID: 6831353685916346378}
   - component: {fileID: 4345955333888909448}
-  - component: {fileID: 6831353685916346377}
   - component: {fileID: 6831353685916346379}
   - component: {fileID: 871862320}
   - component: {fileID: 871862321}
   - component: {fileID: 5357468}
   - component: {fileID: 3618653458915930880}
+  - component: {fileID: 3538337651863411937}
   m_Layer: 9
   m_Name: Playable_Sage
   m_TagString: Player
@@ -235,25 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthController: {fileID: 1186273600148539086}
-  _potionFactory: {fileID: 0}
   _potionDataConfiguration: {fileID: 11400000, guid: 0e9cee8e960fd4e488b5616e65c8f559,
     type: 2}
---- !u!70 &6831353685916346377
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6831353685916346614}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.035565972}
-  m_Size: {x: 0.5, y: 0.761132}
-  m_Direction: 0
 --- !u!50 &6831353685916346379
 Rigidbody2D:
   serializedVersion: 4
@@ -316,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.18
+  radius: 0.3
   height: 0.3
   repathRate: 0.5
   canSearch: 1
@@ -333,7 +316,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 5
-  pickNextWaypointDist: 2
+  pickNextWaypointDist: 0.2
   endReachedDistance: 3
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
@@ -381,6 +364,22 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+--- !u!58 &3538337651863411937
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831353685916346614}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.38
 --- !u!1 &6831353686977776730
 GameObject:
   m_ObjectHideFlags: 0

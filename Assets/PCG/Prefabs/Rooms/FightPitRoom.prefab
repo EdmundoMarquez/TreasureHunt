@@ -43,11 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927bb5e235c4af44faebb764ab6aab28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPlacer: {fileID: 4341242197028722173, guid: 49d1de73f44f58940a43bf538b290285, type: 3}
+  prefabPlacer: {fileID: 4341242197028722173, guid: 49d1de73f44f58940a43bf538b290285,
+    type: 3}
   enemyPlacementData:
-  - minQuantity: 5
-    maxQuantity: 10
-    enemyPrefab: {fileID: 3094051805721863274, guid: befb4cd3e122c99418502e04ec5a05a0, type: 3}
+  - minQuantity: 2
+    maxQuantity: 4
+    enemyPrefab: {fileID: 6882859258702414644, guid: 6397d570c1a4a384cbd951185b9a2aee,
+      type: 3}
     enemySize: {x: 1, y: 1}
   itemData:
   - minQuantity: 3

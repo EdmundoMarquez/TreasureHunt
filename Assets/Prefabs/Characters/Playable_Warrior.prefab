@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 1582419349503239407}
   - component: {fileID: 1582419349503239402}
   - component: {fileID: 7747285734487814042}
-  - component: {fileID: 1582419349503239380}
   - component: {fileID: 1582419349503239401}
   - component: {fileID: 1055176425}
   - component: {fileID: 1055176424}
   - component: {fileID: 1055176423}
+  - component: {fileID: 2497961308629994982}
   m_Layer: 9
   m_Name: Playable_Warrior
   m_TagString: Player
@@ -37,9 +37,9 @@ Transform:
   m_LocalPosition: {x: 0.2, y: -0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1582419350319044504}
-  - {fileID: 1582419350709921150}
   - {fileID: 5163765373146958849}
+  - {fileID: 1582419350709921150}
+  - {fileID: 1582419350319044504}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -121,25 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthController: {fileID: 1582419349503239406}
-  _potionFactory: {fileID: 0}
   _potionDataConfiguration: {fileID: 11400000, guid: 0e9cee8e960fd4e488b5616e65c8f559,
     type: 2}
---- !u!70 &1582419349503239380
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582419349503239381}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.33}
-  m_Size: {x: 0.5, y: 0.69}
-  m_Direction: 0
 --- !u!50 &1582419349503239401
 Rigidbody2D:
   serializedVersion: 4
@@ -202,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.18
+  radius: 0.3
   height: 0.3
   repathRate: 0.5
   canSearch: 1
@@ -219,7 +202,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 5
-  pickNextWaypointDist: 2
+  pickNextWaypointDist: 0.2
   endReachedDistance: 3
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
@@ -240,6 +223,22 @@ MonoBehaviour:
   _characterToFollow: {fileID: 0}
   _spriteTransform: {fileID: 1582419350319044504}
   _spriteAnimator: {fileID: 1582419350319044511}
+--- !u!58 &2497961308629994982
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582419349503239381}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.38
 --- !u!1 &1582419349623770076
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,15 +454,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582419350319044505}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.28199998, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 1582419350254850882}
   - {fileID: 1582419350478012612}
   - {fileID: 1582419349669237827}
   m_Father: {fileID: 1582419349503239403}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1582419350319044511
 Animator:
@@ -570,12 +569,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6841410388311419957}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 2.5661511, y: 2.5661511, z: 0.51323}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.718, z: 0}
+  m_LocalScale: {x: 2.566153, y: 2.566153, z: 0.51323}
   m_Children: []
   m_Father: {fileID: 1582419349503239403}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &6040711587973164260
 SpriteRenderer:
@@ -706,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 1961327651050213640, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.2
+      value: -0.482
       objectReference: {fileID: 0}
     - target: {fileID: 1961327651050213640, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}

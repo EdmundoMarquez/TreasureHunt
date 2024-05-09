@@ -33,6 +33,29 @@ public class PrefabPlacer : MonoBehaviour
         return placedObjects;
     }
 
+    public List<GameObject> PlaceTreasures(List<TreasurePlacementData> treasurePlacementData, ItemPlacementHelper itemPlacementHelper)
+    {
+        List<GameObject> placedObjects = new List<GameObject>();
+
+        foreach (var placementData in treasurePlacementData)
+        {
+            for (int i = 0; i < placementData.Quantity; i++)
+            {
+                Vector2? possiblePlacementSpot = itemPlacementHelper.GetItemPlacementPosition(
+                    PlacementType.OpenSpace,
+                    100,
+                    placementData.treasureSize,
+                    false
+                );
+                if(possiblePlacementSpot.HasValue)
+                {
+                    placedObjects.Add(CreateObject(placementData.treasurePrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f)));
+                }
+            }
+        }
+        return placedObjects;
+    }
+
     public List<GameObject> PlaceAllItems(List<ItemPlacementData> itemPlacementData, ItemPlacementHelper itemPlacementHelper)
     {
         List<GameObject> placedObjects = new List<GameObject>();
@@ -52,18 +75,19 @@ public class PrefabPlacer : MonoBehaviour
 
                 if (possiblePlacementSpot.HasValue)
                 {
-
-                    placedObjects.Add(PlaceItem(placementData.itemData, possiblePlacementSpot.Value));
+                    placedObjects.Add(PlaceItem(placementData.itemData, possiblePlacementSpot.Value, placementData.itemData.assignedLayerMask));
                 }
             }
         }
         return placedObjects;
     }
-    private GameObject PlaceItem(ItemData item, Vector2 placementPosition)
+    private GameObject PlaceItem(ItemData item, Vector2 placementPosition, LayerMask layerMask)
     {
         GameObject newItem = CreateObject(itemPrefab,placementPosition);
         //GameObject newItem = Instantiate(itemPrefab, placementPosition, Quaternion.identity);
         newItem.GetComponent<Item>().Initialize(item);
+        int layerNumber = (int)Mathf.Log(layerMask.value, 2); //Get real layer index
+        newItem.layer = layerNumber;
         return newItem;
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cinemachine;
+using Treasure.EventBus;
 using UnityEngine.Events;
 
 public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
@@ -25,9 +26,9 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     private List<Color> roomColors = new List<Color>();
     [SerializeField]
     private bool showRoomGizmo = false, showCorridorsGizmo;
-
     //Events
-    public UnityEvent<DungeonData> OnDungeonFloorReady;
+    // public UnityEvent<DungeonData> OnDungeonFloorReady;
+
 
     protected override void RunProceduralGeneration()
     {
@@ -38,7 +39,11 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             corridorPositions = this.corridorPositions,
             floorPositions = this.floorPositions
         };
-        OnDungeonFloorReady?.Invoke(data);
+        // OnDungeonFloorReady?.Invoke(data);
+        EventBus<OnDungeonFloorReady>.Raise(new OnDungeonFloorReady
+        {
+            dungeonData = data
+        });
     }
 
     private void CorridorFirstGeneration()
@@ -80,7 +85,11 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             corridorPositions = this.corridorPositions,
             floorPositions = this.floorPositions
         };
-        OnDungeonFloorReady?.Invoke(data);
+        EventBus<OnDungeonFloorReady>.Raise(new OnDungeonFloorReady
+        {
+            dungeonData = data
+        });
+        // OnDungeonFloorReady?.Invoke(data);
     }
 
     private void CreateRoomsAtDeadEnd(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)

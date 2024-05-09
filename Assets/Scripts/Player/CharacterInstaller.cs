@@ -8,13 +8,12 @@
     public class CharacterInstaller : MonoBehaviour
     {
 
-        [SerializeField] private CinemachineVirtualCamera _followCamera = null;
         [SerializeField] private Warrior _warriorCharacter = null;
         [SerializeField] private Sage _sageCharacter = null;
         [SerializeField] private InventoryView _inventoryView = null;
+        private CinemachineVirtualCamera _followCamera = null;
         private IPlayerInput _inputAdapter;
         private bool isWarriorActive = true;
-
 
         private void Awake()
         {
@@ -22,15 +21,22 @@
             _inputAdapter = new UnityInputAdapter();
         }
 
-        private void Start()
+        public void Init(CinemachineVirtualCamera followCamera)
         {
+            _followCamera = followCamera;
             _warriorCharacter.Init(_inputAdapter);
             _sageCharacter.Init(_inputAdapter);
             _inventoryView.Init(_inputAdapter);
 
+            SetDefaultCharacter();
+        }
+
+        private void SetDefaultCharacter()
+        {
             //Set warrior as the default
             _warriorCharacter.ToggleControl(true);
             _sageCharacter.ToggleControl(false);
+            _followCamera.m_Follow = _warriorCharacter.transform;
         }
 
         private void Update()

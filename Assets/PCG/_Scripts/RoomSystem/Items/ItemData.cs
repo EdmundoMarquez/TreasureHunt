@@ -8,6 +8,7 @@ public class ItemData : ScriptableObject
     public Sprite sprite;
     public Vector2Int size = new Vector2Int(1, 1);
     public PlacementType placementType;
+    public LayerMask assignedLayerMask;
     public bool addOffset;
     public int health = 1;
     public bool nonDestructible;
