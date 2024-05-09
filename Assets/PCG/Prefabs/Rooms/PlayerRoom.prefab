@@ -57,5 +57,8 @@ MonoBehaviour:
   - minQuantity: 2
     maxQuantity: 4
     itemData: {fileID: 11400000, guid: 70bb79b25760ec54d8a3c2f4d30fbde2, type: 2}
+  - minQuantity: 2
+    maxQuantity: 4
+    itemData: {fileID: 11400000, guid: d8d519ff40f243f44a50bfba8d598266, type: 2}
   prefabPlacer: {fileID: 4341242197028722173, guid: 49d1de73f44f58940a43bf538b290285,
     type: 3}

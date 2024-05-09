@@ -64,3 +64,9 @@ MonoBehaviour:
   - minQuantity: 2
     maxQuantity: 3
     itemData: {fileID: 11400000, guid: f42e9114019933d4cbe2ee1cf58e5165, type: 2}
+  - minQuantity: 0
+    maxQuantity: 2
+    itemData: {fileID: 11400000, guid: d8d519ff40f243f44a50bfba8d598266, type: 2}
+  - minQuantity: 0
+    maxQuantity: 2
+    itemData: {fileID: 11400000, guid: 4554042cfe88bd345b31388b47f57379, type: 2}

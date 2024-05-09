@@ -75,19 +75,17 @@ public class PrefabPlacer : MonoBehaviour
 
                 if (possiblePlacementSpot.HasValue)
                 {
-                    placedObjects.Add(PlaceItem(placementData.itemData, possiblePlacementSpot.Value, placementData.itemData.assignedLayerMask));
+                    placedObjects.Add(PlaceItem(placementData.itemData, possiblePlacementSpot.Value));
                 }
             }
         }
         return placedObjects;
     }
-    private GameObject PlaceItem(ItemData item, Vector2 placementPosition, LayerMask layerMask)
+    private GameObject PlaceItem(ItemData item, Vector2 placementPosition)
     {
         GameObject newItem = CreateObject(itemPrefab,placementPosition);
         //GameObject newItem = Instantiate(itemPrefab, placementPosition, Quaternion.identity);
         newItem.GetComponent<Item>().Initialize(item);
-        int layerNumber = (int)Mathf.Log(layerMask.value, 2); //Get real layer index
-        newItem.layer = layerNumber;
         return newItem;
     }
 

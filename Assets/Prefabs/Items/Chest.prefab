@@ -234,7 +234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccad7ee9cc6aea14d8bb7ddf030f683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _requiredCharacter: {fileID: 11400000, guid: 75aea07be920ad94fb4118c1c792798b, type: 2}
   _chestData: {fileID: 11400000, guid: ec489b177bbb6f6418cda1be690c3946, type: 2}
   _lockedSprite: {fileID: 5178263635350698737}
   _unlockedSprite: {fileID: 5178263636366948312}

@@ -14,6 +14,9 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
     [SerializeField]
     private RoomGenerator playerRoom, defaultRoom, treasureRoom;
 
+    [Range(0f,1f)]
+    [SerializeField]
+    private float defaultRoomPercent = 0.5f;
     List<GameObject> spawnedObjects = new List<GameObject>();
 
     [SerializeField]
@@ -88,7 +91,7 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
     {
         foreach (KeyValuePair<Vector2Int, HashSet<Vector2Int>> roomData in dungeonData.roomsDictionary)
         {
-            if (Random.value > 0.5f) //50% chance of getting default room
+            if (Random.value < defaultRoomPercent)
             {
                 spawnedObjects.AddRange(
                     defaultRoom.ProcessRoom(

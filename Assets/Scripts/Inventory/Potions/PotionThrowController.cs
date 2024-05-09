@@ -8,7 +8,6 @@
 
     public class PotionThrowController : MonoBehaviour, IEventReceiver<ThrowPotionItem>
     {
-        [SerializeField] private Camera _mainCamera = null;
         [SerializeField] private CanvasGroup _inventoryCanvas = null;
         [SerializeField] private SpriteRenderer _potionCrosshair = null;
         [SerializeField] private ContactFilter2D _contactFilter;
@@ -30,7 +29,7 @@
             if (!_isThrowingPotion) return;
 
             Vector2 mousePosition = Input.mousePosition;
-            Vector3 targetPosition = _mainCamera.ScreenToWorldPoint(mousePosition);
+            Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
             targetPosition.z = 10f;
 
             _potionCrosshair.transform.position = targetPosition;
