@@ -14,12 +14,12 @@ TagManager:
   - UI
   - 
   - 
-  - Obstacles
+  - Props
   - Player
   - Interactables
-  - 
-  - 
-  - 
+  - Minimap
+  - Walls
+  - Enemies
   - 
   - 
   - 
@@ -50,4 +50,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 4077800623
+    locked: 0
+  - name: Minimap
+    uniqueID: 696493223
     locked: 0

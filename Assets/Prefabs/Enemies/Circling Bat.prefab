@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6882859257983899661}
   - component: {fileID: 6882859257983900151}
   - component: {fileID: 6882859257983900148}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 6882859258016236983}
   - component: {fileID: 6882859258016236982}
   - component: {fileID: 6882859258016236980}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6882859258702414645}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Circling Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6882859259165427963}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

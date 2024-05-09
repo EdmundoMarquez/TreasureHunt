@@ -47,7 +47,8 @@ public class Item : MonoBehaviour
             return;
         }
         //Not pickables should be obstacles
-        gameObject.layer = LayerMask.NameToLayer("Obstacles");
+        gameObject.layer = LayerMask.NameToLayer("Props");
+        spriteRenderer.gameObject.layer = LayerMask.NameToLayer("Props");
     }
 
     private void SetAsPickable(ItemData itemData)

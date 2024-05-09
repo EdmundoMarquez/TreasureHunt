@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5178263634903972091}
   - component: {fileID: 5178263634903972090}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5178263635350698736}
   - component: {fileID: 5178263635350698739}
   - component: {fileID: 5178263635350698738}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lock Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 5178263636366948315}
   - component: {fileID: 5178263636366948309}
   - component: {fileID: 5178263636366948314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Unlocked Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
