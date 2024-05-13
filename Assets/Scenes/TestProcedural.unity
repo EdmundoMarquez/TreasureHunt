@@ -1804,6 +1804,8 @@ MonoBehaviour:
     type: 3}
   treasureRoom: {fileID: 8360787510211147184, guid: b09effbf800ac6e469ea9f556b8d6c50,
     type: 3}
+  objectiveRoom: {fileID: 2425764609423819638, guid: 87212e7c9f2bd764391eb9a5ae8873c4,
+    type: 3}
   defaultRoomPercent: 0.4
   graphTest: {fileID: 1477273316}
   itemParent: {fileID: 801703744}
@@ -2853,8 +2855,8 @@ MonoBehaviour:
   randomWalkParameters: {fileID: 11400000, guid: d19a4dd1c4d2aa649a1882baf1b0deb8,
     type: 2}
   corridorLength: 20
-  corridorCount: 10
-  roomPercent: 0.5
+  corridorCount: 20
+  roomPercent: 1
   showRoomGizmo: 0
   showCorridorsGizmo: 0
 --- !u!4 &1687697776
@@ -8750,7 +8752,7 @@ MonoBehaviour:
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0

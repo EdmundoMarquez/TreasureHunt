@@ -12,7 +12,7 @@ using Pathfinding;
 public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloorReady>
 {
     [SerializeField]
-    private RoomGenerator playerRoom, defaultRoom, treasureRoom;
+    private RoomGenerator playerRoom, defaultRoom, treasureRoom, objectiveRoom;
 
     [Range(0f,1f)]
     [SerializeField]
@@ -23,6 +23,7 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
     private GraphTest graphTest;
 
     public Transform itemParent;
+    private bool hasSpawnedObjective;
 
     [SerializeField]
     private CinemachineVirtualCamera cinemachineCamera;
@@ -102,6 +103,22 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
                 );
                 continue;
             }
+
+            if(!hasSpawnedObjective)
+            {
+                spawnedObjects.AddRange(
+                    objectiveRoom.ProcessRoom
+                    (
+                        roomData.Key,
+                        roomData.Value,
+                        dungeonData.GetRoomFloorWithoutCorridors(roomData.Key)
+                    )
+                );
+                hasSpawnedObjective = true;
+                
+                continue;
+            }
+
 
             spawnedObjects.AddRange(
                     treasureRoom.ProcessRoom(

@@ -9,6 +9,24 @@ public class PrefabPlacer : MonoBehaviour
     [SerializeField]
     private GameObject itemPrefab;
 
+    public GameObject PlaceObjective(ObjectivePlacementData objectivePlacementData, ItemPlacementHelper itemPlacementHelper)
+    {
+        GameObject placedObject = null;
+
+        Vector2? possiblePlacementSpot = itemPlacementHelper.GetItemPlacementPosition(
+                    PlacementType.OpenSpace,
+                    100,
+                    Vector2Int.one,
+                    false
+                    );
+        if (possiblePlacementSpot.HasValue)
+        {
+            placedObject = CreateObject(objectivePlacementData.objectivePrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f)); //Instantiate(placementData.enemyPrefab,possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f), Quaternion.identity)
+        }
+
+        return placedObject;
+    }
+
     public List<GameObject> PlaceEnemies(List<EnemyPlacementData> enemyPlacementData, ItemPlacementHelper itemPlacementHelper)
     {
         List<GameObject> placedObjects = new List<GameObject>();
@@ -47,7 +65,7 @@ public class PrefabPlacer : MonoBehaviour
                     placementData.treasureSize,
                     false
                 );
-                if(possiblePlacementSpot.HasValue)
+                if (possiblePlacementSpot.HasValue)
                 {
                     placedObjects.Add(CreateObject(placementData.treasurePrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f)));
                 }
@@ -67,9 +85,9 @@ public class PrefabPlacer : MonoBehaviour
             for (int i = 0; i < placementData.Quantity; i++)
             {
                 Vector2? possiblePlacementSpot = itemPlacementHelper.GetItemPlacementPosition(
-                    placementData.itemData.placementType, 
-                    100, 
-                    placementData.itemData.size, 
+                    placementData.itemData.placementType,
+                    100,
+                    placementData.itemData.size,
                     placementData.itemData.addOffset);
 
 
@@ -83,7 +101,7 @@ public class PrefabPlacer : MonoBehaviour
     }
     private GameObject PlaceItem(ItemData item, Vector2 placementPosition)
     {
-        GameObject newItem = CreateObject(itemPrefab,placementPosition);
+        GameObject newItem = CreateObject(itemPrefab, placementPosition);
         //GameObject newItem = Instantiate(itemPrefab, placementPosition, Quaternion.identity);
         newItem.GetComponent<Item>().Initialize(item);
         return newItem;

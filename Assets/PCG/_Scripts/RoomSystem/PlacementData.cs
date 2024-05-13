@@ -31,3 +31,9 @@ public class TreasurePlacementData : PlacementData
     public GameObject treasurePrefab;
     public Vector2Int treasureSize = Vector2Int.one;
 }
+
+[Serializable]
+public class ObjectivePlacementData : PlacementData
+{
+    public GameObject objectivePrefab;
+}
