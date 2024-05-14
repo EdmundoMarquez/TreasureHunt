@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Treasure.Player;
 using Treasure.EventBus;
+using Treasure.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -11,6 +12,8 @@ using Pathfinding;
 
 public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloorReady>
 {
+    [SerializeField] 
+    private InventoryController inventoryController;
     [SerializeField]
     private RoomGenerator playerRoom, defaultRoom, treasureRoom, objectiveRoom;
 
@@ -84,8 +87,8 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
 
     private void InitializePlayer(Transform playerTransform)
     {
-        CharacterInstaller playerInstaller = playerTransform.GetComponent<CharacterInstaller>();
-        playerInstaller.Init(cinemachineCamera);
+        PlayerInstaller playerInstaller = playerTransform.GetComponent<PlayerInstaller>();
+        playerInstaller.Init(cinemachineCamera, inventoryController);
     }
 
     private void SelectDungeonSpawnPoints(DungeonData dungeonData)

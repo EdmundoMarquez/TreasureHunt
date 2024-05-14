@@ -4,6 +4,7 @@ namespace Treasure.Player
     using Treasure.PlayerInput;
     using UnityEngine;
     using DG.Tweening;
+    using Treasure.Inventory;
 
     public class Warrior : MonoBehaviour, IPlayableCharacter
     {
@@ -19,13 +20,15 @@ namespace Treasure.Player
         public ObjectId CharacterId => _characterId;
         private IPlayerInput _inputAdapter;
         private bool _canTick = false;
+        public bool IsActive => _canTick;
 
-        public void Init(IPlayerInput inputAdapter)
+        public void Init(IPlayerInput inputAdapter, string swordId)
         {
             _healthController.Init(_characterAttributes.Health);
             _movementController.Init(_characterAttributes.Stamina);
             _followController.Init(_characterAttributes.Stamina);
             _potionController.Init(_characterId.Value);
+            _swordAttackController.Init(swordId);
             _healthBar.Init();
 
             _inputAdapter = inputAdapter;

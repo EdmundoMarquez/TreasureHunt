@@ -10,10 +10,9 @@
 
         [SerializeField] private Warrior _warriorCharacter = null;
         [SerializeField] private Sage _sageCharacter = null;
-        [SerializeField] private InventoryController _inventoryController = null;
-        [SerializeField] private InventoryView _inventoryView = null;
         [SerializeField] private bool _initOnStart = false;
         [SerializeField] private CinemachineVirtualCamera _followCamera = null;
+        [SerializeField] private InventoryController _inventoryController = null;
         private IPlayerInput _inputAdapter;
         private bool isWarriorActive = true;
 
@@ -26,16 +25,13 @@
         private void Start()
         {
             if(!_initOnStart) return;
-            Init(_followCamera);
+            Init(_followCamera, _inventoryController);
         }
 
-        public void Init(CinemachineVirtualCamera followCamera)
+        public void Init(CinemachineVirtualCamera followCamera, InventoryController inventoryController)
         {
-            _inventoryController.Init();
-            _inventoryView.Init(_inputAdapter);
-
             _followCamera = followCamera;
-            _warriorCharacter.Init(_inputAdapter);
+            _warriorCharacter.Init(_inputAdapter, inventoryController.EquippedSword);
             _sageCharacter.Init(_inputAdapter);
             SetDefaultCharacter();
         }
@@ -52,7 +48,6 @@
         {
             _warriorCharacter.Tick();
             _sageCharacter.Tick();
-            _inventoryView.Tick();
 
             if (_inputAdapter.ChangeCharacterButtonPressed())
             {

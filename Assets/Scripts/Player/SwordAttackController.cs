@@ -12,14 +12,13 @@
         [SerializeField] private Transform _swordPivot = null;
         [SerializeField] private SpriteRenderer _swordSprite = null;
         [SerializeField] private DamageInstigator _damageInstigator = null;
-        [SerializeField] private InventoryController _inventoryController = null;
         [SerializeField] private float _attackTime = 0.8f;
         private float _attackTimer;
         private bool _canAttack;
 
-        private void Start()
+        public void Init(string swordId)
         {
-            UpdateSword(_inventoryController.EquippedSword);
+            UpdateSword(swordId);
         }
 
         private void UpdateSword(string swordId)

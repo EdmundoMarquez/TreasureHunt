@@ -20,6 +20,7 @@ namespace Treasure.Player
         public ObjectId CharacterId => _characterId;
         private IPlayerInput _inputAdapter;
         private bool _canTick = false;
+        public bool IsActive => _canTick;
 
 
         public void Init(IPlayerInput inputAdapter)

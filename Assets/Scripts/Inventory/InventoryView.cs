@@ -20,9 +20,9 @@
         private IPlayerInput _inputAdapter;
         private bool _isOpen = false;
 
-        public void Init(IPlayerInput inputAdapter)
+        private void Start()
         {
-            _inputAdapter = inputAdapter;
+            _inputAdapter = new UnityInputAdapter();
         }
 
         private void OnEnable() 
@@ -35,7 +35,7 @@
             _inventoryController.onUpdateInventory -= UpdateInventory;   
         }
 
-        public void Tick()
+        private void Update()
         {
             if(_inputAdapter.InventoryButtonPressed())
             {

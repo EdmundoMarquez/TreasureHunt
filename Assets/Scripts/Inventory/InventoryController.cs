@@ -26,20 +26,22 @@
             _idToKey = new Dictionary<string, bool>();
             _potionsInStorage = new Dictionary<string, PotionInventoryData>();
 
+            foreach (var key in _inventoryData.Keys)
+            {
+                _idToKey.Add(key.Id, key.IsUnlocked);
+            }
+            
             foreach (var potion in _potions.healingPotions)
             {
                 AddPotionToStorage(potion);
             }
             //...Remaining Potions
+
+            LoadPersistentData();
         }
 
-        public void Init()
+        private void LoadPersistentData()
         {
-            foreach (var key in _inventoryData.Keys)
-            {
-                _idToKey.Add(key.Id, key.IsUnlocked);
-            }
-
             if(_inventoryData.EquippedSword != null)
                 _equippedSword = _inventoryData.EquippedSword;
 

@@ -6,7 +6,7 @@ namespace Treasure.Common
     public interface IPlayableCharacter
     {
         ObjectId CharacterId { get; }
-        void Init(IPlayerInput inputAdapter);
+        bool IsActive {get;}
         void ToggleControl(bool toggle);
         void ShowControlArrow(bool show);
     }
