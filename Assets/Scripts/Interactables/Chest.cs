@@ -14,7 +14,7 @@
         [SerializeField] private GameObject _unlockedSprite;
         private WordData _wordToSolve;
         private bool _isUnlocked;
-        public bool CanInteract => _isUnlocked;
+        public bool CanInteract => !_isUnlocked;
 
         private void Start()
         {

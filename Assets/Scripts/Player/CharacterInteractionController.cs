@@ -30,7 +30,7 @@ namespace Treasure.Player
             if(!_canTick) return;
 
             _currentInteractable = FindInteractableInRange();
-
+            
             if(_inputAdapter.InteractButtonPressed())
             {
                 TryInteract();
@@ -39,19 +39,22 @@ namespace Treasure.Player
 
         private IInteractable FindInteractableInRange()
         {
+            IInteractable interactable = null;
+
             Collider2D[] results = new Collider2D[8];
             int hits = Physics2D.OverlapCircle(transform.position, _detectionRadius, _contactFilter, results);
 
             if(hits > 0)
             {
-                return results[0].transform.GetComponent<IInteractable>();
+                interactable = results[0].transform.GetComponent<IInteractable>();
             }
-            return null;
+            return interactable;
         }   
 
         private void TryInteract()
         {
             if(_currentInteractable == null) return;
+            if(!_currentInteractable.CanInteract) return;
             _currentInteractable.Interact();
         }
     }

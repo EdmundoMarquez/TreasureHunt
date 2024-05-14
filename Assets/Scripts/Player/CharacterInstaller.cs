@@ -11,7 +11,8 @@
         [SerializeField] private Warrior _warriorCharacter = null;
         [SerializeField] private Sage _sageCharacter = null;
         [SerializeField] private InventoryView _inventoryView = null;
-        private CinemachineVirtualCamera _followCamera = null;
+        [SerializeField] private bool _initOnStart = false;
+        [SerializeField] private CinemachineVirtualCamera _followCamera = null;
         private IPlayerInput _inputAdapter;
         private bool isWarriorActive = true;
 
@@ -19,6 +20,12 @@
         {
             isWarriorActive = true;
             _inputAdapter = new UnityInputAdapter();
+        }
+
+        private void Start()
+        {
+            if(!_initOnStart) return;
+            Init(_followCamera);
         }
 
         public void Init(CinemachineVirtualCamera followCamera)
