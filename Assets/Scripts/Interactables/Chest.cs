@@ -12,6 +12,7 @@
         [SerializeField] private GameObject _lockedSprite;
         [SerializeField] private GameObject _unlockedSprite;
         [SerializeField] private SpriteRenderer _treasureSprite;
+        [SerializeField] private MinimapIconDisplay _minimapIcon = null;
         private WordData _wordToSolve;
         private bool _isUnlocked;
         private int _totalReward = 500;
@@ -21,6 +22,7 @@
         private void Start()
         {
             _wordToSolve = _chestData.RandomizeWord();
+            _minimapIcon.Init(_lockedSprite.GetComponent<SpriteRenderer>().sprite);
         }
 
         public void Interact()

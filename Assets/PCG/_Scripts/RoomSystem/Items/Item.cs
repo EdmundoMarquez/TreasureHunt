@@ -19,6 +19,8 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     private GameObject hitFeedback, destoyFeedback;
+    [SerializeField]
+    private MinimapIconDisplay minimap;
 
     private bool isPickable;
     private ObjectId pickableId;
@@ -59,6 +61,11 @@ public class Item : MonoBehaviour
         pickableId = itemData.pickableId;
         pickableType = itemData.pickableType;
         characterThatCanPickId = itemData.characterThatCanPickId;
+
+        minimap.Init(itemData.sprite);
+
+        gameObject.layer = LayerMask.NameToLayer("Pickables");
+        spriteRenderer.gameObject.layer = LayerMask.NameToLayer("Pickables");
     }
 
     private void OnTriggerEnter2D(Collider2D col)
