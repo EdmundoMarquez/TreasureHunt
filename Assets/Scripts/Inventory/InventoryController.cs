@@ -11,13 +11,12 @@
 
     public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>, IEventReceiver<AddPotionItem>, IEventReceiver<RemovePotionItem>
     {
-        [SerializeField] private KeyData[] _keys;
+        [SerializeField] private InventoryData _inventoryData;
         [SerializeField] private PotionDataConfiguration _potions;
-        [SerializeField] private ObjectId _startingSword = null;
         private Dictionary<string, bool> _idToKey;
         private Dictionary<string, PotionInventoryData> _potionsInStorage;
-        private string _equippedSword;
-        public string EquippedSword => _equippedSword;
+        private ObjectId _equippedSword;
+        public string EquippedSword => _equippedSword?.Value;
         private const int POTIONS_LIMIT_IN_INVENTORY = 3;
         public delegate void OnUpdateInventory();
         public OnUpdateInventory onUpdateInventory;
@@ -25,13 +24,6 @@
         private void Awake()
         {
             _idToKey = new Dictionary<string, bool>();
-
-            foreach (var key in _keys)
-            {
-                _idToKey.Add(key.Id, key.IsUnlocked);
-            }
-
-            _equippedSword = _startingSword.Value;
             _potionsInStorage = new Dictionary<string, PotionInventoryData>();
 
             foreach (var potion in _potions.healingPotions)
@@ -39,6 +31,28 @@
                 AddPotionToStorage(potion);
             }
             //...Remaining Potions
+        }
+
+        public void Init()
+        {
+            foreach (var key in _inventoryData.Keys)
+            {
+                _idToKey.Add(key.Id, key.IsUnlocked);
+            }
+
+            if(_inventoryData.EquippedSword != null)
+                _equippedSword = _inventoryData.EquippedSword;
+
+            if(_inventoryData.StoredPotions.Count > 1) return;
+
+            foreach (var potion in _inventoryData.StoredPotions)
+            {
+                PotionInventoryData potionData = GetPotionById(potion.Properties.propertyId.Value);
+                if(potionData == null) continue;
+                potionData.PotionImage = potion.PotionImage;
+                potionData.Properties = potion.Properties;
+                potionData.Quantity = potion.Quantity;
+            }
         }
 
         private void AddPotionToStorage(PotionData potion)
@@ -107,6 +121,12 @@
             return _idToKey.Keys.ToArray();
         }
 
+        public PotionInventoryData GetPotionById(string id)
+        {
+            if (!_potionsInStorage.TryGetValue(id, out var potion)) return null;
+            return potion;
+        }
+
         public PotionInventoryData[] GetAllPotions()
         {
             return _potionsInStorage.Values.ToArray();
@@ -130,6 +150,18 @@
             return availablePotions;
         }
 
+        public void SaveInventory()
+        {
+            _inventoryData.EquippedSword = _equippedSword;
+            
+            for (int i = 0; i < _inventoryData.Keys.Length; i++)
+            {
+                _inventoryData.Keys[i].IsUnlocked = GetKeyById(_inventoryData.Keys[i].Id);
+            }
+
+            _inventoryData.StoredPotions = _potionsInStorage.Values.ToList();
+        }
+
         private void OnEnable()
         {
             EventBus<AddKeyItem>.Register(this);
@@ -140,6 +172,8 @@
 
         private void OnDisable()
         {
+            SaveInventory();
+
             EventBus<AddKeyItem>.UnRegister(this);
             EventBus<AddSwordItem>.UnRegister(this);
             EventBus<RemovePotionItem>.UnRegister(this);

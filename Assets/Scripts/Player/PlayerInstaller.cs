@@ -5,11 +5,12 @@
     using Treasure.PlayerInput;
     using Treasure.Inventory;
 
-    public class CharacterInstaller : MonoBehaviour
+    public class PlayerInstaller : MonoBehaviour
     {
 
         [SerializeField] private Warrior _warriorCharacter = null;
         [SerializeField] private Sage _sageCharacter = null;
+        [SerializeField] private InventoryController _inventoryController = null;
         [SerializeField] private InventoryView _inventoryView = null;
         [SerializeField] private bool _initOnStart = false;
         [SerializeField] private CinemachineVirtualCamera _followCamera = null;
@@ -30,11 +31,12 @@
 
         public void Init(CinemachineVirtualCamera followCamera)
         {
+            _inventoryController.Init();
+            _inventoryView.Init(_inputAdapter);
+
             _followCamera = followCamera;
             _warriorCharacter.Init(_inputAdapter);
             _sageCharacter.Init(_inputAdapter);
-            _inventoryView.Init(_inputAdapter);
-
             SetDefaultCharacter();
         }
 

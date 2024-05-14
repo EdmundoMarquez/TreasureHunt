@@ -1,6 +1,7 @@
 ﻿namespace Treasure.Swords
 {
     using UnityEngine;
+    using Treasure.Common;
     using Treasure.EventBus;
     using Treasure.Inventory;
     using DG.Tweening;
@@ -30,8 +31,8 @@
             ToggleVisibility(true);
 
             currentSwordId = _inventoryController.EquippedSword;
-            newSwordId = e.itemId;
             swordObject = e.swordObject;
+            newSwordId = e.itemId;
 
             SwordData currentSword = SwordFactory.Instance.GetSwordById(currentSwordId);
             SwordData newSword = SwordFactory.Instance.GetSwordById(newSwordId);
@@ -45,10 +46,12 @@
             swordObject.SetActive(false);
             ToggleVisibility(false);
 
+            ObjectId newSwordObjectId =  SwordFactory.Instance.GetSwordById(newSwordId).SwordId;
+
             EventBus<AddSwordItem>.Raise(new AddSwordItem
             {
                 previousItemId = currentSwordId,
-                newItemId = newSwordId
+                newItemId = newSwordObjectId
             });
         }
 

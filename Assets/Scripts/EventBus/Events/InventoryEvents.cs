@@ -10,7 +10,7 @@ namespace Treasure.EventBus
     public struct AddSwordItem : IEvent
     {
         public string previousItemId;
-        public string newItemId;
+        public ObjectId newItemId;
     }
 
     public struct ConfirmAddSwordItem : IEvent

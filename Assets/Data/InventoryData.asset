@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8210594b2517d5647a1147743dd99152, type: 3}
+  m_Name: InventoryData
+  m_EditorClassIdentifier: 
+  Keys:
+  - {fileID: 11400000, guid: c3cf01da0971c56488e8c606e761e16c, type: 2}
+  - {fileID: 11400000, guid: e072f52b862039a46b0b1c9c9b21fe92, type: 2}
+  - {fileID: 11400000, guid: 1ac59f02b5c423b4eaf118d4fc62bebb, type: 2}
+  - {fileID: 11400000, guid: c64223182d2e1604baeffd0e1338f607, type: 2}
+  - {fileID: 11400000, guid: 092af7405560d5b40a208633691f0426, type: 2}
+  EquippedSword: {fileID: 11400000, guid: bff1eef83687f224194ec557442e7fd1, type: 2}
+  StoredPotions:
+  - PotionImage: {fileID: -8558721662302090408, guid: 537b963eb4016904784e2928dbf7e5ad,
+      type: 3}
+    Properties:
+      propertyId: {fileID: 11400000, guid: 93a057e65d5fbab4da7e63ef511dd2ff, type: 2}
+      amount: 10
+    Quantity: 0

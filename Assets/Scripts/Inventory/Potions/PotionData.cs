@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using Treasure.Common;
+    using System;
 
     [CreateAssetMenu(fileName = "PotionData", menuName = "Items/PotionData", order = 1)]
     public class PotionData : ScriptableObject
@@ -10,7 +11,7 @@
         public DataProperty Properties;
     }
 
-    [SerializeField]
+    [Serializable]
     public class PotionInventoryData
     {
         public Sprite PotionImage;

@@ -31,7 +31,7 @@
 
         public void OnEvent(AddSwordItem e)
         {
-            UpdateSword(e.newItemId);
+            UpdateSword(e.newItemId.Value);
         }
 
         private void OnEnable()
