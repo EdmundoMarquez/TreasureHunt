@@ -37,10 +37,10 @@ namespace Treasure.Puzzle
         {
             if (toggle) RefreshDraggableKeys();
 
-            _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f);
+            _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f).SetUpdate(true);
             _canvasGroup.interactable = toggle;
             _canvasGroup.blocksRaycasts = toggle;
-
+            Time.timeScale = toggle ? 0f : 1f;
         }
 
         private void RefreshDraggableKeys()
