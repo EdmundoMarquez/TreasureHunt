@@ -31,6 +31,7 @@ namespace Treasure.Player
 
             _currentInteractable = FindInteractableInRange();
             
+            if(Time.timeScale < 1f) return;
             if(_inputAdapter.InteractButtonPressed())
             {
                 TryInteract();

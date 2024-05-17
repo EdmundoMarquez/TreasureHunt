@@ -12,12 +12,12 @@ using Pathfinding;
 
 public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloorReady>
 {
-    [SerializeField] 
+    [SerializeField]
     private InventoryController inventoryController;
     [SerializeField]
     private RoomGenerator playerRoom, defaultRoom, treasureRoom, objectiveRoom;
 
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     [SerializeField]
     private float defaultRoomPercent = 0.5f;
     List<GameObject> spawnedObjects = new List<GameObject>();
@@ -33,22 +33,30 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
 
     public UnityEvent RegenerateDungeon;
 
+    #if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            foreach (var item in spawnedObjects)
-            {
-                Destroy(item);
-            }
-            RegenerateDungeon?.Invoke();
+            StartDungeonRegeneration();
         }
     }
+    #endif
+
+    public void StartDungeonRegeneration()
+    {
+        foreach (var item in spawnedObjects)
+        {
+            Destroy(item);
+        }
+        RegenerateDungeon?.Invoke();
+    }
+
     public void GenerateRoomContent(DungeonData dungeonData)
     {
         foreach (GameObject item in spawnedObjects)
         {
-            DestroyImmediate(item);
+            Destroy(item);
         }
         spawnedObjects.Clear();
 
@@ -107,7 +115,7 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
                 continue;
             }
 
-            if(!hasSpawnedObjective)
+            if (!hasSpawnedObjective)
             {
                 spawnedObjects.AddRange(
                     objectiveRoom.ProcessRoom
@@ -118,7 +126,7 @@ public class RoomContentGenerator : MonoBehaviour, IEventReceiver<OnDungeonFloor
                     )
                 );
                 hasSpawnedObjective = true;
-                
+
                 continue;
             }
 

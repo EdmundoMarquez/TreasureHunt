@@ -18,7 +18,7 @@
         [SerializeField] private float _rotationSpeed = 2;
         private float _angle;
 
-        private void Start()
+        private void Awake()
         {
             _damageInstigator.Init(_damageProperties);
         }
@@ -37,7 +37,9 @@
 
         private void OnDamage()
         {
-            _batSprite.transform.DOShakePosition(0.4f, 0.5f);
+            // _batSprite.transform.DOShakePosition(0.4f, 0.5f);
+            _batSprite.DOColor(Color.red, 0.3f).OnComplete(()=>
+            { _batSprite.DOColor(Color.white, 0.3f); });
         }
 
         private void OnDead()

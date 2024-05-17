@@ -8,6 +8,8 @@
         [SerializeField] private Transform _characterToFollow = null;
         [SerializeField] private Transform _spriteTransform = null;
         [SerializeField] private Animator _spriteAnimator = null;
+        [SerializeField] private float _minDistanceToRush = 20f;
+        [SerializeField] private float _rushMultiplier = 1.5f;
         private float _moveSpeed;
         private float _horizontalScale;
         private bool _canMove;
@@ -36,6 +38,9 @@
         public void Follow()
         {
             if (!_canMove) return;
+
+            float distance = Vector3.Distance(transform.position, _characterToFollow.position);
+            _aiPath.maxSpeed = distance > _minDistanceToRush ? _moveSpeed * _rushMultiplier : _moveSpeed;
 
             float magnitude = _aiPath.velocity.magnitude;
             _spriteAnimator.SetFloat("speed", magnitude);

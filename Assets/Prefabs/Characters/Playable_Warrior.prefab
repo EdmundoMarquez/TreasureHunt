@@ -92,7 +92,6 @@ MonoBehaviour:
   _swordPivot: {fileID: 1582419349669237827}
   _swordSprite: {fileID: 1582419349623770066}
   _damageInstigator: {fileID: 1582419350478012634}
-  _inventoryController: {fileID: 0}
   _attackTime: 0.5
 --- !u!114 &1582419349503239402
 MonoBehaviour:
@@ -530,7 +529,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.06851745
+  m_Radius: 0.1
 --- !u!114 &1582419350478012634
 MonoBehaviour:
   m_ObjectHideFlags: 0

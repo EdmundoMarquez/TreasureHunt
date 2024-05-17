@@ -5,7 +5,7 @@ using Treasure.Common;
 using Treasure.EventBus;
 using Treasure.Inventory.Potions;
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
@@ -26,8 +26,6 @@ public class Item : MonoBehaviour
     private ObjectId pickableId;
     private PickableTypes pickableType;
     private ObjectId characterThatCanPickId;
-
-    public UnityEvent OnGetHit { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public void Initialize(ItemData itemData)
     {
@@ -72,8 +70,9 @@ public class Item : MonoBehaviour
     {
         if (col.tag == "Player")
         {
-            if (col.GetComponent<IPlayableCharacter>().CharacterId.Value != characterThatCanPickId.Value) return;
-
+            IPlayableCharacter character = col.GetComponent<IPlayableCharacter>();
+            if (character.CharacterId.Value != characterThatCanPickId.Value) return;
+            if(!character.IsActive) return;
 
             switch (pickableType)
             {
@@ -101,14 +100,14 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void GetHit(int damage, GameObject damageDealer)
+    public void Damage(int damage)
     {
         if (nonDestructible)
             return;
-        if (health > 1)
-            Instantiate(hitFeedback, spriteRenderer.transform.position, Quaternion.identity);
-        else
-            Instantiate(destoyFeedback, spriteRenderer.transform.position, Quaternion.identity);
+        // if (health > 1)
+        //     Instantiate(hitFeedback, spriteRenderer.transform.position, Quaternion.identity);
+        // else
+        //     Instantiate(destoyFeedback, spriteRenderer.transform.position, Quaternion.identity);
         spriteRenderer.transform.DOShakePosition(0.2f, 0.3f, 75, 1, false, true).OnComplete(ReduceHealth);
     }
 

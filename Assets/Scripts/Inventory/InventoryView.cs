@@ -37,6 +37,7 @@
 
         private void Update()
         {
+            if(Time.timeScale < 1f) return;
             if(_inputAdapter.InventoryButtonPressed())
             {
                 if(_isOpen) return;

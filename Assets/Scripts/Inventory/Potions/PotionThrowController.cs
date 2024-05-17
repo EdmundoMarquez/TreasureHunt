@@ -47,6 +47,10 @@
                 }
                 ThrowPotionCoroutine = StartCoroutine(ThrowPotionToCharacter(character.CharacterId.Value));
             }
+            else
+            {
+                ToggleCrosshair(false);
+            }
         }
 
         private IEnumerator ThrowPotionToCharacter(string characterId)

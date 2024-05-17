@@ -14,6 +14,7 @@
         private string keyId;
         public delegate void OnUnlocked();
         public OnUnlocked onUnlocked;
+        private bool canDropKey = true;
 
         private void Awake()
         {
@@ -28,18 +29,20 @@
 
         public void OnDrop(PointerEventData eventData)
         {
+            if(!canDropKey) return;
             if (eventData.pointerDrag != null)
             {
                 DragItem item = eventData.pointerDrag.GetComponent<DragItem>();
                 if (item.Id.Value == keyId)
                 {
-                    _slotImage.DOFade(0f, 0.5f);
-                    _slotImage.rectTransform.DOAnchorPosY(-45f, 0.8f);
+                    _slotImage.DOFade(0f, 0.5f).SetUpdate(true);
+                    _slotImage.rectTransform.DOAnchorPosY(-45f, 0.8f).SetUpdate(true);
+                    canDropKey = false;
                     if (onUnlocked != null) onUnlocked();
                 }
                 else
                 {
-                    _slotImage.rectTransform.DOShakeAnchorPos(0.8f, new Vector3(2, 0, 0));
+                    _slotImage.rectTransform.DOShakeAnchorPos(0.8f, new Vector3(2, 0, 0)).SetUpdate(true);
                 }
             }
         }

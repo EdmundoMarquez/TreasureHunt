@@ -17,7 +17,7 @@ MonoBehaviour:
   placementType: 0
   addOffset: 0
   health: 1
-  nonDestructible: 0
+  nonDestructible: 1
   isPickable: 1
   pickableId: {fileID: 11400000, guid: 736ab3ed44821674dbb4fe831a33c7b3, type: 2}
   pickableType: 3

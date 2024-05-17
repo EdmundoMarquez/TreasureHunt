@@ -57,7 +57,7 @@ MonoBehaviour:
   _batSprite: {fileID: 6882859258016236982}
   _target: {fileID: 6882859259165427963}
   _radius: 2
-  _rotationSpeed: 3
+  _rotationSpeed: 1
 --- !u!114 &6882859257983899658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6882859258016237001}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 306425dc39e540e45be7b1b29528687f, type: 2}
   m_Animations:
