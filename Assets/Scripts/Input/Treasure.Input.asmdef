@@ -1,0 +1,14 @@
+{
+    "name": "Treasure.Input",
+    "references": [
+        "GUID:b83df30ddb8c7804dacc33d5b7ee7bb8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

@@ -1,7 +1,6 @@
-namespace Treasure.Puzzle
+namespace Treasure.Common
 {
     using UnityEngine;
-    using Treasure.Common;
 
     [CreateAssetMenu(fileName = "ChestData", menuName = "Puzzle/ChestData", order = 0)]
     public class ChestData : ScriptableObject

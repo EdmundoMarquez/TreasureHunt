@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class AbstractDungeonGenerator : MonoBehaviour
+﻿namespace PCG
 {
-    [SerializeField]
-    protected TilemapVisualizer tilemapVisualizer = null;
-    [SerializeField]
-    protected Vector2Int startPosition = Vector2Int.zero;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    public void GenerateDungeon()
+    public abstract class AbstractDungeonGenerator : MonoBehaviour
     {
-        tilemapVisualizer.Clear();
-        RunProceduralGeneration();
+        [SerializeField]
+        protected TilemapVisualizer tilemapVisualizer = null;
+        [SerializeField]
+        protected Vector2Int startPosition = Vector2Int.zero;
+
+        public void GenerateDungeon()
+        {
+            tilemapVisualizer.Clear();
+            RunProceduralGeneration();
+        }
+
+        protected abstract void RunProceduralGeneration();
     }
 
-    protected abstract void RunProceduralGeneration();
 }

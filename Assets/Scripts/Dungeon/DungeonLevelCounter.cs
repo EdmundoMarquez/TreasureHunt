@@ -22,6 +22,7 @@
 
         public void OnEvent(OnCompletedDungeon e)
         {
+            _backgroundDimmer.raycastTarget = true;
             _transitionLevelText.SetText($"Piso {++_levelData.currentLevel}");
 
             TransitionSequence = DOTween.Sequence();
@@ -33,7 +34,10 @@
                 DungeonComplete?.Invoke();
                 _counterLevelText.SetText($"Piso {_levelData.currentLevel}");
             }))
-            .Append(_backgroundDimmer.DOFade(0f, 0.5f));
+            .Append(_backgroundDimmer.DOFade(0f, 0.5f).OnComplete(() => 
+            { 
+                _backgroundDimmer.raycastTarget = false; 
+            }));
         }
 
         private void OnEnable()

@@ -1,38 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using Treasure.Player;
-
-public class PlayerRoom : RoomGenerator
+namespace PCG
 {
-    public GameObject player;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using Treasure.Player;
 
-    public List<ItemPlacementData> itemData;
-
-    [SerializeField]
-    private PrefabPlacer prefabPlacer;
-
-    public override List<GameObject> ProcessRoom(
-        Vector2Int roomCenter, 
-        HashSet<Vector2Int> roomFloor, 
-        HashSet<Vector2Int> roomFloorNoCorridors)
+    public class PlayerRoom : RoomGenerator
     {
+        public GameObject player;
 
-        ItemPlacementHelper itemPlacementHelper = 
-            new ItemPlacementHelper(roomFloor, roomFloorNoCorridors);
+        public List<ItemPlacementData> itemData;
 
-        List<GameObject> placedObjects = 
-            prefabPlacer.PlaceAllItems(itemData, itemPlacementHelper);
+        [SerializeField]
+        private PrefabPlacer prefabPlacer;
 
-        Vector2Int playerSpawnPoint = roomCenter;
+        public override List<GameObject> ProcessRoom(
+            Vector2Int roomCenter,
+            HashSet<Vector2Int> roomFloor,
+            HashSet<Vector2Int> roomFloorNoCorridors)
+        {
 
-        GameObject playerObject 
-            = prefabPlacer.CreateObject(player, playerSpawnPoint + new Vector2(0.5f, 0.5f));
- 
-        placedObjects.Add(playerObject);
+            ItemPlacementHelper itemPlacementHelper =
+                new ItemPlacementHelper(roomFloor, roomFloorNoCorridors);
 
-        return placedObjects;
+            List<GameObject> placedObjects =
+                prefabPlacer.PlaceAllItems(itemData, itemPlacementHelper);
+
+            Vector2Int playerSpawnPoint = roomCenter;
+
+            GameObject playerObject
+                = prefabPlacer.CreateObject(player, playerSpawnPoint + new Vector2(0.5f, 0.5f));
+
+            placedObjects.Add(playerObject);
+
+            return placedObjects;
+        }
     }
 }

@@ -1,0 +1,20 @@
+{
+    "name": "PCG",
+    "references": [
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:efa45043feb7e4147a305b73b5cea642",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:b309ca0c7888bdb40b7116d6cae1991d",
+        "GUID:3f7797f0799a7d64fa3b3c1aedc12770",
+        "GUID:788b87ebab563614bb44cc2a31cb242d",
+        "GUID:b735cf78cb0c3e140904bf5deba82c83"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

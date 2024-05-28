@@ -2,7 +2,6 @@
 {
     using Treasure.EventBus;
     using Treasure.Common;
-    using Treasure.Puzzle;
     using UnityEngine;
     using DG.Tweening;
 

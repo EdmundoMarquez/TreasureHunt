@@ -1,0 +1,15 @@
+{
+    "name": "Treasure.Common",
+    "references": [
+        "GUID:8e7a0e5128f379d479e9eb85c5f84909",
+        "GUID:81513233c1d50844c8df90535c083d0c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

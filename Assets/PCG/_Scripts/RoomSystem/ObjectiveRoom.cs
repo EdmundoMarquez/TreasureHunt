@@ -1,29 +1,33 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-public class ObjectiveRoom : RoomGenerator
+namespace PCG
 {
-    [SerializeField]
-    private PrefabPlacer prefabPlacer;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
 
-    public ObjectivePlacementData objectivePlacementData;
-    public List<EnemyPlacementData> enemyPlacementData;
-    public List<ItemPlacementData> itemData;
-
-    public override List<GameObject> ProcessRoom(Vector2Int roomCenter, HashSet<Vector2Int> roomFloor, HashSet<Vector2Int> roomFloorNoCorridors)
+    public class ObjectiveRoom : RoomGenerator
     {
-        ItemPlacementHelper itemPlacementHelper =
-            new ItemPlacementHelper(roomFloor, roomFloorNoCorridors);
+        [SerializeField]
+        private PrefabPlacer prefabPlacer;
 
-        List<GameObject> placedObjects =
-            prefabPlacer.PlaceAllItems(itemData, itemPlacementHelper);
+        public ObjectivePlacementData objectivePlacementData;
+        public List<EnemyPlacementData> enemyPlacementData;
+        public List<ItemPlacementData> itemData;
 
-        placedObjects.Add(prefabPlacer.PlaceObjective(objectivePlacementData, itemPlacementHelper));
-        placedObjects.AddRange(prefabPlacer.PlaceEnemies(enemyPlacementData, itemPlacementHelper));
+        public override List<GameObject> ProcessRoom(Vector2Int roomCenter, HashSet<Vector2Int> roomFloor, HashSet<Vector2Int> roomFloorNoCorridors)
+        {
+            ItemPlacementHelper itemPlacementHelper =
+                new ItemPlacementHelper(roomFloor, roomFloorNoCorridors);
 
-        return placedObjects;
+            List<GameObject> placedObjects =
+                prefabPlacer.PlaceAllItems(itemData, itemPlacementHelper);
+
+            placedObjects.Add(prefabPlacer.PlaceObjective(objectivePlacementData, itemPlacementHelper));
+            placedObjects.AddRange(prefabPlacer.PlaceEnemies(enemyPlacementData, itemPlacementHelper));
+
+            return placedObjects;
+        }
     }
+
 }

@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
-[CustomEditor(typeof(AbstractDungeonGenerator), true)]
-public class RandomDungeonGeneratorEditor : Editor
+﻿namespace PCG
 {
-    AbstractDungeonGenerator generator;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEditor;
+    using UnityEngine;
 
-    private void Awake()
+    [CustomEditor(typeof(AbstractDungeonGenerator), true)]
+    public class RandomDungeonGeneratorEditor : Editor
     {
-        generator = (AbstractDungeonGenerator)target;
-    }
+        AbstractDungeonGenerator generator;
 
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        if(GUILayout.Button("Create Dungeon"))
+        private void Awake()
         {
-            generator.GenerateDungeon();
+            generator = (AbstractDungeonGenerator)target;
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            if (GUILayout.Button("Create Dungeon"))
+            {
+                generator.GenerateDungeon();
+            }
         }
     }
+
 }

@@ -1,0 +1,29 @@
+{
+    "name": "PCG.Editor",
+    "references": [
+        "GUID:1d2856bfb0f434641a3462f22682ec69"
+    ],
+    "includePlatforms": [
+        "Android",
+        "BJM",
+        "iOS",
+        "LinuxStandalone64",
+        "Lumin",
+        "macOSStandalone",
+        "PS4",
+        "Switch",
+        "tvOS",
+        "WSA",
+        "WebGL",
+        "WindowsStandalone32",
+        "WindowsStandalone64",
+        "XboxOne"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

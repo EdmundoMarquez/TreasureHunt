@@ -1,36 +1,40 @@
-﻿using UnityEngine;
-using Pathfinding;
-using System.Collections;
-using UnityEngine.Tilemaps;
-
-public class DungeonPathfindingUpdater : MonoBehaviour
+﻿namespace PCG
 {
-    [SerializeField] private Tilemap dungeonFloor;
-    private Coroutine GenerateCoroutine;
+    using UnityEngine;
+    using Pathfinding;
+    using System.Collections;
+    using UnityEngine.Tilemaps;
 
-    public void GenerateNavMesh()
+    public class DungeonPathfindingUpdater : MonoBehaviour
     {
-        if(GenerateCoroutine != null)
+        [SerializeField] private Tilemap dungeonFloor;
+        private Coroutine GenerateCoroutine;
+
+        public void GenerateNavMesh()
         {
-            StopCoroutine(GenerateCoroutine);
+            if (GenerateCoroutine != null)
+            {
+                StopCoroutine(GenerateCoroutine);
+            }
+            GenerateCoroutine = StartCoroutine(GenerateNavMeshTimer());
         }
-        GenerateCoroutine = StartCoroutine(GenerateNavMeshTimer());
+
+        private IEnumerator GenerateNavMeshTimer()
+        {
+            yield return new WaitForSeconds(1f);
+            var gg = AstarPath.active.data.gridGraph;
+            gg.center = dungeonFloor.cellBounds.center;
+
+            Vector2Int tilemapSize = (Vector2Int)dungeonFloor.cellBounds.size;
+            gg.SetDimensions(tilemapSize.x, tilemapSize.y, 1f);
+
+            gg.rotation = new Vector3(90, 0, 0);
+            gg.collision.use2D = true;
+
+            AstarPath.active.Scan();
+
+
+        }
     }
 
-    private IEnumerator GenerateNavMeshTimer()
-    {
-        yield return new WaitForSeconds(1f);
-        var gg = AstarPath.active.data.gridGraph;
-        gg.center = dungeonFloor.cellBounds.center;
-
-        Vector2Int tilemapSize = (Vector2Int) dungeonFloor.cellBounds.size;
-        gg.SetDimensions(tilemapSize.x, tilemapSize.y, 1f);
-
-        gg.rotation = new Vector3(90,0,0);
-        gg.collision.use2D = true;
-
-        AstarPath.active.Scan();
-
-
-    }
 }

@@ -1,0 +1,14 @@
+{
+    "name": "Treasure.EventBus",
+    "references": [
+        "GUID:b309ca0c7888bdb40b7116d6cae1991d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
