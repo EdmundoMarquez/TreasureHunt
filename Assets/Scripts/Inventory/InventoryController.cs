@@ -79,22 +79,29 @@
 
         public void OnEvent(AddPotionItem e)
         {
-            int numberOfPotions = 0;
-            foreach (var potion in GetAllPotions())
-            {
-                numberOfPotions += potion.Quantity;
-                if(numberOfPotions >= POTIONS_LIMIT_IN_INVENTORY)
-                {
-                    Debug.Log("Exceeded max numbers of potions to store.");
-                    return;
-                }
-            }
+            if(IsPotionSpaceFull()) return;
 
             if(_potionsInStorage.TryGetValue(e.potionProperties.propertyId.Value, out var inventoryData))
             {
                 inventoryData.Quantity += 1;
             }
             e.potionObject.SetActive(false);
+        }
+
+        public bool IsPotionSpaceFull()
+        {
+            int numberOfPotions = 0;
+
+            foreach (var potion in GetAllPotions())
+            {
+                numberOfPotions += potion.Quantity;
+                if(numberOfPotions >= POTIONS_LIMIT_IN_INVENTORY)
+                {
+                    Debug.Log("Exceeded max numbers of potions to store.");
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void OnEvent(RemovePotionItem e)

@@ -7,8 +7,6 @@
     using Treasure.Inventory.Potions;
     using System.Collections.Generic;
     using Treasure.PlayerInput;
-    using UnityEngine.Experimental.PlayerLoop;
-    using System.Linq.Expressions;
 
     public class InventoryView : MonoBehaviour
     {
@@ -17,6 +15,7 @@
         [SerializeField] private CanvasGroup[] _availableKeyItems;
         [SerializeField] private PotionContainer[] _potionContainers = null;
         [SerializeField] private InventoryController _inventoryController = null;
+        [SerializeField] private CanvasGroupFacade _canvasFacade = null;
         private IPlayerInput _inputAdapter;
         private bool _isOpen = false;
 
@@ -52,6 +51,7 @@
             _canvasGroup.interactable = toggle;
             _canvasGroup.blocksRaycasts = toggle;
             _isOpen = toggle;
+            _canvasFacade.ToggleVisibility(!toggle);
 
             if (toggle) UpdateInventory();
         }

@@ -19,6 +19,7 @@ namespace Treasure.Puzzle
         [SerializeField] private RectTransform _lockPanel;
         [SerializeField] private LetterSlot _letterSlotTemplate;
         [SerializeField] private DropSlot _dropSlotTemplate;
+        [SerializeField] private CanvasGroupFacade _canvasFacade = null;
         [Header("Configurations")]
         [SerializeField] private float _slotsSize = 60;
         [SerializeField] private float _slotsSpacing = 160;
@@ -40,6 +41,7 @@ namespace Treasure.Puzzle
             _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f).SetUpdate(true);
             _canvasGroup.interactable = toggle;
             _canvasGroup.blocksRaycasts = toggle;
+            _canvasFacade.ToggleVisibility(!toggle);
             Time.timeScale = toggle ? 0f : 1f;
         }
 

@@ -14,6 +14,7 @@
         [SerializeField] private SwordInfoBox _currentSwordInfoBox = null;
         [SerializeField] private SwordInfoBox _newSwordInfoBox = null;
         [SerializeField] private InventoryController _inventoryController = null;
+        [SerializeField] private CanvasGroupFacade _canvasFacade = null;
         [SerializeField] private Button _yesButton = null;
         [SerializeField] private Button _noButton = null;
         private string currentSwordId;
@@ -61,6 +62,7 @@
             _canvasGroup.DOFade(toggle ? 1 : 0, 0.3f).SetUpdate(true);
             _canvasGroup.interactable = toggle;
             _canvasGroup.blocksRaycasts = toggle;
+            _canvasFacade.ToggleVisibility(!toggle);
         }
 
         private void OnEnable()
