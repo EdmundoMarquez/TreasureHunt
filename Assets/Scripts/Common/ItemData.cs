@@ -1,6 +1,5 @@
-namespace PCG
+namespace Treasure.Common
 {
-    using Treasure.Common;
     using UnityEngine;
 
     [CreateAssetMenu]
@@ -17,13 +16,4 @@ namespace PCG
         public PickableTypes pickableType;
         public ObjectId characterThatCanPickId;
     }
-
-    public enum PickableTypes
-    {
-        None,
-        Key,
-        Potion,
-        Sword
-    }
-
 }

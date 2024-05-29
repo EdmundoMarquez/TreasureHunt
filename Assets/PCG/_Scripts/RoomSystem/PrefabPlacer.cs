@@ -5,6 +5,7 @@ namespace PCG
     using System.Linq;
     using UnityEditor;
     using UnityEngine;
+    using Treasure.Common;
 
     public class PrefabPlacer : MonoBehaviour
     {

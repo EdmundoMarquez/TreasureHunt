@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a83f2a5bea8447489822be80764763e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac4ae9b7436cf0f4a9071914ecb69d53, type: 3}
   m_Name: Broken_Sword
   m_EditorClassIdentifier: 
-  sprite: {fileID: -4716602535706096335, guid: 537b963eb4016904784e2928dbf7e5ad, type: 3}
+  sprite: {fileID: 1731697443031409149, guid: 537b963eb4016904784e2928dbf7e5ad, type: 3}
   size: {x: 1, y: 1}
   placementType: 0
-  addOffset: 0
+  addOffset: 1
   health: 1
   nonDestructible: 1
   isPickable: 1

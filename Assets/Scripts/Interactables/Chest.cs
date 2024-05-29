@@ -14,7 +14,6 @@
         [SerializeField] private MinimapIconDisplay _minimapIcon = null;
         private WordData _wordToSolve;
         private bool _isUnlocked;
-        private int _totalReward = 500;
         public bool CanInteract => !_isUnlocked;
         private Sequence UnlockSequence;
 
@@ -45,9 +44,11 @@
 
         private void OnUnlockChest()
         {
-            EventBus<OnGainReward>.Raise(new OnGainReward
+
+            EventBus<OnOpenChest>.Raise(new OnOpenChest
             {
-                coinAmount = _totalReward
+                itemParent = transform,
+                itemPlacementPosition = transform.position
             });
 
             _treasureSprite.gameObject.SetActive(true);

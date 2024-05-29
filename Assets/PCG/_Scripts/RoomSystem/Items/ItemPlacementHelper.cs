@@ -4,6 +4,7 @@ namespace PCG
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using Treasure.Common;
 
     public class ItemPlacementHelper
     {
@@ -96,11 +97,4 @@ namespace PCG
         }
 
     }
-
-    public enum PlacementType
-    {
-        OpenSpace,
-        NearWall
-    }
-
 }

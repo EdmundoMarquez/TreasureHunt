@@ -2,6 +2,7 @@ namespace PCG
 {
     using System;
     using UnityEngine;
+    using Treasure.Common;
 
     public abstract class PlacementData
     {
