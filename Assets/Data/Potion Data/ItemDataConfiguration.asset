@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4526a14bb13308b4aa52fbea26e1bbff, type: 3}
-  m_Name: PotionDataConfiguration
+  m_Script: {fileID: 11500000, guid: f79d3b94b00f0f443a065e8419aba676, type: 3}
+  m_Name: ItemDataConfiguration
   m_EditorClassIdentifier: 
-  healingPotions:
+  HealingPotions:
   - {fileID: 11400000, guid: 6f9f4dd56ec90cf44bd640d391ec1d85, type: 2}
-  staminaPotions: []
+  Swords:
+  - {fileID: 11400000, guid: 7cdb066427e2d40488b54c3e1b8425ac, type: 2}
+  - {fileID: 11400000, guid: b86157c708e18f046b3ef6514f451ff2, type: 2}

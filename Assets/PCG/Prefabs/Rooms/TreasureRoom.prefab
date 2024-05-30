@@ -51,4 +51,13 @@ MonoBehaviour:
     treasurePrefab: {fileID: 5178263636310172659, guid: d5e5f3b3d8d541740bdd4529e1e7043b,
       type: 3}
     treasureSize: {x: 1, y: 1}
-  itemData: []
+  itemData:
+  - minQuantity: 2
+    maxQuantity: 6
+    itemData: {fileID: 11400000, guid: e6fbb48e3197b1240af75f332743cedb, type: 2}
+  - minQuantity: 2
+    maxQuantity: 3
+    itemData: {fileID: 11400000, guid: b43fc4d0c68442c42bdb67a33c712a30, type: 2}
+  - minQuantity: 2
+    maxQuantity: 3
+    itemData: {fileID: 11400000, guid: 72a21020aa37788428ebda35046d6d1a, type: 2}

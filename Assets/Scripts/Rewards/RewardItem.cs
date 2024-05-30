@@ -5,6 +5,7 @@ namespace Treasure.Rewards
     using UnityEngine.Events;
     using Treasure.Common;
     using Treasure.EventBus;
+    using Treasure.Inventory;
     using Treasure.Inventory.Potions;
 
     public class RewardItem : MonoBehaviour
@@ -16,12 +17,14 @@ namespace Treasure.Rewards
 
         [SerializeField]
         private MinimapIconDisplay minimap;
-        private bool isPickable;
-        private ObjectId pickableId;
-        private PickableTypes pickableType;
-        private ObjectId characterThatCanPickId;
+        private bool _isPickable;
+        private ObjectId _pickableId;
+        private PickableTypes _pickableType;
+        private ObjectId _characterThatCanPickId;
+        private ItemData _itemData;
         public Sprite Icon => spriteRenderer?.sprite;
-        public string Id => pickableId?.Value;
+        public string Id => _pickableId?.Value;
+        public ItemData Data => _itemData;
 
         public void Initialize(ItemData itemData)
         {
@@ -34,12 +37,13 @@ namespace Treasure.Rewards
             itemCollider.enabled = false;
 
             //Set pickable data
-            isPickable = itemData.isPickable;
-            pickableId = itemData.pickableId;
-            pickableType = itemData.pickableType;
-            characterThatCanPickId = itemData.characterThatCanPickId;
+            _isPickable = itemData.isPickable;
+            _pickableId = itemData.pickableId;
+            _pickableType = itemData.pickableType;
+            _characterThatCanPickId = itemData.characterThatCanPickId;
             
             minimap.Init(itemData.sprite);
+            _itemData = itemData;
         }
 
         public void EnablePickable()
@@ -56,17 +60,17 @@ namespace Treasure.Rewards
             if (col.tag == "Player")
             {
                 IPlayableCharacter character = col.GetComponent<IPlayableCharacter>();
-                if (character.CharacterId.Value != characterThatCanPickId.Value) return;
+                if (character.CharacterId.Value != _characterThatCanPickId.Value) return;
                 if (!character.IsActive) return;
 
-                switch (pickableType)
+                switch (_pickableType)
                 {
                     case PickableTypes.Key:
-                        EventBus<AddKeyItem>.Raise(new AddKeyItem { itemId = pickableId.Value });
+                        EventBus<AddKeyItem>.Raise(new AddKeyItem { itemId = _pickableId.Value });
                         gameObject.SetActive(false);
                         break;
                     case PickableTypes.Potion:
-                        PotionData data = PotionFactory.Instance.GetPotionById(pickableId.Value);
+                        PotionData data = PotionFactory.Instance.GetPotionById(_pickableId.Value);
                         EventBus<AddPotionItem>.Raise(new AddPotionItem
                         {
                             potionObject = gameObject,
@@ -76,7 +80,7 @@ namespace Treasure.Rewards
                     case PickableTypes.Sword:
                         EventBus<ConfirmAddSwordItem>.Raise(new ConfirmAddSwordItem
                         {
-                            itemId = pickableId.Value,
+                            itemId = _pickableId.Value,
                             swordObject = gameObject
                         });
                         break;

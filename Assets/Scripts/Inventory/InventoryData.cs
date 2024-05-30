@@ -8,6 +8,7 @@
     [CreateAssetMenu(fileName = "InventoryData", menuName = "Inventory/InventoryData", order = 1)]
     public class InventoryData : ScriptableObject
     {
+        public int Coins;
         public KeyData[] Keys;
         public ObjectId EquippedSword;
         public List<PotionInventoryData> StoredPotions = new List<PotionInventoryData>();

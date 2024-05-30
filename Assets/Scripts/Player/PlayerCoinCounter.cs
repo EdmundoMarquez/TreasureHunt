@@ -3,16 +3,19 @@ namespace Treasure.Player
 {
     using UnityEngine;
     using Treasure.EventBus;
+    using Treasure.Inventory;
     using DG.Tweening;
     using TMPro;
 
     public class PlayerCoinCounter : MonoBehaviour, IEventReceiver<OnGainReward>
     {
+        [SerializeField] private InventoryData _inventoryData = null;
         [SerializeField] private TMP_Text _counterText = null;
         private int coins = 0;
 
         private void Start()
         {
+            coins = _inventoryData.Coins;
             SetCounter(coins);
         }
 

@@ -10,4 +10,11 @@ namespace Treasure.Inventory
         public string Id => _objectId.Value;
         public bool IsUnlocked;
     }
+
+    [System.Serializable]
+    public class KeyInventoryData
+    {
+        public string Id;
+        public bool Unlocked;
+    }
 }

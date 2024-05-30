@@ -1,4 +1,4 @@
-namespace Treasure.Swords
+namespace Treasure.Inventory
 {
     using System.Collections.Generic;
     using UnityEngine;

@@ -5,7 +5,6 @@
     using Treasure.EventBus;
     using Treasure.Common;
     using Treasure.Inventory;
-    using Treasure.Swords;
 
     public class SwordAttackController : MonoBehaviour, IEventReceiver<AddSwordItem>
     {
@@ -30,7 +29,7 @@
 
         public void OnEvent(AddSwordItem e)
         {
-            UpdateSword(e.newItemId.Value);
+            UpdateSword(e.itemId);
         }
 
         private void OnEnable()

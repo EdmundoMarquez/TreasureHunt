@@ -5,6 +5,7 @@ namespace PCG
     using UnityEngine.Events;
     using Treasure.Common;
     using Treasure.EventBus;
+    using Treasure.Inventory;
     using Treasure.Inventory.Potions;
 
     public class Item : MonoBehaviour, IDamageable
@@ -91,7 +92,7 @@ namespace PCG
                         });
                         break;
                     case PickableTypes.Sword:
-                        EventBus<ConfirmAddSwordItem>.Raise(new ConfirmAddSwordItem
+                        EventBus<AddSwordItem>.Raise(new AddSwordItem
                         {
                             itemId = pickableId.Value,
                             swordObject = gameObject

@@ -2,7 +2,6 @@
 {
     using UnityEngine;
     using DG.Tweening;
-    using Treasure.Swords;
     using Treasure.Common;
     using Treasure.Inventory.Potions;
     using System.Collections.Generic;
@@ -61,11 +60,11 @@
             SwordData equippedSword = SwordFactory.Instance.GetSwordById(_inventoryController.EquippedSword);
             _currentSwordInfoBox.Fill(equippedSword.SwordId.Value, equippedSword.SwordImage, equippedSword.Damage);
 
-            bool[] keys = _inventoryController.GetAllKeyValues();
+            var keys = _inventoryController.GetAllKeys();
             for (int i = 0; i < _availableKeyItems.Length; i++)
             {
-                _availableKeyItems[i].alpha = keys[i] ? 1f : 0.3f;
-                _availableKeyItems[i].blocksRaycasts = keys[i];
+                _availableKeyItems[i].alpha = keys[i].Unlocked ? 1f : 0.3f;
+                _availableKeyItems[i].blocksRaycasts = keys[i].Unlocked;
             }           
 
             foreach (var container in _potionContainers)

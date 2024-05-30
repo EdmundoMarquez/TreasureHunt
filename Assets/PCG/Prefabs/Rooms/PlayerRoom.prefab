@@ -44,6 +44,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 468381243321773061, guid: 013cd506048890c43ac00cbfca7d9242, type: 3}
-  itemData: []
+  itemData:
+  - minQuantity: 4
+    maxQuantity: 6
+    itemData: {fileID: 11400000, guid: b43fc4d0c68442c42bdb67a33c712a30, type: 2}
+  - minQuantity: 2
+    maxQuantity: 6
+    itemData: {fileID: 11400000, guid: 1824ea8734a52324db90b399e73b5a38, type: 2}
+  - minQuantity: 4
+    maxQuantity: 6
+    itemData: {fileID: 11400000, guid: e6fbb48e3197b1240af75f332743cedb, type: 2}
+  - minQuantity: 2
+    maxQuantity: 4
+    itemData: {fileID: 11400000, guid: bb0975c0317fd3448ba53071150b7bf1, type: 2}
   prefabPlacer: {fileID: 4341242197028722173, guid: 49d1de73f44f58940a43bf538b290285,
     type: 3}

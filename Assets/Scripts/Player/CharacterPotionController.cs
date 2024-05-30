@@ -1,7 +1,7 @@
 ﻿namespace Treasure.Player
 {
     using Treasure.Common;
-    using Treasure.Inventory.Potions;
+    using Treasure.Inventory;
     using Treasure.EventBus;
 
     using UnityEngine;
@@ -9,7 +9,7 @@
     public class CharacterPotionController : MonoBehaviour, IEventReceiver<OnPotionSelectCharacter> 
     {
         [SerializeField] private CharacterHealthController _healthController = null;
-        [SerializeField] private PotionDataConfiguration _potionDataConfiguration = null;
+        [SerializeField] private ItemDataConfiguration _itemDataConfiguration = null;
         private string _characterId;
 
         public void Init(string characterId)
@@ -25,7 +25,7 @@
 
         private void ApplyPotion(string potionId)
         {
-            foreach(var potion in _potionDataConfiguration.healingPotions)
+            foreach(var potion in _itemDataConfiguration.HealingPotions)
             {
                 if(potion.Properties.propertyId.Value == potionId)
                 {

@@ -1,4 +1,4 @@
-﻿namespace Treasure.Swords
+﻿namespace Treasure.Inventory
 {
     using UnityEngine;
     using Treasure.Common;
@@ -49,11 +49,11 @@
 
             ObjectId newSwordObjectId =  SwordFactory.Instance.GetSwordById(newSwordId).SwordId;
 
-            EventBus<AddSwordItem>.Raise(new AddSwordItem
-            {
-                previousItemId = currentSwordId,
-                newItemId = newSwordObjectId
-            });
+            // EventBus<AddSwordItem>.Raise(new AddSwordItem
+            // {
+            //     previousItemId = currentSwordId,
+            //     newItemId = newSwordObjectId
+            // });
         }
 
         private void ToggleVisibility(bool toggle)

@@ -44,13 +44,16 @@
 
         private void OnUnlockChest()
         {
-
             EventBus<OnOpenChest>.Raise(new OnOpenChest
             {
                 itemParent = transform,
                 itemPlacementPosition = transform.position
             });
+        }
 
+        public void PlayFloatingTreasureAnimation(Sprite rewardIcon)
+        {
+            _treasureSprite.sprite = rewardIcon;
             _treasureSprite.gameObject.SetActive(true);
 
             UnlockSequence = DOTween.Sequence();

@@ -12,33 +12,44 @@
     public class InventoryController : MonoBehaviour, IEventReceiver<AddKeyItem>, IEventReceiver<AddSwordItem>, IEventReceiver<AddPotionItem>, IEventReceiver<RemovePotionItem>
     {
         [SerializeField] private InventoryData _inventoryData;
-        [SerializeField] private PotionDataConfiguration _potions;
-        private Dictionary<string, bool> _idToKey;
+        [SerializeField] private ItemDataConfiguration _items;
+        private Dictionary<string, KeyInventoryData> _idToKey;
         private Dictionary<string, PotionInventoryData> _potionsInStorage;
+        private Dictionary<string, SwordInventoryData> _swordsInStorage;
         private ObjectId _equippedSword;
         public string EquippedSword => _equippedSword?.Value;
         private const int POTIONS_LIMIT_IN_INVENTORY = 3;
+        private const int SWORDS_LIMIT_IN_INVENTORY = 3;
         public delegate void OnUpdateInventory();
         public OnUpdateInventory onUpdateInventory;
 
         private void Awake()
         {
-            _idToKey = new Dictionary<string, bool>();
+            _idToKey = new Dictionary<string, KeyInventoryData>();
             _potionsInStorage = new Dictionary<string, PotionInventoryData>();
+            _swordsInStorage = new Dictionary<string, SwordInventoryData>();
 
             foreach (var key in _inventoryData.Keys)
             {
-                _idToKey.Add(key.Id, key.IsUnlocked);
+                KeyInventoryData keyData = new KeyInventoryData();
+                keyData.Id = key.Id;
+                keyData.Unlocked = key.IsUnlocked;
+                _idToKey.Add(key.Id, keyData);
             }
             
-            foreach (var potion in _potions.healingPotions)
+            foreach (var potion in _items.HealingPotions)
             {
                 AddPotionToStorage(potion);
             }
-            //...Remaining Potions
+
+            foreach (var sword in _items.Swords)
+            {
+                AddSwordToStorage(sword);
+            }
 
             LoadPersistentData();
         }
+
 
         private void LoadPersistentData()
         {
@@ -56,6 +67,15 @@
                 potionData.Quantity = potion.Quantity;
             }
         }
+        private void AddSwordToStorage(SwordData sword)
+        {
+            SwordInventoryData inventoryData = new SwordInventoryData();
+            inventoryData.SwordImage = sword.SwordImage;
+            inventoryData.Damage = sword.Damage;
+            inventoryData.Quantity = 0;
+
+            _swordsInStorage.Add(sword.SwordId.Value, inventoryData);
+        }
 
         private void AddPotionToStorage(PotionData potion)
         {
@@ -69,12 +89,18 @@
 
         public void OnEvent(AddKeyItem e)
         {
-            _idToKey[e.itemId] = true;
+            _idToKey[e.itemId].Unlocked = true;
         }
 
         public void OnEvent(AddSwordItem e)
         {
-            _equippedSword = e.newItemId;
+            if(IsSwordSpaceFull()) return;
+
+            if(_swordsInStorage.TryGetValue(e.itemId, out var inventoryData))
+            {
+                inventoryData.Quantity += 1;
+            }
+            e.swordObject.SetActive(false);
         }
 
         public void OnEvent(AddPotionItem e)
@@ -86,6 +112,22 @@
                 inventoryData.Quantity += 1;
             }
             e.potionObject.SetActive(false);
+        }
+
+        public bool IsSwordSpaceFull()
+        {
+            int numberOfSwords = 0;
+
+            foreach (var sword in GetAllSwords())
+            {
+                numberOfSwords += sword.Quantity;
+                if(numberOfSwords >= SWORDS_LIMIT_IN_INVENTORY)
+                {
+                    Debug.Log("Exceeded max numbers of swords to store.");
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool IsPotionSpaceFull()
@@ -114,32 +156,21 @@
             if(onUpdateInventory != null) onUpdateInventory();
         }
 
-        public bool GetKeyById(string id)
+        public KeyInventoryData GetKeyById(string id)
         {
-            if (!_idToKey.TryGetValue(id, out bool keyUnlocked)) return false;
+            if (!_idToKey.TryGetValue(id, out var keyUnlocked)) return null;
             return keyUnlocked;
         }
 
-        public bool[] GetAllKeyValues()
-        {
-            return _idToKey.Values.ToArray();
-        }
-
-        public string[] GetAllKeyIds()
-        {
-            return _idToKey.Keys.ToArray();
-        }
 
         public PotionInventoryData GetPotionById(string id)
         {
             if (!_potionsInStorage.TryGetValue(id, out var potion)) return null;
             return potion;
         }
-
-        public PotionInventoryData[] GetAllPotions()
-        {
-            return _potionsInStorage.Values.ToArray();
-        }
+        public KeyInventoryData[] GetAllKeys() { return _idToKey.Values.ToArray(); }
+        public PotionInventoryData[] GetAllPotions() { return _potionsInStorage.Values.ToArray(); }
+        public SwordInventoryData[] GetAllSwords() { return _swordsInStorage.Values.ToArray(); }
 
         public List<DataProperty> GetAllAvailablePotions()
         {
@@ -165,7 +196,7 @@
             
             for (int i = 0; i < _inventoryData.Keys.Length; i++)
             {
-                _inventoryData.Keys[i].IsUnlocked = GetKeyById(_inventoryData.Keys[i].Id);
+                _inventoryData.Keys[i].IsUnlocked = GetKeyById(_inventoryData.Keys[i].Id).Unlocked;
             }
 
             _inventoryData.StoredPotions = _potionsInStorage.Values.ToList();

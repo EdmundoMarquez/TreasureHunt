@@ -41,17 +41,18 @@ namespace Treasure.Puzzle
             _canvasGroup.DOFade(toggle ? 1f : 0f, 0.5f).SetUpdate(true);
             _canvasGroup.interactable = toggle;
             _canvasGroup.blocksRaycasts = toggle;
+            
             _canvasFacade.ToggleVisibility(!toggle);
             Time.timeScale = toggle ? 0f : 1f;
         }
 
         private void RefreshDraggableKeys()
         {
-            string[] ids = _inventoryController.GetAllKeyIds();
+            var keys = _inventoryController.GetAllKeys();
 
-            for (int i = 0; i < ids.Length; i++)
+            for (int i = 0; i < keys.Length; i++)
             {
-                _draggableKeyItems[i].gameObject.SetActive(_inventoryController.GetKeyById(ids[i]));
+                _draggableKeyItems[i].gameObject.SetActive(keys[i].Unlocked);
             }
         }
 
@@ -114,7 +115,11 @@ namespace Treasure.Puzzle
 
             if (_numberOfLocksUnlocked < _totalNumberOfLocks) return;
             _currentChest.ToggleLock(true);
-            ToggleVisibility(false);
+
+            //Hide lock puzzle view
+            _canvasGroup.DOFade(0f, 0.5f).SetUpdate(true);
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
 
         private bool ShouldGenerateDropSlot(char letter, int letterPosition)

@@ -1,4 +1,4 @@
-﻿namespace Treasure.Inventory.Potions
+﻿namespace Treasure.Inventory
 {
     using UnityEngine;
     using Treasure.Common;

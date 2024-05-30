@@ -1,4 +1,4 @@
-﻿namespace Treasure.Swords
+﻿namespace Treasure.Inventory
 {
     using UnityEngine;
     using Treasure.Common;
@@ -9,5 +9,14 @@
         public ObjectId SwordId;
         public Sprite SwordImage;
         public DataProperty[] Damage;
+    }
+
+    [System.Serializable]
+    public class SwordInventoryData
+    {
+        public string SwordId;
+        public Sprite SwordImage;
+        public DataProperty[] Damage;
+        public int Quantity;
     }
 }
