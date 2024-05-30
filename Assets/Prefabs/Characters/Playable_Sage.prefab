@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthController: {fileID: 1186273600148539086}
-  _potionDataConfiguration: {fileID: 11400000, guid: 0e9cee8e960fd4e488b5616e65c8f559,
+  _itemDataConfiguration: {fileID: 11400000, guid: f853f4e43942e99499b2da29b7f74c88,
     type: 2}
 --- !u!50 &6831353685916346379
 Rigidbody2D:
@@ -337,6 +337,8 @@ MonoBehaviour:
   _characterToFollow: {fileID: 0}
   _spriteTransform: {fileID: 6831353685814468642}
   _spriteAnimator: {fileID: 6831353685814468644}
+  _minDistanceToRush: 20
+  _rushMultiplier: 1.5
 --- !u!114 &3618653458915930880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,11 +584,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1961327649765531727, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 1961327651050213636, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
       propertyPath: _healthController
@@ -596,6 +593,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961327649765531727, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1961327651257212320, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}

@@ -10,7 +10,8 @@
     {
         public int Coins;
         public KeyData[] Keys;
-        public ObjectId EquippedSword;
+        public string EquippedSword;
+        public List<SwordInventoryData> StoredSwords = new List<SwordInventoryData>();
         public List<PotionInventoryData> StoredPotions = new List<PotionInventoryData>();
     }
 }

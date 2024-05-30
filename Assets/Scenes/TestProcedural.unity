@@ -1183,7 +1183,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 158010759}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1687133022}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04195bcff049fe747b8f6392f968e4e4, type: 3}
@@ -2019,7 +2019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25.4, y: 3.3}
+  m_AnchoredPosition: {x: -30.98, y: 3.3}
   m_SizeDelta: {x: 33.73, y: 33.759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329939723
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 895194371}
-  _currentSwordInfoBox: {fileID: 158010761}
+  _swordInfoSelector: {fileID: 1687133025}
   _availableKeyItems:
   - {fileID: 210590379}
   - {fileID: 1789014537}
@@ -5450,8 +5450,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895194368}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &943521932 stripped
@@ -7242,7 +7242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -51.4, y: -192.4}
+  m_AnchoredPosition: {x: -51.399994, y: -192.4}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246170961
@@ -8234,7 +8234,7 @@ GameObject:
   - component: {fileID: 1414261659}
   - component: {fileID: 1414261658}
   m_Layer: 5
-  m_Name: Space Counter
+  m_Name: Sword Index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9541,6 +9541,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1687133022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8212405299494365334, guid: 4e53e509990832c4f8d0a97a759d857c,
+    type: 3}
+  m_PrefabInstance: {fileID: 158010759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1687133025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687133022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e0256459d547a4d8dd228fed6871dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryController: {fileID: 373171402}
+  _equipButton: {fileID: 1932075748}
+  _trashButton: {fileID: 339800436}
+  _leftButton: {fileID: 2095467699}
+  _rightButton: {fileID: 1366793914}
+  _swordInfoBox: {fileID: 158010761}
+  _equippedIcon: {fileID: 329939721}
+  _swordIndexText: {fileID: 1414261658}
 --- !u!1 &1687697774
 GameObject:
   m_ObjectHideFlags: 0

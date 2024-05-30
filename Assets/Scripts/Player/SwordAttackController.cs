@@ -6,7 +6,7 @@
     using Treasure.Common;
     using Treasure.Inventory;
 
-    public class SwordAttackController : MonoBehaviour, IEventReceiver<AddSwordItem>
+    public class SwordAttackController : MonoBehaviour, IEventReceiver<EquipSwordItem>
     {
         [SerializeField] private Transform _swordPivot = null;
         [SerializeField] private SpriteRenderer _swordSprite = null;
@@ -27,19 +27,19 @@
             _damageInstigator.Init(equippedSword.Damage);
         }
 
-        public void OnEvent(AddSwordItem e)
+        public void OnEvent(EquipSwordItem e)
         {
-            UpdateSword(e.itemId);
+            UpdateSword(e.swordId);
         }
 
         private void OnEnable()
         {
-            EventBus<AddSwordItem>.Register(this);
+            EventBus<EquipSwordItem>.Register(this);
         }
 
         private void OnDisable()
         {
-            EventBus<AddSwordItem>.UnRegister(this);
+            EventBus<EquipSwordItem>.UnRegister(this);
         }
 
         public void Toggle(bool toggle)

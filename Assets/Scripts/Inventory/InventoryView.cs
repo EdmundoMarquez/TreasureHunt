@@ -10,7 +10,8 @@
     public class InventoryView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
-        [SerializeField] private SwordInfoBox _currentSwordInfoBox = null;
+        [SerializeField] private SwordInfoSelector _swordInfoSelector = null;
+        // [SerializeField] private SwordInfoBox _currentSwordInfoBox = null;
         [SerializeField] private CanvasGroup[] _availableKeyItems;
         [SerializeField] private PotionContainer[] _potionContainers = null;
         [SerializeField] private InventoryController _inventoryController = null;
@@ -57,9 +58,8 @@
 
         private void UpdateInventory()
         {
-            SwordData equippedSword = SwordFactory.Instance.GetSwordById(_inventoryController.EquippedSword);
-            _currentSwordInfoBox.Fill(equippedSword.SwordId.Value, equippedSword.SwordImage, equippedSword.Damage);
-
+            _swordInfoSelector.UpdateSelector();
+            
             var keys = _inventoryController.GetAllKeys();
             for (int i = 0; i < _availableKeyItems.Length; i++)
             {

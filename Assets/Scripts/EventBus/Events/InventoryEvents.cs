@@ -15,6 +15,16 @@ namespace Treasure.EventBus
         public GameObject swordObject;
     }
 
+    public struct EquipSwordItem : IEvent
+    {
+        public string swordId;
+    }
+
+    public struct RemoveSwordItem : IEvent
+    {
+        public string swordId;
+    }
+
     public struct ConfirmAddSwordItem : IEvent
     {
         public string itemId;
