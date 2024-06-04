@@ -21,13 +21,15 @@ namespace Treasure.Player
         private IPlayerInput _inputAdapter;
         private bool _canTick = false;
         public bool IsActive => _canTick;
+        public bool IsFullHealth => _healthController.Health >= _healthController.MaxHealth;
+        public bool IsDead => _healthController.Health <= 0;
 
         public void Init(IPlayerInput inputAdapter, string swordId)
         {
             _healthController.Init(_characterAttributes.Health);
-            _movementController.Init(_characterAttributes.Stamina);
-            _followController.Init(_characterAttributes.Stamina);
-            _potionController.Init(_characterId.Value);
+            _movementController.Init(_characterAttributes.Speed);
+            _followController.Init(_characterAttributes.Speed);
+            _potionController.Init(_characterId.Value, _movementController, _followController, _healthController);
             _swordAttackController.Init(swordId);
             _healthBar.Init();
 
@@ -52,6 +54,8 @@ namespace Treasure.Player
 
         public void Tick()
         {
+            if(IsDead) return;
+
             if(!_canTick) 
             {
                 _followController.Follow();

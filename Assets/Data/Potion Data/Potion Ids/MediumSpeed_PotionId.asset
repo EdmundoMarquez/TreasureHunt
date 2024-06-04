@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da2ddcbf6870ee4a91e55c4b300d2df, type: 3}
-  m_Name: WarriorBaseAttributes
+  m_Script: {fileID: 11500000, guid: 61008b5efb4be0442b8af26df9724c67, type: 3}
+  m_Name: MediumSpeed_PotionId
   m_EditorClassIdentifier: 
-  MaxHealth: 10
-  Health: 10
-  Speed: 2
+  _objectId: mediumSpeedPotion

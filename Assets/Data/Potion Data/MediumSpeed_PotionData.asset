@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f477cf3fa2bac71479418c00ed9a92f8, type: 3}
+  m_Name: MediumSpeed_PotionData
+  m_EditorClassIdentifier: 
+  PotionImage: {fileID: 7421218225407433232, guid: 537b963eb4016904784e2928dbf7e5ad,
+    type: 3}
+  Properties:
+    propertyId: {fileID: 11400000, guid: f107bfed600d19140afbbbb2e1dff496, type: 2}
+    amount: 20

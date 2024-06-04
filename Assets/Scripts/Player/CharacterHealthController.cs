@@ -6,15 +6,15 @@
     public class CharacterHealthController : MonoBehaviour, IDamageable
     {
         private int _maxHealth;
-        private float _health;
+        private int _health;
         public delegate void OnDamageFeedback();
         public OnDamageFeedback onDamageFeedback;
         public delegate void OnDead();
         public OnDead onDead;
         public delegate void OnHealFeedback();
         public OnHealFeedback onHealFeedback;
-        public float Health => _health;
-        public float MaxHealth => _maxHealth;
+        public int Health => _health;
+        public int MaxHealth => _maxHealth;
         private bool _canTakeDamage;
 
         public void Init(int maxHealth)

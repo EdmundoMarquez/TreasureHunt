@@ -19,11 +19,36 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ac59f02b5c423b4eaf118d4fc62bebb, type: 2}
   - {fileID: 11400000, guid: c64223182d2e1604baeffd0e1338f607, type: 2}
   - {fileID: 11400000, guid: 092af7405560d5b40a208633691f0426, type: 2}
-  EquippedSword: {fileID: 11400000, guid: bff1eef83687f224194ec557442e7fd1, type: 2}
+  EquippedSword: woodenSword
+  StoredSwords:
+  - SwordId: brokenSword
+    SwordImage: {fileID: 21300000, guid: 778d7a0f4e17ced469f848ad7b292d18, type: 3}
+    Damage:
+    - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
+      amount: 2
+    Quantity: 0
+  - SwordId: woodenSword
+    SwordImage: {fileID: 21300000, guid: e67ca7430e24c3f45bbf9ab2d00a4e7e, type: 3}
+    Damage:
+    - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
+      amount: 1
+    Quantity: 1
   StoredPotions:
   - PotionImage: {fileID: -8558721662302090408, guid: 537b963eb4016904784e2928dbf7e5ad,
       type: 3}
     Properties:
       propertyId: {fileID: 11400000, guid: 93a057e65d5fbab4da7e63ef511dd2ff, type: 2}
+      amount: 10
+    Quantity: 0
+  - PotionImage: {fileID: 7421218225407433232, guid: 537b963eb4016904784e2928dbf7e5ad,
+      type: 3}
+    Properties:
+      propertyId: {fileID: 11400000, guid: f107bfed600d19140afbbbb2e1dff496, type: 2}
+      amount: 20
+    Quantity: 0
+  - PotionImage: {fileID: 7421218225407433232, guid: 537b963eb4016904784e2928dbf7e5ad,
+      type: 3}
+    Properties:
+      propertyId: {fileID: 11400000, guid: 491715ad4543c404c887b84ff49366e0, type: 2}
       amount: 10
     Quantity: 0

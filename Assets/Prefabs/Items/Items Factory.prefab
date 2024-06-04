@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989887bd4e92ed84fb3f47d97901747e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _swordsDatabase:
-  - {fileID: 11400000, guid: 7cdb066427e2d40488b54c3e1b8425ac, type: 2}
-  - {fileID: 11400000, guid: b86157c708e18f046b3ef6514f451ff2, type: 2}
+  _itemDataConfiguration: {fileID: 11400000, guid: f853f4e43942e99499b2da29b7f74c88,
+    type: 2}
 --- !u!114 &1135807422539210167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,5 +58,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f65f422b1639c54698400e1d2520ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _potionDatabase:
-  - {fileID: 11400000, guid: 6f9f4dd56ec90cf44bd640d391ec1d85, type: 2}
+  _itemDataConfiguration: {fileID: 11400000, guid: f853f4e43942e99499b2da29b7f74c88,
+    type: 2}

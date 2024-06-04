@@ -1,11 +1,11 @@
-namespace Treasure.Inventory.Potions
+namespace Treasure.Inventory
 {
     using System.Collections.Generic;
     using UnityEngine;
 
     public class PotionFactory : MonoBehaviour
     {
-        public PotionData[] _potionDatabase = null;
+        [SerializeField] private ItemDataConfiguration _itemDataConfiguration = null;
         private Dictionary<string, PotionData> _idToPotion;
         public static PotionFactory Instance;
 
@@ -18,7 +18,7 @@ namespace Treasure.Inventory.Potions
 
             _idToPotion = new Dictionary<string, PotionData>();
 
-            foreach (var potion in _potionDatabase)
+            foreach (var potion in _itemDataConfiguration.GetAllPotions())
             {
                 _idToPotion.Add(potion.Properties.propertyId.Value, potion);
             }

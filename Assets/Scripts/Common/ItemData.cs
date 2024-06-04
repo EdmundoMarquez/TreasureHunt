@@ -2,7 +2,7 @@ namespace Treasure.Common
 {
     using UnityEngine;
 
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "ItemData", menuName = "PCG/ItemData", order = 0)]
     public class ItemData : ScriptableObject
     {
         public Sprite sprite;

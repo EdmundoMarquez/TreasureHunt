@@ -9,5 +9,7 @@ namespace Treasure.Common
         bool IsActive {get;}
         void ToggleControl(bool toggle);
         void ShowControlArrow(bool show);
+        bool IsFullHealth {get;}
+        bool IsDead {get;}
     }
 }

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da2ddcbf6870ee4a91e55c4b300d2df, type: 3}
   m_Name: WarriorAttributes
   m_EditorClassIdentifier: 
+  MaxHealth: 10
   Health: 10
-  Stamina: 3
-  Strength: 1
-  Dexterity: 0
+  Speed: 2

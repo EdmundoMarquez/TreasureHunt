@@ -5,12 +5,14 @@
     using DG.Tweening;
     using System.Collections;
     using Treasure.Common;
+    using System;
 
     public class PotionThrowController : MonoBehaviour, IEventReceiver<ThrowPotionItem>
     {
         [SerializeField] private CanvasGroup _inventoryCanvas = null;
         [SerializeField] private SpriteRenderer _potionCrosshair = null;
         [SerializeField] private ContactFilter2D _contactFilter;
+        [SerializeField] private ItemDataConfiguration _itemDataConfiguration = null;
         private bool _isThrowingPotion;
         private string _throwPotionId;
         private Coroutine ThrowPotionCoroutine;
@@ -41,6 +43,8 @@
             {
                 IPlayableCharacter character = results[0].transform.GetComponent<IPlayableCharacter>();
                 
+                if(!CanThrowPotion(character, _throwPotionId)) return;
+                
                 if(ThrowPotionCoroutine != null)
                 {
                     StopCoroutine(ThrowPotionCoroutine);
@@ -51,6 +55,27 @@
             {
                 ToggleCrosshair(false);
             }
+        }
+
+        private bool CanThrowPotion(IPlayableCharacter character, string potionId)
+        {
+            // Debug.Log($"Dead: {character.IsDead}\n Full Health: {character.IsFullHealth}");
+            foreach(var potion in _itemDataConfiguration.HealingPotions)
+                if(potion.Properties.propertyId.Value == potionId)
+                    return !character.IsFullHealth && !character.IsDead;
+
+            foreach(var potion in _itemDataConfiguration.SpeedPotions)
+                if(potion.Properties.propertyId.Value == potionId)
+                    return !character.IsDead;
+            
+            foreach(var potion in _itemDataConfiguration.InvisibilityPotions)
+                if(potion.Properties.propertyId.Value == potionId)
+                    return !character.IsDead;
+
+            if(_itemDataConfiguration.RevivePotion.Properties.propertyId.Value == potionId)
+                return character.IsDead;
+
+            return false;
         }
 
         private IEnumerator ThrowPotionToCharacter(string characterId)
@@ -66,7 +91,8 @@
                 selectedCharacterId = characterId
             });
             
-            yield return new WaitForSecondsRealtime(0.5f);
+            _potionCrosshair.gameObject.SetActive(false);
+            yield return new WaitForSecondsRealtime(1.5f);
             ToggleCrosshair(false);
         }
 
@@ -75,8 +101,8 @@
             _inventoryCanvas.alpha = toggle ? 0f : 1f;
             _inventoryCanvas.interactable = !toggle;
             _inventoryCanvas.blocksRaycasts = !toggle;
-            _potionCrosshair.gameObject.SetActive(toggle);
             _isThrowingPotion = toggle;
+            _potionCrosshair.gameObject.SetActive(toggle);
         }
 
         private void OnEnable()

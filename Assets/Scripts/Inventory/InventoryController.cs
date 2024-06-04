@@ -38,15 +38,11 @@
                 _idToKey.Add(key.Id, keyData);
             }
 
-            foreach (var potion in _items.HealingPotions)
-            {
+            foreach (var potion in _items.GetAllPotions())
                 AddPotionToStorage(potion);
-            }
 
             foreach (var sword in _items.Swords)
-            {
                 AddSwordToStorage(sword);
-            }
 
             LoadPersistentData();
         }

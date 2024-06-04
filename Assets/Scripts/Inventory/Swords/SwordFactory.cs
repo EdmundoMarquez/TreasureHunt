@@ -5,7 +5,7 @@ namespace Treasure.Inventory
 
     public class SwordFactory : MonoBehaviour
     {
-        public SwordData[] _swordsDatabase = null;
+        [SerializeField] private ItemDataConfiguration _itemDataConfiguration = null;
         private Dictionary<string, SwordData> _idToSword;
         public static SwordFactory Instance;
 
@@ -18,7 +18,7 @@ namespace Treasure.Inventory
 
             _idToSword = new Dictionary<string, SwordData>();
 
-            foreach (var sword in _swordsDatabase)
+            foreach (var sword in _itemDataConfiguration.Swords)
             {
                 _idToSword.Add(sword.SwordId.Value, sword);
             }
