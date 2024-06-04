@@ -18,6 +18,7 @@
         {
             if (col.tag == "Player")
             {
+                if(!col.GetComponent<IPlayableCharacter>().IsActive) return;
                 GetComponent<Collider2D>().enabled = false;
                 EventBus<OnCompletedDungeon>.Raise(new OnCompletedDungeon());
             }
