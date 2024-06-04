@@ -39,7 +39,7 @@ MonoBehaviour:
     Properties:
       propertyId: {fileID: 11400000, guid: 93a057e65d5fbab4da7e63ef511dd2ff, type: 2}
       amount: 10
-    Quantity: 0
+    Quantity: 1
   - PotionImage: {fileID: 7421218225407433232, guid: 537b963eb4016904784e2928dbf7e5ad,
       type: 3}
     Properties:
@@ -51,4 +51,10 @@ MonoBehaviour:
     Properties:
       propertyId: {fileID: 11400000, guid: 491715ad4543c404c887b84ff49366e0, type: 2}
       amount: 10
+    Quantity: 0
+  - PotionImage: {fileID: 7121432322982252667, guid: 537b963eb4016904784e2928dbf7e5ad,
+      type: 3}
+    Properties:
+      propertyId: {fileID: 11400000, guid: 7bde3e5904271c848a08ef9189189615, type: 2}
+      amount: 20
     Quantity: 0

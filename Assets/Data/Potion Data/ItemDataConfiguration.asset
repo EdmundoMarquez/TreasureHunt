@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5443cba2eb3ee924b9e86eddf240cbcc, type: 2}
   InvisibilityPotions:
   - {fileID: 11400000, guid: 0690755a74b771347afa1103022afe9c, type: 2}
-  RevivePotion: {fileID: 11400000, guid: 6f9f4dd56ec90cf44bd640d391ec1d85, type: 2}
+  RevivePotion: {fileID: 11400000, guid: 4be3cf82ff6a5ce42bd12fc2f79f9e5a, type: 2}
   Swords:
   - {fileID: 11400000, guid: 7cdb066427e2d40488b54c3e1b8425ac, type: 2}
   - {fileID: 11400000, guid: b86157c708e18f046b3ef6514f451ff2, type: 2}

@@ -45,6 +45,7 @@
                 AddSwordToStorage(sword);
 
             LoadPersistentData();
+            SaveInventory();
         }
 
 

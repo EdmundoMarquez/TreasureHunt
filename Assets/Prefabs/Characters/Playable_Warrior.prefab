@@ -130,6 +130,8 @@ MonoBehaviour:
     type: 3}
   _invisibilityFxPrefab: {fileID: 7865921024749119523, guid: e2ec7da8501b7f243844d08f50a7f1a0,
     type: 3}
+  _reviveFxPrefab: {fileID: 7865921024749119523, guid: 08ff3dfe66fcb1f4eb5825d7bcaab90b,
+    type: 3}
   _fxParent: {fileID: 4927075194845226224}
 --- !u!50 &1582419349503239401
 Rigidbody2D:
@@ -834,6 +836,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1961327651050213636, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: _healthController
+      value: 
+      objectReference: {fileID: 1582419349503239406}
     - target: {fileID: 1961327651050213640, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -939,16 +946,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1961327651050213636, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
-        type: 3}
-      propertyPath: _healthController
-      value: 
-      objectReference: {fileID: 1582419349503239406}
-    - target: {fileID: 1961327651050213637, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 1961327649765531727, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
         type: 3}
       propertyPath: m_Layer
@@ -958,6 +955,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961327651050213637, guid: 2ec14b05ff984db4d8f0a32e6de45fbc,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ec14b05ff984db4d8f0a32e6de45fbc, type: 3}

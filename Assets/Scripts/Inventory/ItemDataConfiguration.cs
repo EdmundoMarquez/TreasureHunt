@@ -26,7 +26,7 @@ namespace Treasure.Inventory
             foreach (var potion in InvisibilityPotions)
                 allPotions.Add(potion);
 
-            // allPotions.Add(RevivePotion);
+            allPotions.Add(RevivePotion);
             return allPotions.ToArray();
         }
     }

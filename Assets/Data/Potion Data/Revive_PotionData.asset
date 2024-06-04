@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f477cf3fa2bac71479418c00ed9a92f8, type: 3}
-  m_Name: MediumInvisibility_PotionData
+  m_Name: Revive_PotionData
   m_EditorClassIdentifier: 
-  PotionImage: {fileID: -8887993299131670151, guid: 537b963eb4016904784e2928dbf7e5ad,
+  PotionImage: {fileID: 7121432322982252667, guid: 537b963eb4016904784e2928dbf7e5ad,
     type: 3}
   Properties:
-    propertyId: {fileID: 11400000, guid: 491715ad4543c404c887b84ff49366e0, type: 2}
-    amount: 10
+    propertyId: {fileID: 11400000, guid: 7bde3e5904271c848a08ef9189189615, type: 2}
+    amount: 2

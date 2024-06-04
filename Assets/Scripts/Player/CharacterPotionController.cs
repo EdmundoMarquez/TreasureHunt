@@ -16,6 +16,7 @@
         [SerializeField] private GameObject _healingFxPrefab = null;
         [SerializeField] private GameObject _speedFxPrefab = null;
         [SerializeField] private GameObject _invisibilityFxPrefab = null;
+        [SerializeField] private GameObject _reviveFxPrefab = null;
         [SerializeField] private Transform _fxParent = null;
         private CharacterHealthController _healthController = null;
         private MovementController _movementController = null;
@@ -68,6 +69,13 @@
                     StartCoroutine(ApplyInvisibility_Timer(potion.Properties.amount));
                     return;
                 }
+            }
+
+            if(_itemDataConfiguration.RevivePotion.Properties.propertyId.Value == potionId)
+            {
+                _healthController.Heal(_itemDataConfiguration.RevivePotion.Properties.amount);
+                _characterSprite.DOColor(Color.green, 0.5f).SetLoops(2, LoopType.Yoyo).SetUpdate(true);
+                InstantiateEffect(_reviveFxPrefab, 3f, true);
             }
         }
         
