@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SageAttributes
   m_EditorClassIdentifier: 
   MaxHealth: 10
-  Health: 15
+  Health: 10
   Speed: 1

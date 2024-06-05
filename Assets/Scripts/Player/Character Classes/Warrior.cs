@@ -26,7 +26,7 @@ namespace Treasure.Player
 
         public void Init(IPlayerInput inputAdapter, string swordId)
         {
-            _healthController.Init(_characterAttributes.Health);
+            _healthController.Init(_characterAttributes.Health, _characterAttributes.MaxHealth);
             _movementController.Init(_characterAttributes.Speed);
             _followController.Init(_characterAttributes.Speed);
             _potionController.Init(_characterId.Value, _movementController, _followController, _healthController);
@@ -68,6 +68,12 @@ namespace Treasure.Player
             {
                 _swordAttackController.Attack();
             }
+        }
+
+        private void OnDisable()
+        {
+            //Save health
+            _characterAttributes.Health = _healthController.Health;
         }
 
     }

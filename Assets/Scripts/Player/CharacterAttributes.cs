@@ -7,7 +7,6 @@
     {
         [Range(10,30)]
         public int MaxHealth = 10;
-        [Range(10,30)]
         public int Health = 10;
         [Range(0,5)]
         public int Speed = 5;

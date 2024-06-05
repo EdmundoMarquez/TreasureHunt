@@ -17,10 +17,10 @@
         public int MaxHealth => _maxHealth;
         private bool _canTakeDamage;
 
-        public void Init(int maxHealth)
+        public void Init(int health, int maxHealth)
         {
+            _health = health;
             _maxHealth = maxHealth;
-            _health = _maxHealth;
         }
 
         public void Toggle(bool toggle)
