@@ -78,7 +78,7 @@ namespace Treasure.Rewards
                         });
                         break;
                     case PickableTypes.Sword:
-                        EventBus<ConfirmAddSwordItem>.Raise(new ConfirmAddSwordItem
+                        EventBus<AddSwordItem>.Raise(new AddSwordItem
                         {
                             itemId = _pickableId.Value,
                             swordObject = gameObject

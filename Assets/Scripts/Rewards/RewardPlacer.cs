@@ -11,30 +11,33 @@
     {
         [SerializeField]
         private GameObject itemPrefab;
+        [SerializeField]
+        private Vector2 offset = new Vector2(-0.5f, -0.5f);
 
         
-        public GameObject PlaceItem(ItemData item, Vector2 placementPosition)
+        public GameObject PlaceItem(ItemData item, Transform parent)
         {
-            GameObject newItem = CreateObject(itemPrefab, placementPosition);
+            GameObject newItem = CreateObject(itemPrefab, parent);
             //GameObject newItem = Instantiate(itemPrefab, placementPosition, Quaternion.identity);
             newItem.GetComponent<RewardItem>().Initialize(item);
             return newItem;
         }
 
-        public GameObject CreateObject(GameObject prefab, Vector3 placementPosition)
+        public GameObject CreateObject(GameObject prefab, Transform itemParent)
         {
             if (prefab == null)
                 return null;
             GameObject newItem;
             if (Application.isPlaying)
             {
-                newItem = Instantiate(prefab, placementPosition, Quaternion.identity);
+                newItem = Instantiate(prefab, itemParent);
+                newItem.transform.localPosition = offset;
             }
             else
             {
                 newItem = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                newItem.transform.position = placementPosition;
-                newItem.transform.rotation = Quaternion.identity;
+                newItem.transform.parent = itemParent;
+                newItem.transform.localPosition = offset;
             }
 
             return newItem;

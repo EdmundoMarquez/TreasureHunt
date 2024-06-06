@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 3293408477025586303, guid: 9960729836990be48b3c05ecc1cdc27c,
     type: 3}
+  offset: {x: -0.5, y: 0}

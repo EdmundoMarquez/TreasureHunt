@@ -19,8 +19,7 @@
             {
                 //Gain an item
                 var randomizedItem = _rewardsConfiguration.Level1RewardItems[Random.Range(0, _rewardsConfiguration.Level1RewardItems.Length)];
-                spawnedItem = _rewardPlacer.PlaceItem(randomizedItem, placementPosition).GetComponent<RewardItem>();
-                spawnedItem.transform.parent = itemParent;
+                spawnedItem = _rewardPlacer.PlaceItem(randomizedItem, itemParent).GetComponent<RewardItem>();
             }
             else if(randomizedValue > 0.3f)
             {

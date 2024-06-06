@@ -84,13 +84,9 @@
             ToggleVisibility(true);
 
             if(generatedItem.Data.pickableType == PickableTypes.Potion)
-            {
-                if(_inventoryController.IsPotionSpaceFull())
-                {
-                    _takeButton.gameObject.SetActive(false);
-                }
-            }
-
+                _takeButton.gameObject.SetActive(!_inventoryController.IsPotionSpaceFull());
+            else if(generatedItem.Data.pickableType == PickableTypes.Sword)
+                _takeButton.gameObject.SetActive(!_inventoryController.IsSwordSpaceFull());
         }
 
         private void ToggleVisibility(bool toggle)
