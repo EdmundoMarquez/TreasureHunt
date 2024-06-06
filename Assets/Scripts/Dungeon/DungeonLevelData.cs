@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Treasure.InfiniteMode
+namespace Treasure.Dungeon
 {
     [CreateAssetMenu(fileName = "DungeonLevelData", menuName = "Infinite/DungeonLevelData", order = 1)]
     public class DungeonLevelData : ScriptableObject

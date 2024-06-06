@@ -1,4 +1,4 @@
-﻿namespace Treasure.InfiniteMode
+﻿namespace Treasure.Dungeon
 {
     using UnityEngine;
     using UnityEngine.UI;

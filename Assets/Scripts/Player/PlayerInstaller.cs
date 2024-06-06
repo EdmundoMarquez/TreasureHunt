@@ -2,8 +2,11 @@
 {
     using Cinemachine;
     using UnityEngine;
+    using Treasure.Common;
     using Treasure.PlayerInput;
     using Treasure.Inventory;
+    using Treasure.EventBus;
+    using System.Collections.Generic;
 
     public class PlayerInstaller : MonoBehaviour
     {
@@ -34,6 +37,15 @@
             _warriorCharacter.Init(_inputAdapter, inventoryController.EquippedSword);
             _sageCharacter.Init(_inputAdapter);
             SetDefaultCharacter();
+
+            List<IPlayableCharacter> generatedCharacters = new List<IPlayableCharacter>();
+            generatedCharacters.Add(_warriorCharacter);
+            generatedCharacters.Add(_sageCharacter);
+
+            EventBus<OnPlayerCharactersGenerated>.Raise(new OnPlayerCharactersGenerated
+            {
+                characters = generatedCharacters.ToArray()
+            });
         }
 
         private void SetDefaultCharacter()

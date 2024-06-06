@@ -1,7 +1,9 @@
-﻿namespace Treasure.Common
+﻿using System;
+
+namespace Treasure.Common
 {
     public interface IDamageable
     {
-        void Damage(int amount);
+        void Damage(int amount, string instigator = "");
     }
 }

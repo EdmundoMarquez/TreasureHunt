@@ -18,7 +18,7 @@ namespace Treasure.Damageables
             _health = _maxHealth;
         }
     
-        public void Damage(int amount)
+        public void Damage(int amount, string instigator = "")
         {
             _health -= amount;
     

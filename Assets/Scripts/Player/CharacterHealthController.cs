@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using Treasure.Common;
+    using Treasure.EventBus;
 
     public class CharacterHealthController : MonoBehaviour, IDamageable
     {
@@ -36,7 +37,7 @@
             if (onHealFeedback != null) onHealFeedback();
         }
 
-        public void Damage(int amount)
+        public void Damage(int amount, string instigatorId = "")
         {
             if(!_canTakeDamage) return;
 
@@ -45,6 +46,12 @@
             if (_health <= 0)
             {
                 _health = 0;
+
+                EventBus<OnPlayerCharacterDefeated>.Raise(new OnPlayerCharacterDefeated
+                {
+                    damageInstigator = instigatorId
+                });
+                
                 if (onDead != null) onDead();
                 return;
             }

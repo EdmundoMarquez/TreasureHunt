@@ -557,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 1582419350478012635}
   _instigatorTag: 0
+  _instigatorId: {fileID: 11400000, guid: 00c41f1ca94aa9d4197980e6481b0c42, type: 2}
 --- !u!1 &3241722075020824946
 GameObject:
   m_ObjectHideFlags: 0

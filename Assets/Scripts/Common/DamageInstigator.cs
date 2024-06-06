@@ -6,6 +6,7 @@ namespace Treasure.Common
     {
         [SerializeField] private Collider2D _collider;
         [SerializeField] private InstigatorTags _instigatorTag;
+        [SerializeField] private ObjectId _instigatorId = null;
         private DataProperty[] _damageProperties;
     
         public void Init(DataProperty[] damageProperties)
@@ -29,7 +30,8 @@ namespace Treasure.Common
         {
             foreach (var damage in _damageProperties)
             {
-                damageable.Damage(damage.amount);
+                damageable.Damage(damage.amount, _instigatorId?.Value);
+
             }
         }
     }

@@ -105,7 +105,7 @@ namespace PCG
             }
         }
 
-        public void Damage(int damage)
+        public void Damage(int damage, string instigator = "")
         {
             if (nonDestructible)
                 return;

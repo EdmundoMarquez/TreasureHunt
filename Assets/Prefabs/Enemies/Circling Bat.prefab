@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 6882859257983899661}
   _instigatorTag: 1
+  _instigatorId: {fileID: 11400000, guid: 6956aa57a4c1f904abe6a588d03eeebd, type: 2}
 --- !u!50 &6882859257983900148
 Rigidbody2D:
   serializedVersion: 4
