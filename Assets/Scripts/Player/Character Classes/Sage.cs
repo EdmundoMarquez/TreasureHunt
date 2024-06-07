@@ -15,7 +15,8 @@ namespace Treasure.Player
         [SerializeField] private CharacterPotionController _potionController = null;
         [SerializeField] private CharacterInteractionController _interactionController = null;
         [SerializeField] private CompanionFollowController _followController = null;
-        [SerializeField] private SpriteRenderer _arrow = null;
+        [SerializeField] private SpriteRenderer _characterSprite = null;
+        [SerializeField] private GameObject _blurMinimapVolume = null;
         public ObjectId CharacterId => _characterId;
         private IPlayerInput _inputAdapter;
         private bool _canTick = false;
@@ -40,15 +41,24 @@ namespace Treasure.Player
             _movementController.Toggle(toggle);
             _healthController.Toggle(toggle);
             _interactionController.Toggle(toggle);
+            _blurMinimapVolume.SetActive(toggle);
             _followController.Toggle(!toggle);
             _canTick = toggle;
 
-            ShowControlArrow(toggle);
+            SetCharacterSprite(toggle);
         }
 
-        public void ShowControlArrow(bool show)
+        public void SetCharacterSprite(bool toggle)
         {
-            _arrow.DOFade(show ? 1f : 0f, 0.3f);
+            //Set character outline
+            MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+
+            _characterSprite.GetPropertyBlock(propertyBlock);
+
+            propertyBlock.SetInt("_Intensity", toggle ? 1 : 0);
+            _characterSprite.SetPropertyBlock(propertyBlock);
+
+            _characterSprite.sortingOrder = toggle ? 1 : 0;
         }
 
         public void Tick()

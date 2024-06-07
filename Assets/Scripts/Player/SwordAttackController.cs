@@ -46,6 +46,15 @@
         {
             _canAttack = toggle;
             _damageInstigator.ToggleInstigator(false);
+
+            //Set character outline
+            MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+
+            _swordSprite.GetPropertyBlock(propertyBlock);
+
+            propertyBlock.SetInt("_Intensity", toggle ? 1 : 0);
+            _swordSprite.SetPropertyBlock(propertyBlock);
+            _swordSprite.sortingOrder = toggle ? 2 : 1;
         }
 
         public void Attack()

@@ -8,7 +8,7 @@ namespace Treasure.Common
         ObjectId CharacterId { get; }
         bool IsActive {get;}
         void ToggleControl(bool toggle);
-        void ShowControlArrow(bool show);
+        void SetCharacterSprite(bool show);
         bool IsFullHealth {get;}
         bool IsDead {get;}
     }
