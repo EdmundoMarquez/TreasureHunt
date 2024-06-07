@@ -21,6 +21,8 @@
         {
             _wordToSolve = _chestData.RandomizeWord();
             _minimapIcon.Init(_lockedSprite.GetComponent<SpriteRenderer>().sprite);
+
+            EventBus<OnChestGenerated>.Raise(new OnChestGenerated());
         }
 
         public void Interact()

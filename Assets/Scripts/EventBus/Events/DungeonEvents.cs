@@ -16,3 +16,4 @@ public struct GameOverEvent : IEvent
 {
     public string instigatorId;
 }
+public struct OnChestGenerated : IEvent {}
