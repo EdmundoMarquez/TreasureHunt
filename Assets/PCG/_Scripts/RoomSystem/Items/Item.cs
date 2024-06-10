@@ -6,7 +6,7 @@ namespace PCG
     using Treasure.Common;
     using Treasure.EventBus;
     using Treasure.Inventory;
-    using Treasure.Inventory.Potions;
+    using Pathfinding;
 
     public class Item : MonoBehaviour, IDamageable
     {
@@ -74,7 +74,10 @@ namespace PCG
             if (col.tag == "Player")
             {
                 IPlayableCharacter character = col.GetComponent<IPlayableCharacter>();
-                if (character.CharacterId.Value != characterThatCanPickId.Value) return;
+
+                if (characterThatCanPickId != null)
+                    if (character.CharacterId.Value != characterThatCanPickId.Value) return;
+
                 if (!character.IsActive) return;
 
                 switch (pickableType)
@@ -98,11 +101,28 @@ namespace PCG
                             swordObject = gameObject
                         });
                         break;
+                    case PickableTypes.Coins:
+                        EventBus<OnGainReward>.Raise(new OnGainReward
+                        {
+                            coinAmount = Random.Range(5, 10)
+                        });
+                        gameObject.SetActive(false);
+                        break;
                     case PickableTypes.None:
                     default:
                         break;
                 }
             }
+        }
+
+        private void RecalculateObstacle()
+        {
+            var bounds = GetComponent<Collider2D>().bounds;
+            // Expand the bounds along the Z axis
+            bounds.Expand(Vector3.forward * 1000);
+            var guo = new GraphUpdateObject(bounds);
+            // change some settings on the object
+            AstarPath.active.UpdateGraphs(guo);
         }
 
         public void Damage(int damage, string instigator = "")
@@ -122,7 +142,8 @@ namespace PCG
             if (health <= 0)
             {
                 spriteRenderer.transform.DOComplete();
-                Destroy(gameObject);
+                RecalculateObstacle();
+                gameObject.SetActive(false);
             }
 
         }

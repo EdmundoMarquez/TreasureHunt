@@ -169,11 +169,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2938968024682511224}
     m_Modifications:
-    - target: {fileID: 3471546496874393823, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
-        type: 3}
-      propertyPath: m_Name
-      value: Minimap Icon
-      objectReference: {fileID: 0}
     - target: {fileID: 5619280373256497230, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -229,11 +224,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 337160079779048840, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7947089350305157008, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
         type: 3}
       propertyPath: m_Size.x
@@ -243,6 +233,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471546496874393823, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
+        type: 3}
+      propertyPath: m_Name
+      value: Minimap Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 337160079779048840, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b538b76e80dcd34e9cbe8b975922fbd, type: 3}

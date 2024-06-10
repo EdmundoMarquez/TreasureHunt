@@ -5,7 +5,8 @@ namespace Treasure.Common
         None,
         Key,
         Potion,
-        Sword
+        Sword,
+        Coins
     }
 
 }

@@ -58,7 +58,7 @@ namespace Treasure.Player
             propertyBlock.SetInt("_Intensity", toggle ? 1 : 0);
             _characterSprite.SetPropertyBlock(propertyBlock);
 
-            _characterSprite.sortingOrder = toggle ? 1 : 0;
+            _characterSprite.sortingOrder = toggle ? 3 : 0;
         }
 
         public void Tick()
