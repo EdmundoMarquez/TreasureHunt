@@ -13,6 +13,7 @@ namespace Treasure.Audio
         [SerializeField] private float _multiplier = 30f;
         [SerializeField] private Button _toggleButton = null;
         [SerializeField] private Image _toggleIcon = null;
+        private const float _sliderLowValue = 0.0001f;
         // [SerializeField] private GameSaveData _playerData = null;
         private bool toggleSlider = true;
         private void Awake()
@@ -42,7 +43,7 @@ namespace Treasure.Audio
             if(toggleSlider)
                 _audioMixer.SetFloat(_volumeParameter, Mathf.Log10(_slider.value) * _multiplier);
             else
-                _audioMixer.SetFloat(_volumeParameter, Mathf.Log10(0f) * _multiplier);
+                _audioMixer.SetFloat(_volumeParameter, Mathf.Log10(_sliderLowValue) * _multiplier);
 
         }
     }
