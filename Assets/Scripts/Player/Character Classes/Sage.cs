@@ -15,6 +15,7 @@ namespace Treasure.Player
         [SerializeField] private CharacterPotionController _potionController = null;
         [SerializeField] private CharacterInteractionController _interactionController = null;
         [SerializeField] private CompanionFollowController _followController = null;
+        [SerializeField] private CharacterMessageBox _messageBox = null;
         [SerializeField] private SpriteRenderer _characterSprite = null;
         [SerializeField] private GameObject _blurMinimapVolume = null;
         public ObjectId CharacterId => _characterId;
@@ -31,6 +32,7 @@ namespace Treasure.Player
             _followController.Init(_characterAttributes.Speed);
             _potionController.Init(_characterId.Value, _movementController, _followController, _healthController);
             _healthBar.Init();
+            _messageBox.Init(this);
 
             _inputAdapter = inputAdapter;
             _interactionController.Init(_inputAdapter);

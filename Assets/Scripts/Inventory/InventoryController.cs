@@ -5,7 +5,6 @@
     using System.Linq;
     using Treasure.EventBus;
     using Treasure.Common;
-    using Treasure.Inventory.Potions;
     using UnityEngine;
     using System;
 
@@ -114,7 +113,11 @@
 
             if (_swordsInStorage.TryGetValue(e.itemId, out var inventoryData))
             {
-                if(inventoryData.Quantity > 0) return;
+                if(inventoryData.Quantity > 0)
+                {
+                    EventBus<InventoryFullMessageEvent>.Raise(new InventoryFullMessageEvent{});
+                    return;
+                } 
                 inventoryData.Quantity += 1;
             }
             e.swordObject.SetActive(false);
@@ -145,7 +148,7 @@
         {
             if (GetSwordsCount() >= SWORDS_LIMIT_IN_INVENTORY)
             {
-                Debug.Log("Exceeded max numbers of swords to store.");
+                EventBus<InventoryFullMessageEvent>.Raise(new InventoryFullMessageEvent{});
                 return true;
             }
             return false;
@@ -160,7 +163,7 @@
                 numberOfPotions += potion.Quantity;
                 if (numberOfPotions >= POTIONS_LIMIT_IN_INVENTORY)
                 {
-                    Debug.Log("Exceeded max numbers of potions to store.");
+                    EventBus<InventoryFullMessageEvent>.Raise(new InventoryFullMessageEvent{});
                     return true;
                 }
             }

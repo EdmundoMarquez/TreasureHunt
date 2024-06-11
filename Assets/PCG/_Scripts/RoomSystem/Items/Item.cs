@@ -76,7 +76,16 @@ namespace PCG
                 IPlayableCharacter character = col.GetComponent<IPlayableCharacter>();
 
                 if (characterThatCanPickId != null)
-                    if (character.CharacterId.Value != characterThatCanPickId.Value) return;
+                {
+                    if (character.CharacterId.Value != characterThatCanPickId.Value) 
+                    {
+                        EventBus<CharacterRequiredMessageEvent>.Raise(new CharacterRequiredMessageEvent
+                        {
+                            characterId = characterThatCanPickId.Value
+                        });
+                        return;
+                    }
+                }
 
                 if (!character.IsActive) return;
 

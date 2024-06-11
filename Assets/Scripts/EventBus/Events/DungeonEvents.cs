@@ -8,10 +8,6 @@ public struct OnPlayerCharactersGenerated : IEvent
     public IPlayableCharacter[] characters;
 }
 public struct OnCompletedDungeon : IEvent {}
-public struct OnPlayerCharacterDefeated : IEvent 
-{
-    public string damageInstigator;
-}
 public struct GameOverEvent : IEvent 
 {
     public string instigatorId;
