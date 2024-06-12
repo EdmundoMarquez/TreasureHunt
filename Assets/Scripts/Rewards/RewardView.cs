@@ -47,7 +47,7 @@
                     break;
 
                 case PickableTypes.Sword:
-                    EventBus<ConfirmAddSwordItem>.Raise(new ConfirmAddSwordItem
+                    EventBus<AddSwordItem>.Raise(new AddSwordItem
                     {
                         itemId = itemData.pickableId.Value,
                         swordObject = generatedItem.gameObject
@@ -86,7 +86,7 @@
             if(generatedItem.Data.pickableType == PickableTypes.Potion)
                 _takeButton.gameObject.SetActive(!_inventoryController.IsPotionSpaceFull());
             else if(generatedItem.Data.pickableType == PickableTypes.Sword)
-                _takeButton.gameObject.SetActive(!_inventoryController.IsSwordSpaceFull());
+                _takeButton.gameObject.SetActive(!_inventoryController.IsSwordSpaceFull(generatedItem.Id));
         }
 
         private void ToggleVisibility(bool toggle)

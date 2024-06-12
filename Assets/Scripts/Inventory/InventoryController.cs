@@ -109,17 +109,7 @@
 
         public void OnEvent(AddSwordItem e)
         {
-            if (IsSwordSpaceFull()) return;
-
-            if (_swordsInStorage.TryGetValue(e.itemId, out var inventoryData))
-            {
-                if(inventoryData.Quantity > 0)
-                {
-                    EventBus<InventoryFullMessageEvent>.Raise(new InventoryFullMessageEvent{});
-                    return;
-                } 
-                inventoryData.Quantity += 1;
-            }
+            if (IsSwordSpaceFull(e.itemId)) return;
             e.swordObject.SetActive(false);
         }
 
@@ -144,12 +134,22 @@
             return numberOfSwords;
         }
 
-        public bool IsSwordSpaceFull()
+        public bool IsSwordSpaceFull(string swordId)
         {
             if (GetSwordsCount() >= SWORDS_LIMIT_IN_INVENTORY)
             {
                 EventBus<InventoryFullMessageEvent>.Raise(new InventoryFullMessageEvent{});
                 return true;
+            }
+
+            if (_swordsInStorage.TryGetValue(swordId, out var inventoryData))
+            {
+                if(inventoryData.Quantity > 0)
+                {
+                    EventBus<InventoryFullMessageEvent>.Raise(new InventoryFullMessageEvent{});
+                    return true;
+                } 
+                inventoryData.Quantity += 1;
             }
             return false;
         }

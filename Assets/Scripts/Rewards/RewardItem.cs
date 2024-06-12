@@ -60,7 +60,7 @@ namespace Treasure.Rewards
             if (col.tag == "Player")
             {
                 IPlayableCharacter character = col.GetComponent<IPlayableCharacter>();
-                if (character.CharacterId.Value != _characterThatCanPickId.Value)
+                if (character.CharacterId.Value != _characterThatCanPickId.Value && character.IsActive)
                 {
                     EventBus<CharacterRequiredMessageEvent>.Raise(new CharacterRequiredMessageEvent
                     {

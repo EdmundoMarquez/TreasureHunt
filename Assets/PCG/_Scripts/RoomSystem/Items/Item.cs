@@ -77,7 +77,7 @@ namespace PCG
 
                 if (characterThatCanPickId != null)
                 {
-                    if (character.CharacterId.Value != characterThatCanPickId.Value) 
+                    if (character.CharacterId.Value != characterThatCanPickId.Value && character.IsActive) 
                     {
                         EventBus<CharacterRequiredMessageEvent>.Raise(new CharacterRequiredMessageEvent
                         {
