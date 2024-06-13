@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1055176424}
   - component: {fileID: 1055176423}
   - component: {fileID: 2497961308629994982}
+  - component: {fileID: 3333833518030875810}
   m_Layer: 9
   m_Name: Playable_Warrior
   m_TagString: Player
@@ -63,6 +64,7 @@ MonoBehaviour:
     type: 2}
   _healthBar: {fileID: 1582419350709921138}
   _healthController: {fileID: 1582419349503239406}
+  _damageController: {fileID: 3333833518030875810}
   _movementController: {fileID: 1582419349503239402}
   _swordAttackController: {fileID: 1582419349503239407}
   _potionController: {fileID: 7747285734487814042}
@@ -253,6 +255,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.38
+--- !u!114 &3333833518030875810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582419349503239381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca16025ef2bdf3e479ce9b62918beabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageThrust: 2.5
 --- !u!1 &1582419349623770076
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582419349623770067}
   - component: {fileID: 1582419349623770066}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582419349669237827}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sword Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582419350254850882}
   - component: {fileID: 1582419350254850881}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582419350319044504}
   - component: {fileID: 1582419350319044511}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +523,7 @@ GameObject:
   - component: {fileID: 1582419350478012612}
   - component: {fileID: 1582419350478012635}
   - component: {fileID: 1582419350478012634}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Hit Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8292958343882564003}
   - component: {fileID: 2501702460734376253}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

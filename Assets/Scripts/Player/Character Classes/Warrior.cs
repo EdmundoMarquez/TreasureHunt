@@ -12,6 +12,7 @@ namespace Treasure.Player
         [SerializeField] private CharacterAttributes _characterAttributes = null;
         [SerializeField] private CharacterHealthBar _healthBar = null;
         [SerializeField] private CharacterHealthController _healthController = null;
+        [SerializeField] private CharacterDamageController _damageController = null;
         [SerializeField] private MovementController _movementController = null;
         [SerializeField] private SwordAttackController _swordAttackController = null;
         [SerializeField] private CharacterPotionController _potionController = null;
@@ -28,6 +29,7 @@ namespace Treasure.Player
         public void Init(IPlayerInput inputAdapter, string swordId)
         {
             _healthController.Init(_characterAttributes.Health, _characterAttributes.MaxHealth);
+            _damageController.Init(_healthController);
             _movementController.Init(_characterAttributes.Speed);
             _followController.Init(_characterAttributes.Speed);
             _potionController.Init(_characterId.Value, _movementController, _followController, _healthController);
