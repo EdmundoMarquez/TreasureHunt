@@ -1,4 +1,4 @@
-﻿namespace Treasure.Interactables
+﻿namespace Treasure.Chests
 {
     using Treasure.EventBus;
     using Treasure.Common;
@@ -7,7 +7,8 @@
 
     public class Chest : MonoBehaviour, IInteractable
     {
-        [SerializeField] private ChestData _chestData;
+        public ChestData ChestData;
+        public int CurrentTries;
         [SerializeField] private GameObject _lockedSprite;
         [SerializeField] private GameObject _unlockedSprite;
         [SerializeField] private SpriteRenderer _treasureSprite;
@@ -19,7 +20,8 @@
 
         private void Start()
         {
-            _wordToSolve = _chestData.RandomizeWord();
+            _wordToSolve = ChestData.RandomizeWord();
+            CurrentTries = ChestData.Tries;
             _minimapIcon.Init(_lockedSprite.GetComponent<SpriteRenderer>().sprite);
 
             EventBus<OnChestGenerated>.Raise(new OnChestGenerated());
@@ -30,7 +32,8 @@
             EventBus<OnShowPuzzle>.Raise(new OnShowPuzzle
             {
                 chest = gameObject,
-                puzzleWord = _wordToSolve
+                puzzleWord = _wordToSolve,
+                currentTries = CurrentTries
             });
         }
 
@@ -51,6 +54,11 @@
                 itemParent = transform,
                 itemPlacementPosition = transform.position
             });
+        }
+
+        public void ActivateTrap()
+        {
+            CurrentTries = 0;
         }
 
         public void PlayFloatingTreasureAnimation(Sprite rewardIcon)

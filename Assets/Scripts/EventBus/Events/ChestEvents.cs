@@ -6,7 +6,10 @@ public struct OnShowPuzzle : IEvent
 {
     public GameObject chest;
     public WordData puzzleWord;
+    public int currentTries;
 }
+
+public struct OnFailPuzzleTry : IEvent{}
 
 public struct OnOpenChest : IEvent
 {
