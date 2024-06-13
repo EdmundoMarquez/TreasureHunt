@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.EventSystems;
+    using Treasure.EventBus;
     using DG.Tweening;
     using TMPro;
 
@@ -43,6 +44,7 @@
                 else
                 {
                     _slotImage.rectTransform.DOShakeAnchorPos(0.8f, new Vector3(2, 0, 0)).SetUpdate(true);
+                    EventBus<OnFailPuzzleTry>.Raise(new OnFailPuzzleTry());
                 }
             }
         }

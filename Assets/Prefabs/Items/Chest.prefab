@@ -317,7 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccad7ee9cc6aea14d8bb7ddf030f683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chestData: {fileID: 11400000, guid: ec489b177bbb6f6418cda1be690c3946, type: 2}
+  ChestData: {fileID: 11400000, guid: 4a79ac4097d11c6489978eab16d1c115, type: 2}
+  CurrentTries: 0
   _lockedSprite: {fileID: 5178263635350698737}
   _unlockedSprite: {fileID: 5178263636366948312}
   _treasureSprite: {fileID: 4207164035314194017}
