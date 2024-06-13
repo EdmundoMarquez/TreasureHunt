@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8091582858565126434}
   - component: {fileID: 8091582858565126435}
+  - component: {fileID: 3517365768781264026}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
@@ -80,6 +81,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &3517365768781264026
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8091582858565126492}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.05255913
 --- !u!1 &8091582858731754649
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +152,9 @@ MonoBehaviour:
   - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
     amount: 2
   _damageInstigator: {fileID: 8091582858731754850}
-  _collider: {fileID: 8091582858731754648}
+  _colliders:
+  - {fileID: 8091582858731754648}
+  - {fileID: 3517365768781264026}
   _slimeSprite: {fileID: 8091582858565126435}
   _detectionRadius: 5
   _contactFilter:
@@ -273,7 +292,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 0.7
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
