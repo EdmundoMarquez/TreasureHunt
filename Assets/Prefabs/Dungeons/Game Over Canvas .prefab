@@ -1896,9 +1896,11 @@ MonoBehaviour:
   _dungeonLevelData: {fileID: 11400000, guid: 77c273ae7bf898a40a1c131e715e2b04, type: 2}
   _inventoryData: {fileID: 11400000, guid: 6dfca7be388fabb44828f7ededf9af13, type: 2}
   _timeTracker: {fileID: 0}
+  _chestsCounter: {fileID: 0}
   _slayerText: {fileID: 7071263111125785650}
   _timePlayingText: {fileID: 7071263112264461191}
   _levelText: {fileID: 7071263112355070712}
+  _chestsText: {fileID: 7071263111345167456}
   _coinsText: {fileID: 7071263112666848782}
 --- !u!1 &7071263112355070714
 GameObject:

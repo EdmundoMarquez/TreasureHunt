@@ -15,9 +15,11 @@
         [SerializeField] private DungeonLevelData _dungeonLevelData = null;
         [SerializeField] private InventoryData _inventoryData = null;
         [SerializeField] private GameTimeTracker _timeTracker = null;
+        [SerializeField] private DungeonChestsCounter _chestsCounter = null;
         [SerializeField] private TMP_Text _slayerText = null;
         [SerializeField] private TMP_Text _timePlayingText = null;
         [SerializeField] private TMP_Text _levelText = null;
+        [SerializeField] private TMP_Text _chestsText = null;
         [SerializeField] private TMP_Text _coinsText = null;
 
         public void OnEvent(GameOverEvent e)
@@ -25,6 +27,7 @@
             _slayerText.SetText($"<color=red>{e.instigatorId}</color>\n dio el golpe de gracia.");
             _timePlayingText.SetText($"{(int)(_timeTracker.GameTime / 60)}:{_timeTracker.GameTime % 60}");
             _levelText.SetText($"Nivel {_dungeonLevelData.currentLevel}");
+            _chestsText.SetText(_chestsCounter.ChestsOpenedInRun.ToString("000"));
             _coinsText.SetText(_inventoryData.Coins.ToString("00000"));
             StartCoroutine(ShowGameOver_Timer());
         }
