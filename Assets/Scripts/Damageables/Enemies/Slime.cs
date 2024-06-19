@@ -5,11 +5,12 @@
     using DG.Tweening;
     using Treasure.Common;
     using Pathfinding;
-    using UnityEngine.Playables;
+    using System.Collections.Generic;
 
-    public class Slime : MonoBehaviour
+    public class Slime : MonoBehaviour, IEnemy
     {
         [SerializeField] private DamageableHealthController _healthController = null;
+        [SerializeField] private StateController _stateController = null;
         [SerializeField] private DataProperty[] _damageProperties;
         [SerializeField] private DamageInstigator _damageInstigator = null;
         [SerializeField] private Collider2D[] _colliders = null;
@@ -17,7 +18,8 @@
         [SerializeField] private float _detectionRadius;
         [SerializeField] private ContactFilter2D _contactFilter;
         private IAstarAI ai;
-        private Transform player;
+        public Transform Self => transform;
+        public Transform Player {get; set;}
         private bool _canTick = true;
         private bool _isFacingRight;
 
@@ -25,7 +27,17 @@
         {
             ai = GetComponent<IAstarAI>();
             _damageInstigator.Init(_damageProperties);
+
+            Dictionary<int, IState> states = new Dictionary<int, IState>();
+            states.Add((int)EnemyStates.Detection, new CircleDetectionState(_stateController, this, _contactFilter, _detectionRadius));
+            states.Add((int)EnemyStates.Follow, new GenericFollowState(_stateController, this, ai, _detectionRadius, _slimeSprite));
+
+            _stateController.Init(states);
         }
+
+        public void Init() {}
+
+        private void Start() { _stateController.StartFromState((int)EnemyStates.Detection); }
 
         private void OnEnable()
         {
@@ -39,14 +51,14 @@
             _healthController.onDamageFeedback -= OnDamage;
         }
 
-        private void OnDamage()
+        public void OnDamage()
         {
             // _batSprite.transform.DOShakePosition(0.4f, 0.5f);
             _slimeSprite.DOColor(Color.red, 0.3f).OnComplete(() =>
             { _slimeSprite.DOColor(Color.white, 0.3f); });
         }
 
-        private void OnDead()
+        public void OnDead()
         {
             ai.destination = transform.position;
             _slimeSprite.transform.DOShakePosition(0.4f, 0.5f);
@@ -59,48 +71,6 @@
             _canTick = false;
         }
 
-        private void Update()
-        {
-            if (!_canTick) return;
-            if(!DetectPlayerInRange()) return;
-            if (Vector3.Distance(transform.position, player.position) > _detectionRadius * 1.5f)
-            {
-                player = null;
-                return;
-            } 
-
-            ai.destination = player.position;
-            SetSpriteOrientation();
-        }
-
-        private bool DetectPlayerInRange()
-        {
-            Collider2D[] results = new Collider2D[8];
-            int hits = Physics2D.OverlapCircle(transform.position, _detectionRadius, _contactFilter, results);
-
-            if (hits > 0)
-            {
-                IPlayableCharacter character = results[0].GetComponent<IPlayableCharacter>();
-                if (!character.IsActive) return false;
-                player = results[0].transform;
-                return true;
-            }
-            return player != null;
-        }
-
-        private void SetSpriteOrientation()
-        {
-            Vector3 targetVector = player.position - transform.position;
-
-            float magnitude = targetVector.magnitude;
-
-            if (magnitude <= 0f)
-            {
-                _slimeSprite.flipX = _isFacingRight;
-                return;
-            }
-            _isFacingRight = targetVector.x < 0;
-            _slimeSprite.flipX = _isFacingRight;
-        }
+        public void OnRevive() {}
     }
 }

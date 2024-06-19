@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 8091582858731754653}
   - component: {fileID: 8091582858731754654}
   - component: {fileID: 8091582858731754655}
+  - component: {fileID: 5581217911689773972}
   - component: {fileID: 8091582858731754648}
   - component: {fileID: 8091582858731754850}
   - component: {fileID: 8091582858731754849}
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthController: {fileID: 8091582858731754655}
+  _stateController: {fileID: 5581217911689773972}
   _damageProperties:
   - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
     amount: 2
@@ -184,6 +186,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
+--- !u!114 &5581217911689773972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8091582858731754649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf5c423531a9374cbb9e3a488572c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &8091582858731754648
 BoxCollider2D:
   m_ObjectHideFlags: 0
