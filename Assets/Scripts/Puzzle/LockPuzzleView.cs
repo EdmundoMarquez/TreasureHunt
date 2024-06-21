@@ -28,7 +28,7 @@ namespace Treasure.Puzzle
             _exitButton.onClick.AddListener(() => ToggleVisibility(false));
         }
 
-        private void ToggleVisibility(bool toggle)
+        public void ToggleVisibility(bool toggle)
         {
             if (toggle) RefreshDraggableKeys();
 
@@ -68,7 +68,7 @@ namespace Treasure.Puzzle
                 slot.onUnlocked += OnUnlockingSlot;
             }
             
-            _puzzleTryController.Init(_currentChest);
+            _puzzleTryController.Init(this, _currentChest);
         }
 
         private void OnUnlockingSlot()
