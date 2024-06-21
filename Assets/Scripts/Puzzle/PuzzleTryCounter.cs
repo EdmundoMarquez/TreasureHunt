@@ -10,9 +10,11 @@ namespace Treasure.Puzzle
     {
         [SerializeField] private Image[] _tryCounterIcons;
         private Chest _currentChest;
+        private LockPuzzleView _puzzleView;
 
-        public void Init(Chest chest)
+        public void Init(LockPuzzleView puzzleView, Chest chest)
         {
+            _puzzleView = puzzleView;
             _currentChest = chest;
 
             foreach (var icon in _tryCounterIcons)
@@ -25,7 +27,11 @@ namespace Treasure.Puzzle
         {
             if(_currentChest.CurrentTries == 0) return;
             if(--_currentChest.CurrentTries < 1)
+            {
                 _currentChest.ActivateTrap();
+                _puzzleView.ToggleVisibility(false);
+
+            }
 
             ShowRemainingTries();
         }
