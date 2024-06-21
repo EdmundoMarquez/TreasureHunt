@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &314485137637160494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6172544986833063533}
+  - component: {fileID: 2225535972785043699}
+  m_Layer: 0
+  m_Name: Trap Builder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6172544986833063533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314485137637160494}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5178263636310172653}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2225535972785043699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314485137637160494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22708139a710ac4e8a49ff8a6bee2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 5120
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  _spikeTrap: {fileID: 4814129779904568271, guid: c493b163d43949a44bfbcfa8c5914ae0,
+    type: 3}
+  _spikeTrapProperties:
+  - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
+    amount: 1
+  _arrowTrap: {fileID: 8715488823443317208, guid: 0b377a1518c39c541af84d7ed71e735e,
+    type: 3}
 --- !u!1 &1542091016752783156
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +366,7 @@ Transform:
   - {fileID: 5178263636366948315}
   - {fileID: 4466020566661929966}
   - {fileID: 7410318336077547958}
+  - {fileID: 6172544986833063533}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -317,7 +382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccad7ee9cc6aea14d8bb7ddf030f683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chestData: {fileID: 11400000, guid: ec489b177bbb6f6418cda1be690c3946, type: 2}
+  ChestData: {fileID: 11400000, guid: 4a79ac4097d11c6489978eab16d1c115, type: 2}
+  CurrentTries: 0
+  _trapBuilder: {fileID: 2225535972785043699}
   _lockedSprite: {fileID: 5178263635350698737}
   _unlockedSprite: {fileID: 5178263636366948312}
   _treasureSprite: {fileID: 4207164035314194017}
@@ -335,7 +402,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020730257, y: -0.22809553}
+  m_Offset: {x: 0.0018935204, y: -0.0679822}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -346,7 +413,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2973407, y: 0.3335035}
+  m_Size: {x: 0.674078, y: 0.6916244}
   m_EdgeRadius: 0
 --- !u!1 &5178263636366948312
 GameObject:

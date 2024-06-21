@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Treasure.Common
@@ -8,6 +9,8 @@ namespace Treasure.Common
         [SerializeField] private InstigatorTags _instigatorTag;
         [SerializeField] private ObjectId _instigatorId = null;
         private DataProperty[] _damageProperties;
+        public delegate void OnHit();
+        public OnHit onHit;
     
         public void Init(DataProperty[] damageProperties)
         {
@@ -18,7 +21,19 @@ namespace Treasure.Common
         {
             _collider.enabled = toggle;
         }
+
+        public void ToggleInstigator(bool toggle, float duration)
+        {
+            StartCoroutine(ToogleInstigator_Timer(toggle, duration));
+        }
     
+        private IEnumerator ToogleInstigator_Timer(bool toggle, float duration)
+        {
+            _collider.enabled = toggle;
+            yield return new WaitForSeconds(duration);
+            _collider.enabled = !toggle;
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             if(col.tag == _instigatorTag.ToString()) return;
@@ -33,6 +48,8 @@ namespace Treasure.Common
                 damageable.Damage(damage.amount, _instigatorId?.Value);
 
             }
+
+            if(onHit != null) onHit();
         }
     }
     
