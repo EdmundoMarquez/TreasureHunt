@@ -4,6 +4,7 @@ namespace Treasure.Player
     using UnityEngine;
     using Treasure.Common;
     using Treasure.PlayerInput;
+    using Treasure.EventBus;
 
     public class CharacterInteractionController : MonoBehaviour
     {
@@ -55,7 +56,11 @@ namespace Treasure.Player
         private void TryInteract()
         {
             if(_currentInteractable == null) return;
-            if(!_currentInteractable.CanInteract) return;
+            if(!_currentInteractable.CanInteract)
+            {
+                EventBus<ChestTriesDepletedMessageEvent>.Raise(new ChestTriesDepletedMessageEvent());
+                return;
+            } 
             _currentInteractable.Interact();
         }
     }

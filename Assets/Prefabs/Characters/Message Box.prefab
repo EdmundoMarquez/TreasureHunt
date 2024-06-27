@@ -114,9 +114,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 5399007520063853586}
   _messageIcon: {fileID: 1748719783167050882}
-  _inventoryFullCross: {fileID: 8852185089670630353}
+  _crossIcon: {fileID: 8852185089670630353}
   _inventoryIcon: {fileID: -589316354031001511, guid: a0d3fbbc155eb404a87f827b40a48dfe,
     type: 3}
+  _lockIcon: {fileID: 21300000, guid: acf5986ebe281ed43a093f2328a12b12, type: 3}
   _warriorIcon: {fileID: 21300000, guid: 0d019086bcfacdf4bbb87cbb2250ded9, type: 3}
   _sageIcon: {fileID: 21300000, guid: 303f918d1c089b9499e4c19d0b8a8e13, type: 3}
   _warriorId: {fileID: 11400000, guid: 00c41f1ca94aa9d4197980e6481b0c42, type: 2}

@@ -14,3 +14,5 @@ public struct CharacterRequiredMessageEvent : IEvent
 }
 
 public struct InventoryFullMessageEvent : IEvent{}
+
+public struct ChestTriesDepletedMessageEvent : IEvent{}

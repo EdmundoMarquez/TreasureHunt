@@ -6,12 +6,15 @@
     using Treasure.EventBus;
     using DG.Tweening;
 
-    public class CharacterMessageBox : MonoBehaviour, IEventReceiver<InventoryFullMessageEvent>, IEventReceiver<CharacterRequiredMessageEvent>
+    public class CharacterMessageBox : MonoBehaviour, IEventReceiver<InventoryFullMessageEvent>, IEventReceiver<CharacterRequiredMessageEvent>,
+    IEventReceiver<ChestTriesDepletedMessageEvent>
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Image _messageIcon = null;
-        [SerializeField] private GameObject _inventoryFullCross = null;
+        [SerializeField] private GameObject _crossIcon = null;
+        [Header("Configurations")]
         [SerializeField] private Sprite _inventoryIcon = null;
+        [SerializeField] private Sprite _lockIcon = null;
         [SerializeField] private Sprite _warriorIcon = null;
         [SerializeField] private Sprite _sageIcon = null;
         [SerializeField] private ObjectId _warriorId;
@@ -32,12 +35,12 @@
             ShowMessageSequence = DOTween.Sequence();
 
             _messageIcon.sprite = _inventoryIcon;
-            _inventoryFullCross.SetActive(true);
+            _crossIcon.SetActive(true);
 
             ShowMessageSequence.Append(_canvasGroup.DOFade(1f, 1f))
             .AppendInterval(3f)
             .Append(_canvasGroup.DOFade(0f, 1f))
-            .OnComplete(() => { _inventoryFullCross.SetActive(false); });
+            .OnComplete(() => { _crossIcon.SetActive(false); });
         }
 
         public void OnEvent(CharacterRequiredMessageEvent e)
@@ -59,10 +62,28 @@
             .Append(_canvasGroup.DOFade(0f, 1f));
         }
 
+        public void OnEvent(ChestTriesDepletedMessageEvent e)
+        {
+            if(!_character.IsActive) return;
+
+            if(ShowMessageSequence != null)
+                ShowMessageSequence.Complete();
+
+            ShowMessageSequence = DOTween.Sequence();
+
+            _messageIcon.sprite = _lockIcon;
+            _crossIcon.SetActive(true);
+
+            ShowMessageSequence.Append(_canvasGroup.DOFade(1f, 1f))
+            .AppendInterval(3f)
+            .Append(_canvasGroup.DOFade(0f, 1f))
+            .OnComplete(() => { _crossIcon.SetActive(false); });
+        }
 
         private void OnEnable()
         {
             EventBus<InventoryFullMessageEvent>.Register(this);
+            EventBus<ChestTriesDepletedMessageEvent>.Register(this);
             EventBus<CharacterRequiredMessageEvent>.Register(this);
         }
 
@@ -70,6 +91,7 @@
         {
             EventBus<InventoryFullMessageEvent>.UnRegister(this);
             EventBus<CharacterRequiredMessageEvent>.UnRegister(this);
+            EventBus<ChestTriesDepletedMessageEvent>.UnRegister(this);
         }
 
     }
