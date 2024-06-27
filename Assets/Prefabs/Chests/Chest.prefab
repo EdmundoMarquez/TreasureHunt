@@ -64,6 +64,8 @@ MonoBehaviour:
     amount: 1
   _arrowTrap: {fileID: 8715488823443317208, guid: 0b377a1518c39c541af84d7ed71e735e,
     type: 3}
+  _fireTrap: {fileID: 6372525883234410303, guid: 6bd832acb89cde743900ab7df5094ce4,
+    type: 3}
 --- !u!1 &1542091016752783156
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,8 +385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccad7ee9cc6aea14d8bb7ddf030f683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChestData: {fileID: 11400000, guid: 4a79ac4097d11c6489978eab16d1c115, type: 2}
-  CurrentTries: 0
   _trapBuilder: {fileID: 2225535972785043699}
   _lockedChestSprite: {fileID: 5178263635350698737}
   _unlockedChestSprite: {fileID: 5178263636366948312}
@@ -548,11 +548,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5178263636310172653}
     m_Modifications:
-    - target: {fileID: 3471546496874393823, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
-        type: 3}
-      propertyPath: m_Name
-      value: Minimap Icon
-      objectReference: {fileID: 0}
     - target: {fileID: 5619280373256497230, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -622,6 +617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471546496874393823, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
+        type: 3}
+      propertyPath: m_Name
+      value: Minimap Icon
       objectReference: {fileID: 0}
     - target: {fileID: 337160079779048840, guid: 5b538b76e80dcd34e9cbe8b975922fbd,
         type: 3}
