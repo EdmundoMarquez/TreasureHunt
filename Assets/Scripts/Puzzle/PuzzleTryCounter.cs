@@ -38,7 +38,7 @@ namespace Treasure.Puzzle
 
         private void ShowRemainingTries()
         {
-            for (int i = 0; i < _currentChest.ChestData.Tries; i++)
+            for (int i = 0; i < _currentChest.Tries; i++)
             {
                 _tryCounterIcons[i].gameObject.SetActive(true);
                 _tryCounterIcons[i].DOFade(i < _currentChest.CurrentTries ? 1f : 0.5f, 0.3f).SetUpdate(true); 

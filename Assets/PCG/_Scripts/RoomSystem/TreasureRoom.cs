@@ -4,10 +4,14 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using Treasure.Dungeon;
+    using Treasure.Chests;
     using UnityEngine;
 
     public class TreasureRoom : RoomGenerator
     {
+        [SerializeField] 
+        private DungeonLevelData dungeonLevelData;
         [SerializeField]
         private PrefabPlacer prefabPlacer;
 
@@ -22,7 +26,12 @@
             List<GameObject> placedObjects =
                 prefabPlacer.PlaceAllItems(itemData, itemPlacementHelper);
 
-            placedObjects.AddRange(prefabPlacer.PlaceTreasures(treasurePlacementData, itemPlacementHelper));
+            List<GameObject> placedChests = prefabPlacer.PlaceTreasures(treasurePlacementData, itemPlacementHelper);
+
+            foreach (var chest in placedChests)
+                ChestBuilder.Instance.BuildChestFromData(chest.GetComponent<Chest>(), dungeonLevelData.currentLevel);
+
+            placedObjects.AddRange(placedChests);
 
             return placedObjects;
         }

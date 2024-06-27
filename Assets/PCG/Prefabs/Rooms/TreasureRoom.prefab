@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a8fb38b2e987e479e6c72930d69772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeonLevelData: {fileID: 11400000, guid: 77c273ae7bf898a40a1c131e715e2b04, type: 2}
   prefabPlacer: {fileID: 4341242197028722173, guid: 49d1de73f44f58940a43bf538b290285,
     type: 3}
   treasurePlacementData:

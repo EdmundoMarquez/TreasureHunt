@@ -7,26 +7,31 @@
 
     public class Chest : MonoBehaviour, IInteractable
     {
-        public ChestData ChestData;
-        public int CurrentTries;
         [SerializeField] private TrapBuilder _trapBuilder = null;
-        [SerializeField] private GameObject _lockedSprite;
-        [SerializeField] private GameObject _unlockedSprite;
-        [SerializeField] private SpriteRenderer _treasureSprite;
+        [SerializeField] private GameObject _lockedChestSprite;
+        [SerializeField] private GameObject _unlockedChestSprite;
+        // [SerializeField] private SpriteRenderer _treasureSprite;
+        [SerializeField] private SpriteColorModifier _lockColorModifier = null;
         [SerializeField] private MinimapIconDisplay _minimapIcon = null;
+        private ChestData _chestData;
         private WordData _wordToSolve;
-        private bool _canInteract;
+        private bool _canInteract = true;
         public bool CanInteract => _canInteract;
         private Sequence UnlockSequence;
         private Collider2D _collider;
+        public int Tries {get; set;}
+        public int CurrentTries {get; set;}
 
-        private void Start()
+        public void Init(ChestData chestData)
         {
+            _chestData = chestData;
             _collider = GetComponent<Collider2D>();
-            _wordToSolve = ChestData.RandomizeWord();
-            CurrentTries = ChestData.Tries;
-            _minimapIcon.Init(_lockedSprite.GetComponent<SpriteRenderer>().sprite);
-            _trapBuilder.Init(CurrentTries);
+            _wordToSolve = _chestData.WordData;
+            Tries = _chestData.Tries;
+            CurrentTries = _chestData.Tries;
+            _trapBuilder.Init((int)_chestData.trapType);
+            _lockColorModifier.ChangeColor(_chestData.Tries);
+            _minimapIcon.Init(_lockedChestSprite.GetComponent<SpriteRenderer>().sprite);
             _collider.enabled = true;
             
             EventBus<OnChestGenerated>.Raise(new OnChestGenerated());
@@ -46,8 +51,8 @@
         public void ToggleLock(bool unlock)
         {
             _canInteract = !unlock;
-            _lockedSprite.SetActive(!unlock);
-            _unlockedSprite.SetActive(unlock);
+            _lockedChestSprite.SetActive(!unlock);
+            _unlockedChestSprite.SetActive(unlock);
 
             if (unlock) OnUnlockChest();
         }

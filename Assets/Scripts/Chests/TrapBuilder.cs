@@ -67,7 +67,7 @@
                     else
                     {
                         Debug.DrawRay((Vector2)transform.position + squarePosition, Vector2.down, Color.blue, 1000);
-                        Debug.Log(results[0].transform.name + " : " + squarePosition.ToString());
+                        // Debug.Log(results[0].transform.name + " : " + squarePosition.ToString());
                     }
                 }
             }

@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 5178263635350698739}
   - component: {fileID: 5178263635350698738}
   m_Layer: 8
-  m_Name: Lock Sprite
+  m_Name: Locked Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 5178263636310172653}
   - component: {fileID: 5178263636310172652}
   - component: {fileID: 5178263636310172658}
+  - component: {fileID: 984758192353347778}
   m_Layer: 10
   m_Name: Chest
   m_TagString: Untagged
@@ -385,9 +386,9 @@ MonoBehaviour:
   ChestData: {fileID: 11400000, guid: 4a79ac4097d11c6489978eab16d1c115, type: 2}
   CurrentTries: 0
   _trapBuilder: {fileID: 2225535972785043699}
-  _lockedSprite: {fileID: 5178263635350698737}
-  _unlockedSprite: {fileID: 5178263636366948312}
-  _treasureSprite: {fileID: 4207164035314194017}
+  _lockedChestSprite: {fileID: 5178263635350698737}
+  _unlockedChestSprite: {fileID: 5178263636366948312}
+  _lockColorModifier: {fileID: 984758192353347778}
   _minimapIcon: {fileID: 2053586571563167346}
 --- !u!61 &5178263636310172658
 BoxCollider2D:
@@ -415,6 +416,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.674078, y: 0.6916244}
   m_EdgeRadius: 0
+--- !u!114 &984758192353347778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178263636310172659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0f9c44dd1fa9c4f8d60d618cd4758a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5178263634903972090}
+  variations:
+  - {r: 0.2784474, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.6076495, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &5178263636366948312
 GameObject:
   m_ObjectHideFlags: 0
