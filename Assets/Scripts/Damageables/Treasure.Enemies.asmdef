@@ -1,0 +1,16 @@
+{
+    "name": "Treasure.Enemies",
+    "references": [
+        "GUID:b309ca0c7888bdb40b7116d6cae1991d",
+        "GUID:81513233c1d50844c8df90535c083d0c",
+        "GUID:efa45043feb7e4147a305b73b5cea642"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

@@ -27,7 +27,7 @@ namespace Treasure.Damageables
         public void Init()
         {
             _canTick = true;
-            Debug.Log("Entered detection state");
+            // Debug.Log("Entered detection state");
         }
 
         public void FixedTick()
