@@ -37,7 +37,8 @@ namespace Treasure.Common
         private void OnTriggerEnter2D(Collider2D col)
         {
             if(col.tag == _instigatorTag.ToString()) return;
-    
+            if(onHit != null) onHit();
+
             if(col.TryGetComponent<IDamageable>(out var damageable)) { OnDamage(damageable); }
         }
     
@@ -48,8 +49,6 @@ namespace Treasure.Common
                 damageable.Damage(damage.amount, _instigatorId?.Value);
 
             }
-
-            if(onHit != null) onHit();
         }
     }
     

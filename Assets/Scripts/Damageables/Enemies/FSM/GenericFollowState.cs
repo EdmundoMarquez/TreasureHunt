@@ -26,7 +26,7 @@ namespace Treasure.Damageables
         public void Init()
         {
             _canTick = true;
-            Debug.Log("Entered follow state");
+            // Debug.Log("Entered follow state");
         }
 
         public void Tick()

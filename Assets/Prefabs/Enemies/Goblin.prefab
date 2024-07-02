@@ -60,7 +60,9 @@ MonoBehaviour:
   _swordPivot: {fileID: 7936116780289198903}
   _colliders:
   - {fileID: 7936116780009937888}
-  _goblinSprite: {fileID: 1033900054560972752}
+  _goblinSprites:
+  - {fileID: 1033900054560972752}
+  - {fileID: 7936116781984474788}
   _spritesTransform: {fileID: 2073240896986155293}
   _detectionRadius: 10
   _contactFilter:
