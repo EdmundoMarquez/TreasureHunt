@@ -6,8 +6,9 @@
     using Treasure.Common;
     using Pathfinding;
     using System.Collections.Generic;
+    using Treasure.EventBus;
 
-    public class Slime : MonoBehaviour, IEnemy
+    public class Slime : MonoBehaviour, IEnemy, IEventReceiver<OnPlayerCharacterSwitch>
     {
         [SerializeField] private DamageableHealthController _healthController = null;
         [SerializeField] private StateController _stateController = null;
@@ -41,12 +42,14 @@
 
         private void OnEnable()
         {
+            EventBus<OnPlayerCharacterSwitch>.Register(this);
             _healthController.onDestroyDamageable += OnDead;
             _healthController.onDamageFeedback += OnDamage;
         }
 
         private void OnDisable()
         {
+            EventBus<OnPlayerCharacterSwitch>.UnRegister(this);
             _healthController.onDestroyDamageable -= OnDead;
             _healthController.onDamageFeedback -= OnDamage;
         }
@@ -72,5 +75,10 @@
         }
 
         public void OnRevive() {}
+        public void OnEvent(OnPlayerCharacterSwitch e)
+        {
+            Player = e.currentCharacter;
+            _stateController.ChangeToNextState((int)EnemyStates.Follow);
+        }
     }
 }

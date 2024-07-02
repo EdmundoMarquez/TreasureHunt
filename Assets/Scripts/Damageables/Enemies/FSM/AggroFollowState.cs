@@ -40,13 +40,15 @@
 
             if (distance > _detectionRadius * 1.5f)
             {
-                _ai.destination = _enemy.Self.position;
                 _stateController.ChangeToNextState((int)EnemyStates.Detection);
                 return;
             }
 
-            if(distance < 1.5f)
+            if(distance < 1.25f)
+            {
                 _stateController.ChangeToNextState((int)EnemyStates.Attack);
+                return;
+            }
 
             _ai.destination = _enemy.Player.position;
         }

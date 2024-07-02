@@ -16,3 +16,8 @@ public struct CharacterRequiredMessageEvent : IEvent
 public struct InventoryFullMessageEvent : IEvent{}
 
 public struct ChestTriesDepletedMessageEvent : IEvent{}
+
+public struct OnPlayerCharacterSwitch : IEvent
+{
+    public Transform currentCharacter;
+}

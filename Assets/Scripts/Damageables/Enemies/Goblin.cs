@@ -4,10 +4,11 @@
     using UnityEngine;
     using DG.Tweening;
     using Treasure.Common;
+    using Treasure.EventBus;
     using Pathfinding;
     using System.Collections.Generic;
 
-    public class Goblin : MonoBehaviour, IEnemy
+    public class Goblin : MonoBehaviour, IEnemy, IEventReceiver<OnPlayerCharacterSwitch>
     {
         [SerializeField] private DamageableHealthController _healthController = null;
         [SerializeField] private StateController _stateController = null;
@@ -47,12 +48,14 @@
 
         private void OnEnable()
         {
+            EventBus<OnPlayerCharacterSwitch>.Register(this);
             _healthController.onDestroyDamageable += OnDead;
             _healthController.onDamageFeedback += OnDamage;
         }
 
         private void OnDisable()
         {
+            EventBus<OnPlayerCharacterSwitch>.UnRegister(this);
             _healthController.onDestroyDamageable -= OnDead;
             _healthController.onDamageFeedback -= OnDamage;
         }
@@ -78,5 +81,11 @@
         }
 
         public void OnRevive() {}
+
+        public void OnEvent(OnPlayerCharacterSwitch e)
+        {
+            Player = e.currentCharacter;
+            _stateController.ChangeToNextState((int)EnemyStates.Follow);
+        }
     }
 }

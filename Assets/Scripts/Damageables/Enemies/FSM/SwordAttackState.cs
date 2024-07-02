@@ -11,8 +11,8 @@
         private DamageInstigator _damageInstigator = null;
         private Transform _swordPivot = null;
         private bool _canTick;
-        private float _attackTime = 0.5f;
-        private float _attackTimer;
+        private float _cooldownTime = 1f;
+        private float _cooldownTimer;
 
         public SwordAttackState(StateController stateController, IEnemy enemy, DamageInstigator damageInstigator, Transform swordPivot)
         {
@@ -29,11 +29,13 @@
 
         public void Init()
         {
-            _canTick = true;
-
-            _swordPivot.DOLocalRotate(new Vector3(0, 0, -360), _attackTime, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear);
-            _damageInstigator.ToggleInstigator(true, _attackTime);
-            _attackTime = _attackTimer;
+            _swordPivot.DOLocalRotate(new Vector3(0, 0, -360), 0.5f, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                _cooldownTime = _cooldownTimer;
+                _canTick = true;
+            });
+            _damageInstigator.ToggleInstigator(true, 0.5f);
+            
         }
 
         public void FixedTick(){}
@@ -42,10 +44,10 @@
         {
             if(!_canTick) return;
             
-            _attackTimer -= Time.deltaTime;
-            if(_attackTimer <= 0f) 
+            _cooldownTimer -= Time.deltaTime;
+            if(_cooldownTimer <= 0f) 
             {
-                _stateController.DelayChangeToNextState((int)EnemyStates.Detection, 3);
+                _stateController.ChangeToNextState((int)EnemyStates.Detection);
                 Stop();
             }
         }

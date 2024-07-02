@@ -17,11 +17,11 @@
         [SerializeField] private CinemachineVirtualCamera _followCamera = null;
         [SerializeField] private InventoryController _inventoryController = null;
         private IPlayerInput _inputAdapter;
-        private bool isWarriorActive = true;
+        private bool isDefaultActive = true;
 
         private void Awake()
         {
-            isWarriorActive = true;
+            isDefaultActive = true;
             _inputAdapter = new UnityInputAdapter();
         }
 
@@ -63,11 +63,15 @@
 
             if (_inputAdapter.ChangeCharacterButtonPressed())
             {
-                isWarriorActive = !isWarriorActive;
-                _warriorCharacter.ToggleControl(isWarriorActive);
-                _sageCharacter.ToggleControl(!isWarriorActive);
+                isDefaultActive = !isDefaultActive;
+                _warriorCharacter.ToggleControl(isDefaultActive);
+                _sageCharacter.ToggleControl(!isDefaultActive);
 
-                _followCamera.m_Follow = isWarriorActive ? _warriorCharacter.transform : _sageCharacter.transform;
+                _followCamera.m_Follow = isDefaultActive ? _warriorCharacter.transform : _sageCharacter.transform;
+                EventBus<OnPlayerCharacterSwitch>.Raise(new OnPlayerCharacterSwitch
+                {
+                    currentCharacter = isDefaultActive ? _warriorCharacter.transform : _sageCharacter.transform
+                });
             }
         }
 
