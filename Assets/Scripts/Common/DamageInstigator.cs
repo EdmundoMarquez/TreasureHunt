@@ -11,6 +11,7 @@ namespace Treasure.Common
         private DataProperty[] _damageProperties;
         public delegate void OnHit();
         public OnHit onHit;
+        public OnHit onHitDamageable;
     
         public void Init(DataProperty[] damageProperties)
         {
@@ -45,10 +46,9 @@ namespace Treasure.Common
         private void OnDamage(IDamageable damageable)
         {
             foreach (var damage in _damageProperties)
-            {
                 damageable.Damage(damage.amount, _instigatorId?.Value);
 
-            }
+            if(onHitDamageable != null) onHitDamageable();
         }
     }
     

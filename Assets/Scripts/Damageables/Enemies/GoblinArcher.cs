@@ -85,12 +85,15 @@
                 collider.enabled = false;
             }
             _canTick = false;
+            _stateController.StopStates();
         }
 
         public void OnRevive() { }
 
         public void OnEvent(OnPlayerCharacterSwitch e)
         {
+            if(_stateController.CurrentStateIndex != (int)EnemyStates.Follow
+            || _stateController.CurrentStateIndex != (int)EnemyStates.Aim) return;
             Player = e.currentCharacter;
             _stateController.ChangeToNextState((int)EnemyStates.Follow);
         }

@@ -21,6 +21,8 @@
         [SerializeField] private Transform _spritesTransform = null;
         [SerializeField] private float _detectionRadius;
         [SerializeField] private ContactFilter2D _contactFilter;
+        [SerializeField] private int _maxCoinsToSteal = 500;
+        [SerializeField] private bool _stealCoinsOnHit = false;
         private IAstarAI ai;
         public Transform Self => transform;
         public Transform Player { get; set; }
@@ -44,7 +46,18 @@
 
         public void Init() { }
 
-        private void Start() { _stateController.StartFromState((int)EnemyStates.Detection); }
+        private void Start() 
+        { 
+            _stateController.StartFromState((int)EnemyStates.Detection); 
+            if(_stealCoinsOnHit) _damageInstigator.onHitDamageable += () => 
+            { 
+                EventBus<LoseCoinsEvent>.Raise(new LoseCoinsEvent
+                {
+                    coinsAmount = Random.Range(0, _maxCoinsToSteal)
+                }); 
+            };
+        }
+
 
         private void OnEnable()
         {
@@ -66,7 +79,6 @@
             {
                 sprite.DOColor(Color.red, 0.3f).OnComplete(() =>
                 { sprite.DOColor(Color.white, 0.3f); });
-
             }
         }
 
@@ -85,12 +97,15 @@
                 collider.enabled = false;
             }
             _canTick = false;
+            _stateController.StopStates();
         }
 
         public void OnRevive() { }
 
         public void OnEvent(OnPlayerCharacterSwitch e)
         {
+            if(_stateController.CurrentStateIndex != (int)EnemyStates.Follow
+            || _stateController.CurrentStateIndex != (int)EnemyStates.Attack) return;
             Player = e.currentCharacter;
             _stateController.ChangeToNextState((int)EnemyStates.Follow);
         }

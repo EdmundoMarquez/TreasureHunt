@@ -7,6 +7,7 @@ namespace Treasure.Common
     {
         private Dictionary<int, IState> _idToState;
         private IState _currentState;
+        public int CurrentStateIndex {get; private set;}
         public void Init(Dictionary<int, IState> idToState)
         {
             _idToState = idToState;
@@ -16,6 +17,7 @@ namespace Treasure.Common
             _currentState = GetState(state);
             _currentState.Awake();
             _currentState.Init();
+            CurrentStateIndex = state;
         }
 
         public void ChangeToNextState(int nextState)
@@ -23,7 +25,14 @@ namespace Treasure.Common
             _currentState?.Stop();
             _currentState = GetState(nextState);
             _currentState.Init();
+            CurrentStateIndex = nextState;
         }
+
+        public void StopStates()
+        {
+            _currentState?.Stop();
+        }
+
         private IState GetState(int playerState)
         {
             if(!_idToState.TryGetValue(playerState, out IState state))  

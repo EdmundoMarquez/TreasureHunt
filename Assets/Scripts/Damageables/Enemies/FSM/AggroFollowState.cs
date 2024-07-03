@@ -12,6 +12,7 @@
         private IAstarAI _ai;
         private Transform _sprite = null;
         private bool _isFacingRight;
+        private bool _takingPositionToAttack = false;
         private float _horizontalScale;
         private Animator _animator;
         public AggroFollowState(StateController stateController, IEnemy enemy, IAstarAI ai, float detectionRadius, float horizontalScale, Transform sprite, Animator animator)
@@ -30,6 +31,7 @@
         public void Init()
         {
             _canTick = true;
+            _takingPositionToAttack = false;
         }
 
         public void Tick()
@@ -44,10 +46,19 @@
                 return;
             }
 
-            if(distance < 1.25f)
+            if(distance < 3f)
             {
-                _stateController.ChangeToNextState((int)EnemyStates.Attack);
-                return;
+                if(!_takingPositionToAttack)
+                {
+                    _ai.destination = _enemy.Player.position * Random.insideUnitCircle;
+                    _takingPositionToAttack = true;
+                }
+
+                if(_ai.reachedDestination)
+                {
+                    _stateController.ChangeToNextState((int)EnemyStates.Attack);
+                    return;
+                }
             }
 
             _ai.destination = _enemy.Player.position;
