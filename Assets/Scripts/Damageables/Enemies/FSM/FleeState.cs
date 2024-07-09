@@ -32,6 +32,8 @@ namespace Treasure.Damageables
             _randomFleePoint = PickRandomPoint();
             _ai.destination = _randomFleePoint;
             _ai.SearchPath();
+            _animator.speed = 2f;
+            _ai.maxSpeed = 1f;
             _canTick = true;
         }
 
@@ -53,6 +55,8 @@ namespace Treasure.Damageables
         public void Stop()
         {
             _canTick = false;
+            _animator.speed = 1f;
+            _ai.maxSpeed = 0.7f;
         }
 
         private Vector2 PickRandomPoint()
