@@ -11,5 +11,6 @@ namespace Treasure.Damageables
         void OnRevive();
         Transform Self{get;}
         Transform Player{get; set;} 
+        bool IsDead{get; set;}
     }
 }

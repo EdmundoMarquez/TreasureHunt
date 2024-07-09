@@ -21,17 +21,18 @@
         private IAstarAI ai;
         public Transform Self => transform;
         public Transform Player {get; set;}
-        private bool _canTick = true;
+        public bool IsDead {get; set;}
         private bool _isFacingRight;
 
         private void Awake()
         {
             ai = GetComponent<IAstarAI>();
             _damageInstigator.Init(_damageProperties);
-
+            SpriteRenderer[] sprites = new SpriteRenderer[]{_slimeSprite};
             Dictionary<int, IState> states = new Dictionary<int, IState>();
             states.Add((int)EnemyStates.Detection, new CircleDetectionState(_stateController, this, _contactFilter, _detectionRadius));
             states.Add((int)EnemyStates.Follow, new GenericFollowState(_stateController, this, ai, _detectionRadius, _slimeSprite));
+            states.Add((int)EnemyStates.Dead, new DeadState(sprites, _colliders, true));
 
             _stateController.Init(states);
         }
@@ -63,20 +64,18 @@
 
         public void OnDead()
         {
+            if(IsDead) return;
             ai.destination = transform.position;
-            _slimeSprite.transform.DOShakePosition(0.4f, 0.5f);
-            _slimeSprite.DOFade(0f, 0.4f);
-
-            foreach (var collider in _colliders)
-            {
-                collider.enabled = false;
-            }
-            _canTick = false;
+            _stateController.ChangeToNextState((int)EnemyStates.Dead);
+            IsDead = true;
         }
 
         public void OnRevive() {}
         public void OnEvent(OnPlayerCharacterSwitch e)
         {
+            if(IsDead || _stateController.CurrentStateIndex != (int)EnemyStates.Follow || _stateController.CurrentStateIndex != (int)EnemyStates.Attack) 
+                return;
+                
             Player = e.currentCharacter;
             _stateController.ChangeToNextState((int)EnemyStates.Follow);
         }

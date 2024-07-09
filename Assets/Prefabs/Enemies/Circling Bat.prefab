@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6882859257983899656}
-  - component: {fileID: 6882859257983899659}
   - component: {fileID: 6882859257983899658}
   - component: {fileID: 6882859257983899661}
   - component: {fileID: 6882859257983900151}
@@ -36,28 +35,6 @@ Transform:
   m_Father: {fileID: 6882859258702414645}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6882859257983899659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6882859257983899660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3642555d3ee6ad4eafb6d7067276594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthController: {fileID: 6882859257983899658}
-  _damageProperties:
-  - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
-    amount: 1
-  _damageInstigator: {fileID: 6882859257983900151}
-  _collider: {fileID: 6882859257983899661}
-  _batSprite: {fileID: 6882859258016236982}
-  _target: {fileID: 6882859259165427963}
-  _radius: 2
-  _rotationSpeed: 1
 --- !u!114 &6882859257983899658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6882859258702414645}
+  - component: {fileID: 6417686841976748}
   m_Layer: 13
   m_Name: Circling Bat
   m_TagString: Untagged
@@ -262,6 +240,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6417686841976748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882859258702414644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3642555d3ee6ad4eafb6d7067276594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthController: {fileID: 6882859257983899658}
+  _damageProperties:
+  - propertyId: {fileID: 11400000, guid: 5b97b4f232b9ffa41aa73cc542395c56, type: 2}
+    amount: 1
+  _damageInstigator: {fileID: 6882859257983900151}
+  _collider: {fileID: 6882859257983899661}
+  _batSprite: {fileID: 6882859258016236982}
+  _target: {fileID: 6882859259165427963}
+  _batTransform: {fileID: 6882859257983899656}
+  _radius: 2
+  _rotationSpeed: 1
 --- !u!1 &6882859259165427962
 GameObject:
   m_ObjectHideFlags: 0

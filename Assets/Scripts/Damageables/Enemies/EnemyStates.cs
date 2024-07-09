@@ -4,6 +4,7 @@ public enum EnemyStates
     Follow,
     Attack,
     Aim,
-    Shoot,
-    Flee
+    Revive,
+    Flee,
+    Dead
 }

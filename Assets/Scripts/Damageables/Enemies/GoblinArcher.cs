@@ -26,9 +26,8 @@
         private IAstarAI ai;
         public Transform Self => transform;
         public Transform Player { get; set; }
-        private bool _canTick = true;
-        private bool _isFacingRight;
         private float _horizontalScale;
+        public bool IsDead {get; set;}
 
         private void Awake()
         {
@@ -39,12 +38,11 @@
             states.Add((int)EnemyStates.Detection, new CircleDetectionState(_stateController, this, _contactFilter, _detectionRadius));
             states.Add((int)EnemyStates.Follow, new TakeAimPositionState(_stateController, this, ai, _detectionRadius, _minDistanceToAim, _horizontalScale, _spritesTransform, _animator, _bowPivot));
             states.Add((int)EnemyStates.Aim, new BowAttackState(_stateController, this, _arrowPrefab, _bowPivot, _arrowSpawnPoint, _spritesTransform, _horizontalScale, _aimRotationSpeed, _minDistanceToAim));
+            states.Add((int)EnemyStates.Dead, new DeadState(_goblinSprites, _colliders, false));
             _stateController.Init(states);
         }
 
-        public void Init() { }
-
-        private void Start() { _stateController.StartFromState((int)EnemyStates.Detection); }
+        public void Init() { _stateController.StartFromState((int)EnemyStates.Detection); }
 
         private void OnEnable()
         {
@@ -72,28 +70,20 @@
 
         public void OnDead()
         {
+            if(IsDead) return;
             ai.destination = transform.position;
 
-            foreach (var sprite in _goblinSprites)
-            {
-                sprite.transform.DOShakePosition(0.4f, 0.5f);
-                sprite.DOFade(0f, 0.4f);
-            }
-
-            foreach (var collider in _colliders)
-            {
-                collider.enabled = false;
-            }
-            _canTick = false;
-            _stateController.StopStates();
+            _stateController.ChangeToNextState((int)EnemyStates.Dead);
+            IsDead = true;
         }
 
         public void OnRevive() { }
 
         public void OnEvent(OnPlayerCharacterSwitch e)
         {
-            if(_stateController.CurrentStateIndex != (int)EnemyStates.Follow
-            || _stateController.CurrentStateIndex != (int)EnemyStates.Aim) return;
+            if(IsDead || _stateController.CurrentStateIndex != (int)EnemyStates.Follow || _stateController.CurrentStateIndex != (int)EnemyStates.Aim) 
+                return;
+
             Player = e.currentCharacter;
             _stateController.ChangeToNextState((int)EnemyStates.Follow);
         }

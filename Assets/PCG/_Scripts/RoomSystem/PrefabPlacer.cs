@@ -6,6 +6,7 @@ namespace PCG
     using UnityEditor;
     using UnityEngine;
     using Treasure.Common;
+    using Treasure.Damageables;
 
     public class PrefabPlacer : MonoBehaviour
     {
@@ -46,8 +47,9 @@ namespace PCG
                         );
                     if (possiblePlacementSpot.HasValue)
                     {
-
-                        placedObjects.Add(CreateObject(placementData.enemyPrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f))); //Instantiate(placementData.enemyPrefab,possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f), Quaternion.identity)
+                        GameObject enemyObject = CreateObject(placementData.enemyPrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f)); //Instantiate(placementData.enemyPrefab,possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f), Quaternion.identity)
+                        enemyObject.GetComponent<IEnemy>().Init();
+                        placedObjects.Add(enemyObject);
                     }
                 }
             }

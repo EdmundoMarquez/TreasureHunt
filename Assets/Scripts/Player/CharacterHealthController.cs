@@ -3,6 +3,7 @@
     using UnityEngine;
     using Treasure.Common;
     using Treasure.EventBus;
+    using System.Collections;
 
     public class CharacterHealthController : MonoBehaviour, IDamageable
     {
@@ -16,7 +17,9 @@
         public OnHealFeedback onHealFeedback;
         public int Health => _health;
         public int MaxHealth => _maxHealth;
-        private bool _canTakeDamage;
+        private bool _isActive;
+        private bool _onDamageCooldown;
+        private Coroutine DamageCooldownCoroutine;
 
         public void Init(int health, int maxHealth)
         {
@@ -26,7 +29,7 @@
 
         public void Toggle(bool toggle)
         {
-            _canTakeDamage = toggle;
+            _isActive = toggle;
         }
 
         public void Heal(int amount)
@@ -39,7 +42,7 @@
 
         public void Damage(int amount, string instigatorId = "")
         {
-            if(!_canTakeDamage) return;
+            if(!_isActive || _onDamageCooldown) return;
 
             _health -= amount;
 
@@ -57,6 +60,19 @@
             }
 
             if (onDamageFeedback != null) onDamageFeedback();
+
+            if(DamageCooldownCoroutine != null)
+            {
+                StopCoroutine(DamageCooldownCoroutine);
+            }
+            DamageCooldownCoroutine = StartCoroutine(DamageCooldown_Timer());
+        }
+
+        private IEnumerator DamageCooldown_Timer()
+        {
+            _onDamageCooldown = true;
+            yield return new WaitForSeconds(2.5f);
+            _onDamageCooldown = false;
         }
     }
 }
